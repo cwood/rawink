@@ -1,0 +1,9 @@
+Django==1.3.1
+South==0.7.3
+django-autoslug==1.5.0
+django-sekizai==0.5
+# django-tinymce==1.5.1b2
+
+-e git+http://github.com/jezdez/django_compressor.git@1a82db7f8a0ed3bda18139119eaaf0e8c172b164#egg=django_compressor-dev
+-e git://github.com/matthewwithanm/django-html5boilerplate.git@9f3234e7d62a50ba719b1653222b42d6bd728d44#egg=django_html5boilerplate-dev
+-e git://github.com/jdriscoll/django-imagekit.git@c5c0402c89351124a49a17eaf058dacdbda91a17#egg=django_imagekit-develop

@@ -1,0 +1,13 @@
+AddHandler wsgi-script .wsgi
+Options ExecCGI FollowSymLinks
+Order deny,allow 
+Allow from all
+
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ /dispatch.wsgi/$1
+RewriteCond %{REQUEST_URI} ^/dispatch\.wsgi(/.*)?$
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteRule ^(.*)$ /dispatch.wsgi/$1
