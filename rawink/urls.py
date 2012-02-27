@@ -11,6 +11,6 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     # (r'^tinymce/', include('tinymce.urls')),
 
-    # (r'^$', include('rawink.apps.main.urls')),
+    (r'^$', include('rawink.apps.artists.urls')),
 
 )

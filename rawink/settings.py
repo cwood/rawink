@@ -156,16 +156,17 @@ INSTALLED_APPS = (
 
     'south',
     'sekizai',
-
+    'registration',
+    
     'rawink.apps.emailtools',
     'rawink.apps.galleries',
     'rawink.apps.templateland',
     
     'rawink.apps.layout',
     'rawink.apps.main',
+    'rawink.apps.artists',
+    
 )
-
-
 
 INTERNAL_IPS = ('127.0.0.1',)
 

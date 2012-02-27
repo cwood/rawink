@@ -1,0 +1,29 @@
+<form action="./" method="post" class="join-rock-list-form">
+	{# {{form.errors}} #}
+	{# <label for="{{ form.username.auto_id }}" class="questionLabel">username:</label> #}
+	{# {{ form.username }}<br /> #}
+	{# <label for="{{ form.first_name.auto_id }}" class="questionLabel">*First Name:</label> #}
+	{# {{ form.first_name }} #}
+	{# <br /> #}
+	{# <label for="{{ form.last_name.auto_id }}" class="questionLabel">*Last Name:</label>    					 #}
+	{# {{ form.last_name }}					 #}
+	{# <br /> #}
+	{# *Password: (6-15 characters){{ form.password1 }} #}
+	{# <br /> #}
+	{# *Password Confirm:{{ form.password2 }} #}
+	{# <br /> #}
+	{# <label for="{{ form.email.auto_id }}" class="questionLabel">*E-mail:</label> #}
+	{# {{ form.email }} #}
+	{# <br /> #}
+	{# <label for="{{ form.email.auto_id }}" class="questionLabel">Bio:</label> #}
+	{# {{ form.bio }} #}
+	{#  #}
+	{# <br /> #}
+	{# <label for="{{ form.day.auto_id }}" class="questionLabel">Day:</label> #}
+	{# {{ form.day }} #}
+	{{ user_form.as_p }}
+	{{ form.as_p }}
+	{% csrf_token %}
+	<button type="submit">Submit <small>&gt;&gt;</small></button>
+</form>
+<div >
