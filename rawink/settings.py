@@ -165,6 +165,7 @@ INSTALLED_APPS = (
     'rawink.apps.layout',
     'rawink.apps.main',
     'rawink.apps.artists',
+    'rawink.apps.customers',
     
 )
 
