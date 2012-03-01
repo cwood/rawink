@@ -19,38 +19,29 @@ from autoslug import AutoSlugField
 # from modeltools import Enum, format_filename as _ff, FilteredManager
 
 
-from rawink.apps.galleries.models import Gallery, ImageModel
-
-from imagekit.models import ImageSpec
-from imagekit.processors import resize, Adjust
-from imagekit.processors.crop import TrimBorderColor
-
-class ArtistGalleryPhoto(ImageModel):
-    url = models.CharField('link', max_length=200, default='', blank=True)
-
-    class Meta:
-        verbose_name = 'Artist work Image'
-
-
-class ArtistGallery(Gallery):
-    def __unicode__(self):
-        return '%s\'s Photo Gallery' % self.title
-
-    class GalleryMeta:
-        member_models = [ArtistGalleryPhoto]
-
-    class Meta:
-        verbose_name_plural = 'Artist Works Galleries'
-
 class Artist(models.Model):
     user = models.OneToOneField(User, null=True)
-    gallery = models.OneToOneField(ArtistGallery, null=True)
-    
-    day = models.CharField(_("Day"), 
-            max_length=255)
+    slug = models.SlugField(max_length=100)
+    day = models.CharField(_("Days Available"), max_length=255)
     bio = models.TextField(_('Bio'))
-
+    
     def __unicode__(self):
         return u'%s %s' % (self.user.first_name, self.user.last_name)
-
+    
+    def get_absolute_url(self):
+        return reverse('artist-detail', kwargs=dict(slug=self.slug))    
+        
+class ArtistWorkPhoto(models.Model):
+    title = models.CharField(max_length=50)
+    description = models.CharField(max_length=255, blank=True)
+    original_image = models.ImageField(upload_to='galleries')    
+    slug = AutoSlugField(max_length=100, populate_from='title')
+    
+    artist = models.ForeignKey(Artist, null=True)
+    
+    def __unicode__(self):
+        return u'%s %s' % (self.artist, self.title)
+        
+    class Meta:
+        verbose_name = 'Artist work Image'
 

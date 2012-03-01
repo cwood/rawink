@@ -159,13 +159,14 @@ INSTALLED_APPS = (
     'registration',
     
     'rawink.apps.emailtools',
-    'rawink.apps.galleries',
+    # 'rawink.apps.galleries',
     'rawink.apps.templateland',
     
     'rawink.apps.layout',
     'rawink.apps.main',
     'rawink.apps.artists',
     'rawink.apps.customers',
+    'rawink.apps.orders',
     
 )
 
