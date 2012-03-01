@@ -46,16 +46,24 @@ class CreateOrder(CreateView):
         context = self.get_context_data()
         customer = context['customer']
 
+        if self.request.GET.get('product'):
+            initial.update({
+            'product' : get_object_or_404(ArtistWorkPhoto, slug=self.request.GET.get('product')).id,
+            })
+        
         initial.update({
         'billing_first_name': customer.user.first_name,
         'billing_last_name': customer.user.first_name,
         'billing_street_address_1': customer.address.street,
         'billing_state': customer.address.state,
-        'product': get_object_or_404(ArtistWorkPhoto, slug=self.request.GET.get('work')).id,
+        'billing_postal_code': customer.address.zip_code,
+        'billing_phone': customer.phone,
+        'payment_card': customer.card.number,        
             })
         return initial
 
     def form_valid(self, form):
-        context = self.get_context_data()
-        return redirect('/order/')
+        order = form.save(commit=False)
+        order.user = self.request.user
+        return super(CreateView, self).form_valid(form)
 

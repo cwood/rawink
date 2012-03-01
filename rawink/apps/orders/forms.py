@@ -22,5 +22,5 @@ class OrderForm(forms.ModelForm):
     
     class Meta:
         model = Order
-        exclude = ('user')
+        exclude = ('user', 'token',)
 
