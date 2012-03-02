@@ -1,4 +1,4 @@
-from django.views.generic import CreateView, ListView, TemplateView, View
+from django.views.generic import CreateView, ListView, DetailView, TemplateView, View
 from django.conf import settings
 from django.utils import translation
 from django.utils import simplejson as json
@@ -15,13 +15,19 @@ from django.contrib.auth.models import Group
 from django.contrib.auth import authenticate, login
 
 
-class OrderView(TemplateView):
-    template_name = 'orders/index.html'
+class OrderView(ListView):
+    template_name = 'orders/order_list.html'
+    model = Order
     
-    def get_context_data(self, **kwargs):
-        context = super(OrderView, self).get_context_data(**kwargs)
-        context['customer'] = Customer.objects.get(user=self.request.user)
-        return context
+
+class OrderDetail(TemplateView):
+    template_name = 'orders/order_detail.html'
+    model = Order
+
+    def get_queryset(self):
+        print 'test'
+        print get_object_or_404(Order, token=self.kwargs['token'])
+        return get_object_or_404(Order, token=self.kwargs['token'])
 
 
 class CreateOrder(CreateView):

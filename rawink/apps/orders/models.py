@@ -9,6 +9,7 @@ from modeltools import Enum, format_filename as _ff, FilteredManager
 from django.contrib.localflavor.us.models import USStateField, PhoneNumberField
 
 from rawink.apps.artists.models import ArtistWorkPhoto
+from django.core.urlresolvers import reverse
 
 StatusChoices = Enum(
     ('checkout','checkout', 'Undergoing checkout'),
@@ -62,3 +63,9 @@ class Order(models.Model):
         verbose_name = _('order (business)')
         verbose_name_plural = _('orders (business)')
         ordering = ('-last_status_change',)
+
+    def get_absolute_url(self):
+        return reverse('order-detail', kwargs=dict(token=self.token))    
+            
+    def __unicode__(self):
+        return "%s %s" % (self.product, self.last_status_change)    
