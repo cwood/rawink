@@ -130,7 +130,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     
     'rawink.apps.layout.middleware.TemplateFallbackMiddleware',
-    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 ROOT_URLCONF = 'rawink.urls'
@@ -156,7 +156,8 @@ INSTALLED_APPS = (
 
     'south',
     'sekizai',
-    'registration',
+    'html5boilerplate',
+    'debug_toolbar',
     
     'rawink.apps.emailtools',
     # 'rawink.apps.galleries',
@@ -236,7 +237,24 @@ LOGGING = {
         },
     }
 }
-
+DEBUG_TOOLBAR_PANELS = (
+    'debug_toolbar.panels.version.VersionDebugPanel',
+    'debug_toolbar.panels.timer.TimerDebugPanel',
+    'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
+    'debug_toolbar.panels.headers.HeaderDebugPanel',
+    'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
+    'debug_toolbar.panels.template.TemplateDebugPanel',
+    'debug_toolbar.panels.sql.SQLDebugPanel',
+    'debug_toolbar.panels.signals.SignalDebugPanel',
+    'debug_toolbar.panels.logger.LoggingPanel',
+)
+DEBUG_TOOLBAR_CONFIG = {
+    'INTERCEPT_REDIRECTS': False,
+    # 'SHOW_TOOLBAR_CALLBACK': custom_show_toolbar,
+    'HIDE_DJANGO_SQL': False,
+    'TAG': 'div',
+    'ENABLE_STACKTRACES' : True,
+}
 try:
     from local_settings import *
 except ImportError:

@@ -21,6 +21,12 @@ StatusChoices = Enum(
     ('cancelled', 'cancelled', 'Cancelled'),
 )
 
+class OrderManager(models.Manager):
+    pass
+    # def get_query_set(self):
+    #     return super(ProductManager, self).get_query_set().filter(is_enabled=True)
+
+
 class Order(models.Model):
     """
     Add this to your concrete model:
@@ -53,10 +59,21 @@ class Order(models.Model):
     payment_type_name = models.CharField(_('name'), max_length=128, blank=True,
                                          editable=False)
     payment_card =  models.CharField(_('Card number'), max_length=16)
-    payment_price = models.DecimalField(_('unit price'), max_digits=12,
-                                        decimal_places=4, default=0,
-                                        editable=False)
+    payment_price = models.DecimalField(_('Total price'), max_digits=12,
+                                        decimal_places=4, default=0)
     token = models.CharField(max_length=32, blank=True, default='')
+    
+    objects = OrderManager()
+    started = FilteredManager(status='started')
+    
+    def save(self, *args, **kwargs):
+        if not self.token:
+            for i in xrange(100):
+                token = ''.join(random.sample('0123456789abcdefghijklmnopqrstuvwxyz', 32))
+                if not type(self).objects.filter(token=token).exists():
+                    self.token = token
+                    break
+        return super(Order, self).save(*args, **kwargs)
 
     class Meta:
         # Use described string to resolve ambiguity of the word 'order' in English.
@@ -65,7 +82,7 @@ class Order(models.Model):
         ordering = ('-last_status_change',)
 
     def get_absolute_url(self):
-        return reverse('order-detail', kwargs=dict(token=self.token))    
+        return reverse('order-detail')    
             
     def __unicode__(self):
         return "%s %s" % (self.product, self.last_status_change)    

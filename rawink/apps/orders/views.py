@@ -1,4 +1,4 @@
-from django.views.generic import CreateView, ListView, DetailView, TemplateView, View
+from django.views.generic import CreateView, UpdateView, ListView, DetailView, TemplateView, FormView, View
 from django.conf import settings
 from django.utils import translation
 from django.utils import simplejson as json
@@ -24,10 +24,19 @@ class OrderDetail(TemplateView):
     template_name = 'orders/order_detail.html'
     model = Order
 
-    def get_queryset(self):
-        print 'test'
-        print get_object_or_404(Order, token=self.kwargs['token'])
-        return get_object_or_404(Order, token=self.kwargs['token'])
+    def get(self, *args, **kwargs):
+        action = self.request.GET.get('action')
+        order = self.request.GET.get('order')
+        if action == 'statuschange':
+            redirect_url = reverse('artist-order-status-update')
+            extra_params = "?order=%s&action=%s" % (order, action)
+            full_url = "%s%s" % (redirect_url, extra_params)
+            return redirect(full_url)
+
+    def get_context_data(self, **kwargs):
+        context = super(OrderDetail, self).get_context_data(**kwargs)
+        context['order'] = get_object_or_404(Order, token=self.request.GET.get('order'))
+        return context
 
 
 class CreateOrder(CreateView):
@@ -37,21 +46,12 @@ class CreateOrder(CreateView):
     fail_message = 'Failed!'
     success_url = '/order/'
 
-    def get_context_data(self, **kwargs):
-        context = super(CreateView, self).get_context_data(**kwargs)
-        order_pk = self.kwargs.get('order_pk')
-        
-        context["customer"] = get_object_or_404(Customer, user = self.request.user)       
-
-        if order_pk:
-            context["form"] = OrderForm(instance=get_object_or_404(Order, pk=order_pk))
-        return context
-
+    
     def get_initial(self):        
         initial = self.initial or {}
         context = self.get_context_data()
-        customer = context['customer']
-
+        customer = get_object_or_404(Customer, user = self.request.user)
+    
         if self.request.GET.get('product'):
             initial.update({
             'product' : get_object_or_404(ArtistWorkPhoto, slug=self.request.GET.get('product')).id,
@@ -64,7 +64,7 @@ class CreateOrder(CreateView):
         'billing_state': customer.address.state,
         'billing_postal_code': customer.address.zip_code,
         'billing_phone': customer.phone,
-        'payment_card': customer.card.number,        
+        'payment_card': customer.card.number,
             })
         return initial
 
@@ -73,3 +73,20 @@ class CreateOrder(CreateView):
         order.user = self.request.user
         return super(CreateView, self).form_valid(form)
 
+
+class ArtistOrderList(OrderView):
+    def get_queryset(self):
+        print self.request.user
+        qs = Order.objects.all().filter(product__artist__user=self.request.user)
+        qs.query.group_by = ['status']
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super(ArtistOrderList, self).get_context_data(**kwargs)
+        return context
+
+class OrderStatusUpdate(UpdateView):
+    template_name = 'orders/status_update.html'
+    form_class = OrderStatusUpdate
+    model = Order
+    success_url = '/order/artist'

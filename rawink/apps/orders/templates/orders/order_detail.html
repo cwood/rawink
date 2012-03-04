@@ -2,6 +2,10 @@
 {% block content%}
 <ul>
 	<li>{{order}}</li>
+	<li>Name: {{order.user.first_name}}</li>
+	<li>Billing Name: {{order.billing_first_name}}</li>
+	<li>Product Name: {{order.product.title}}</li>
+	<li>Artist Name: {{order.product.artist}}</li>
 	
 </ul>
 {% endblock%}

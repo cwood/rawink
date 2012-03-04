@@ -18,7 +18,7 @@ class CustomerView(TemplateView):
     
     def get_context_data(self, **kwargs):
         context = super(CustomerView, self).get_context_data(**kwargs)
-        context['customer'] = Customer.objects.get(user=self.request.user)
+        context['customer'] = get_object_or_404(Customer, user=self.request.user)
         return context
 
 

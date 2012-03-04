@@ -1,9 +1,10 @@
 {% extends "orders/base.html"%}
 {% block content%}
+{{block.super}}
 <form action="./" method="post">
 	{{ form.as_p }}
 	{% csrf_token %}
-	<input type="hidden" name="id" value="{{order_pk}}">	
+	<input type="hidden" name="id" value="{{order_id}}">	
 	<button type="submit">Submit <small>&gt;&gt;</small></button>
 </form>
 <div >

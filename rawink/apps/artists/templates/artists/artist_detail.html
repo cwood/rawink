@@ -4,7 +4,7 @@
 		{% for work in works%}
 		<li><ul>
 			<li>{{work.title}}</li>
-			<li><a href="{% url customer%}?work={{work.slug}}">Lets do it</a></li>
+			<li><a href="{% url create-order %}?product={{work.slug}}">Lets do it</a></li>
 			<li><a href="{{work.original_image.url}}"><img src="{{work.original_image.url}}" width=200 height=200/></a></li>
 		</ul></li>
 		{% endfor%}
