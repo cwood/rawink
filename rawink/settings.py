@@ -130,6 +130,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     
     'rawink.apps.layout.middleware.TemplateFallbackMiddleware',
+    'rawink.apps.main.middleware.SetGroupMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
@@ -160,7 +161,7 @@ INSTALLED_APPS = (
     'debug_toolbar',
     
     'rawink.apps.emailtools',
-    # 'rawink.apps.galleries',
+    'rawink.apps.main',
     'rawink.apps.templateland',
     
     'rawink.apps.layout',

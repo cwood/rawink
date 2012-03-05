@@ -11,15 +11,19 @@ import settings as _settings
 from django.contrib.auth.models import Group
 
 from django.contrib.auth import authenticate, login
-
+from django.contrib.auth import logout
 
 class CustomerView(TemplateView):
     template_name = 'customers/index.html'
     
     def get_context_data(self, **kwargs):
-        context = super(CustomerView, self).get_context_data(**kwargs)
-        context['customer'] = get_object_or_404(Customer, user=self.request.user)
-        return context
+        if self.request.session.get('usergroup') == 'customer':
+            context = super(CustomerView, self).get_context_data(**kwargs)
+            context['customer'] = get_object_or_404(Customer, user=self.request.user)
+            return context
+        else:
+            return logout(self.request)
+
 
 
 class CustomerCard(CreateView):

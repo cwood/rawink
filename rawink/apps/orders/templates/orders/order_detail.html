@@ -1,6 +1,10 @@
 {% extends 'orders/base.html' %}
+{% load url from future%}
+{% load user_tags %}
 {% block content%}
+{{object}}
 <ul>
+	<li>{{order.id}}</li>
 	<li>{{order}}</li>
 	<li>Name: {{order.user.first_name}}</li>
 	<li>Billing Name: {{order.billing_first_name}}</li>
@@ -8,4 +12,10 @@
 	<li>Artist Name: {{order.product.artist}}</li>
 	
 </ul>
+{{request.user.group.all}}
+{% ifusergroup Artist%}
+	<a href="{% url 'artist-order-status-update' pk=order.id %}">EDIT</a>
+	{% else %}
+		<a href="{% url 'edit-order' pk=order.id %}">EDIT</a>
+{% endifusergroup%}
 {% endblock%}

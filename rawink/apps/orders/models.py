@@ -82,7 +82,7 @@ class Order(models.Model):
         ordering = ('-last_status_change',)
 
     def get_absolute_url(self):
-        return reverse('order-detail')    
+        return reverse('order-detail', kwargs=dict(pk=self.id))
             
     def __unicode__(self):
         return "%s %s" % (self.product, self.last_status_change)    

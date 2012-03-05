@@ -15,29 +15,12 @@ from django.contrib.auth.models import Group
 from django.contrib.auth import authenticate, login
 
 
-class OrderView(ListView):
+class OrderListView(ListView):
     template_name = 'orders/order_list.html'
     model = Order
     
-
-class OrderDetail(TemplateView):
-    template_name = 'orders/order_detail.html'
-    model = Order
-
-    def get(self, *args, **kwargs):
-        action = self.request.GET.get('action')
-        order = self.request.GET.get('order')
-        if action == 'statuschange':
-            redirect_url = reverse('artist-order-status-update')
-            extra_params = "?order=%s&action=%s" % (order, action)
-            full_url = "%s%s" % (redirect_url, extra_params)
-            return redirect(full_url)
-
-    def get_context_data(self, **kwargs):
-        context = super(OrderDetail, self).get_context_data(**kwargs)
-        context['order'] = get_object_or_404(Order, token=self.request.GET.get('order'))
-        return context
-
+    def get_queryset(self):
+        return Order.objects.all().filter(user = self.request.user)
 
 class CreateOrder(CreateView):
     template_name = 'orders/order.html'
@@ -74,9 +57,31 @@ class CreateOrder(CreateView):
         return super(CreateView, self).form_valid(form)
 
 
-class ArtistOrderList(OrderView):
+class OrderDetail(DetailView):
+    template_name = 'orders/order_detail.html'
+    model = Order
+
+    def get_queryset(self, **kwargs):
+        qs = super(OrderDetail, self).get_queryset(**kwargs)
+        
+        if self.request.session.get('usergroup') == 'artist':
+            qs = qs.filter(product__artist__user = self.request.user)
+        else:
+            qs = qs.filter(user = self.request.user)    
+        return qs
+
+class EditOrder(UpdateView):
+
+    model = Order
+    form_class = OrderForm
+    template_name = 'orders/order.html'
+
+    def get_queryset(self, **kwargs):
+        qs = super(EditOrder, self).get_queryset(**kwargs)
+        return qs.filter(user = self.request.user)
+
+class ArtistOrderList(OrderListView):
     def get_queryset(self):
-        print self.request.user
         qs = Order.objects.all().filter(product__artist__user=self.request.user)
         qs.query.group_by = ['status']
         return qs
