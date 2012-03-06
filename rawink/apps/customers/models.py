@@ -48,7 +48,7 @@ class Customer(models.Model):
         return u'%s %s' % (self.user.first_name, self.user.last_name)
 
 class Address(models.Model):
-    customer = models.ForeignKey(Customer, editable=False)
+    customer = models.OneToOneField(Customer)
     street = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
     state = USStateField()
@@ -59,7 +59,7 @@ class Address(models.Model):
 
 
 class Card(models.Model):
-    customer = models.ForeignKey(Customer)
+    customer = models.OneToOneField(Customer)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     id_number = models.CharField(max_length=25)

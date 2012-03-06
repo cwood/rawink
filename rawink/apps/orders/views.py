@@ -38,17 +38,18 @@ class CreateOrder(LoginRequiredMixin, CreateView):
             'product' : get_object_or_404(ArtistWorkPhoto, slug=self.request.GET.get('product')).id,
             })
         
-        address = customer.address_set.all()[0]
-        card = customer.card_set.all()[0]
+        # address = customer.address_set.all()[0]
+        # card = customer.card_set.all()[0]
         
         initial.update({
         'billing_first_name': customer.user.first_name,
         'billing_last_name': customer.user.first_name,
-        'billing_street_address_1': address.street,
-        'billing_state': address.state,
-        'billing_postal_code': address.zip_code,
+        'billing_street_address_1': customer.address.street,
+        'billing_state': customer.address.state,
+        'billing_postal_code': customer.address.zip_code,
         'billing_phone': customer.phone,
-        'payment_card': card.number,
+        'payment_card': customer.card.number,
+        'customer': customer
             })
         return initial
 

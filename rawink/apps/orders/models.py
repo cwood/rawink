@@ -9,6 +9,8 @@ from modeltools import Enum, format_filename as _ff, FilteredManager
 from django.contrib.localflavor.us.models import USStateField, PhoneNumberField
 
 from rawink.apps.artists.models import ArtistWorkPhoto
+from rawink.apps.customers.models import Customer
+
 from django.core.urlresolvers import reverse
 
 StatusChoices = Enum(
@@ -33,13 +35,15 @@ class Order(models.Model):
     cart = models.ForeignKey(Cart, related_name='orders')
     """
     product = models.ForeignKey(ArtistWorkPhoto)
+    customer = models.ForeignKey(Customer)
+    
     status = models.CharField(_('order status'), max_length=32,
                               choices=StatusChoices.choices(), default='checkout')
     created = models.DateTimeField(default=datetime.datetime.now,
                                    editable=False, blank=True)
     last_status_change = models.DateTimeField(default=datetime.datetime.now,
                                    editable=False, blank=True)
-    user = models.ForeignKey(User, blank=True, null=True, related_name='orders')
+    
 
     billing_first_name = models.CharField(_("first name"),
                                           max_length=256, blank=True)
@@ -77,8 +81,8 @@ class Order(models.Model):
 
     class Meta:
         # Use described string to resolve ambiguity of the word 'order' in English.
-        verbose_name = _('order (business)')
-        verbose_name_plural = _('orders (business)')
+        verbose_name = _('order')
+        verbose_name_plural = _('orders')
         ordering = ('-last_status_change',)
 
     def get_absolute_url(self):
