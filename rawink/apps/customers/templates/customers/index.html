@@ -2,14 +2,14 @@
 {{customer}}
 <p><a href="/accounts/logout/">Logout</a></p>
 
-{% if customer.address %}
-	<p><a href="{% url 'edit-address-customer' customer.address.id %}">Edit address</a></p>
+{% if customer.address_set.all.0.id %}
+	<p><a href="{% url 'edit-address-customer' customer.address_set.all.0.id %}">Edit address</a></p>
 {% else%}
 	<p><a href="{% url 'add-address-customer'%}">Add address</a></p>
 {% endif%}
 
-{% if customer.card %}
-	<p><a href="{% url 'edit-card-customer' customer.card.id %}">Edit Card</a></p>
+{% if customer.card_set.all.0.id %}
+	<p><a href="{% url 'edit-card-customer' customer.card_set.all.0.id %}">Edit Card</a></p>
 {% else%}
 	<p><a href="{% url 'add-card-customer'%}">Add Card</a></p>
 {% endif%}

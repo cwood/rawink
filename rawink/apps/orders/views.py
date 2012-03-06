@@ -14,21 +14,19 @@ from django.contrib.auth.models import Group
 
 from django.contrib.auth import authenticate, login
 
+from rawink.apps.main.mixins import LoginRequiredMixin
 
-class OrderListView(ListView):
+class OrderListView(LoginRequiredMixin, ListView):
     template_name = 'orders/order_list.html'
     model = Order
     
     def get_queryset(self):
         return Order.objects.all().filter(user = self.request.user)
 
-class CreateOrder(CreateView):
+class CreateOrder(LoginRequiredMixin, CreateView):
     template_name = 'orders/order.html'
     form_class = OrderForm
-    success_message = 'Form Sent'
-    fail_message = 'Failed!'
     success_url = '/order/'
-
     
     def get_initial(self):        
         initial = self.initial or {}
@@ -40,14 +38,17 @@ class CreateOrder(CreateView):
             'product' : get_object_or_404(ArtistWorkPhoto, slug=self.request.GET.get('product')).id,
             })
         
+        address = customer.address_set.all()[0]
+        card = customer.card_set.all()[0]
+        
         initial.update({
         'billing_first_name': customer.user.first_name,
         'billing_last_name': customer.user.first_name,
-        'billing_street_address_1': customer.address.street,
-        'billing_state': customer.address.state,
-        'billing_postal_code': customer.address.zip_code,
+        'billing_street_address_1': address.street,
+        'billing_state': address.state,
+        'billing_postal_code': address.zip_code,
         'billing_phone': customer.phone,
-        'payment_card': customer.card.number,
+        'payment_card': card.number,
             })
         return initial
 
@@ -57,7 +58,7 @@ class CreateOrder(CreateView):
         return super(CreateView, self).form_valid(form)
 
 
-class OrderDetail(DetailView):
+class OrderDetail(LoginRequiredMixin, DetailView):
     template_name = 'orders/order_detail.html'
     model = Order
 
@@ -70,7 +71,7 @@ class OrderDetail(DetailView):
             qs = qs.filter(user = self.request.user)    
         return qs
 
-class EditOrder(UpdateView):
+class EditOrder(LoginRequiredMixin, UpdateView):
 
     model = Order
     form_class = OrderForm
@@ -81,6 +82,7 @@ class EditOrder(UpdateView):
         return qs.filter(user = self.request.user)
 
 class ArtistOrderList(OrderListView):
+    
     def get_queryset(self):
         qs = Order.objects.all().filter(product__artist__user=self.request.user)
         qs.query.group_by = ['status']
@@ -90,7 +92,7 @@ class ArtistOrderList(OrderListView):
         context = super(ArtistOrderList, self).get_context_data(**kwargs)
         return context
 
-class OrderStatusUpdate(UpdateView):
+class OrderStatusUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'orders/status_update.html'
     form_class = OrderStatusUpdate
     model = Order

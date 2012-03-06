@@ -37,7 +37,18 @@ CardType = Enum(
 )
 
 
+
+class Customer(models.Model):
+    user = models.OneToOneField(User, null=True)
+    gender = models.CharField(max_length=1, choices=Gender.choices())
+    phone = PhoneNumberField(null=True,)
+    birthday = models.DateField(null=True)
+    
+    def __unicode__(self):
+        return u'%s %s' % (self.user.first_name, self.user.last_name)
+
 class Address(models.Model):
+    customer = models.ForeignKey(Customer, editable=False)
     street = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
     state = USStateField()
@@ -46,7 +57,9 @@ class Address(models.Model):
     def __unicode__(self):
         return u'%s, %s, %s %s' % (self.street, self.city, self.state, self.zip_code)
 
+
 class Card(models.Model):
+    customer = models.ForeignKey(Customer)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     id_number = models.CharField(max_length=25)
@@ -55,19 +68,8 @@ class Card(models.Model):
     security_code = models.CharField(max_length=255)
     expiry_date = models.DateField()
 
+    class Meta():
+        unique_together = ('customer', 'number')
+
     def __unicode__(self):
-        return u'%s, %s, %s %s' % (self.street, self.city, self.state, self.zip_code)
-
-class Customer(models.Model):
-    user = models.OneToOneField(User, null=True)
-    address = models.ForeignKey(Address, related_name='billing_customers', null=True, blank=True)
-    card = models.ForeignKey(Card, related_name='card_customers', null=True, blank=True)
-    
-    gender = models.CharField(max_length=1, choices=Gender.choices())
-    phone = PhoneNumberField(null=True,)
-    birthday = models.DateField(null=True)
-    
-    def __unicode__(self):
-        return u'%s %s' % (self.user.first_name, self.user.last_name)
-
-
+        return u'%s, %s' % (self.customer, self.number)

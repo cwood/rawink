@@ -1,4 +1,4 @@
-from django.views.generic import CreateView, ListView, TemplateView, View
+from django.views.generic import CreateView, UpdateView, ListView, TemplateView, View
 from django.conf import settings
 from django.utils import translation
 from django.utils import simplejson as json
@@ -13,7 +13,9 @@ from django.contrib.auth.models import Group
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 
-class CustomerView(TemplateView):
+from rawink.apps.main.mixins import LoginRequiredMixin
+
+class CustomerView(LoginRequiredMixin, TemplateView):
     template_name = 'customers/index.html'
     
     def get_context_data(self, **kwargs):
@@ -26,106 +28,85 @@ class CustomerView(TemplateView):
 
 
 
-class CustomerCard(CreateView):
-    template_name = 'customers/card.html'
+class CreateCard(LoginRequiredMixin, CreateView):
     form_class = CardForm
-    success_message = 'Form Sent'
-    fail_message = 'Failed!'
     success_url = '/customer/'
+    template_name = 'customers/card_form.html'
 
-    def get_context_data(self, **kwargs):
-        context = super(CustomerCard, self).get_context_data(**kwargs)
-        context['contact_form_success'] = 'success' in self.request.GET
-        context['success_message'] = self.success_message
-        card_pk = self.kwargs.get('card_pk')
-        context["customer"] = get_object_or_404(Customer, user = self.request.user)
-        
-
-        if card_pk:
-            context["form"] = CardForm(instance=get_object_or_404(Card, pk=card_pk))
-        return context
-
-    # def get_success_url(self):
-    #     return '%s?success' % self.request.path
+    def get_success_url(self):
+        return self.success_url
+                
     def get_initial(self):        
         initial = self.initial or {}
-        context = self.get_context_data()
-        customer = context['customer']
-
         initial.update({
-        'first_name': customer.user.first_name,
-        'last_name': customer.user.first_name,
+        'first_name': self.request.user.first_name,
+        'last_name': self.request.user.first_name,
+        'customer': Customer.objects.get(user = self.request.user),
             })
         return initial
 
     def form_valid(self, form):
         context = self.get_context_data()
-        if (self.kwargs.get('card_pk')):
-            self.object = form.save(commit=False)
-            self.object.id=self.kwargs.get('card_pk')
-            self.object.save()
-        else:
-            card_id = form.save()            
-            user = self.request.user
-            customer = Customer.objects.get(user=self.request.user)
-            customer.card_id = card_id
-            customer.save()        
-        return redirect('/customer/')
+        card = form.save(commit=False)
 
-class CustomerAddress(CreateView):
-    template_name = 'customers/address.html'
+        customer = Customer.objects.get(user=self.request.user)
+        card.customer = customer
+        return super(CreateCard, self).form_valid(card)
+
+class EditCard(LoginRequiredMixin, UpdateView):
+    form_class = CardForm
+    model = Card
+    success_url = "/customer/"
+
+class CreateAddress(LoginRequiredMixin, CreateView):
     form_class = AddressForm
-    success_message = 'Form Sent'
-    fail_message = 'Failed!'
     success_url = '/customer/'
+    template_name = 'customers/address_form.html'
+    
+    def get_success_url(self):
+        return self.success_url
 
-    def get_context_data(self, **kwargs):
-        context = super(CustomerAddress, self).get_context_data(**kwargs)
-        context['contact_form_success'] = 'success' in self.request.GET
-        context['success_message'] = self.success_message
-        address_pk = self.kwargs.get('address_pk')
-        
-        if address_pk:
-            context["form"] = AddressForm(instance=get_object_or_404(Address, pk=address_pk))
-        return context
-
-    # def get_success_url(self):
-    #     return '%s?success' % self.request.path
+    def get_initial(self):        
+        initial = self.initial or {}
+        initial.update({
+        'first_name': self.request.user.first_name,
+        'last_name': self.request.user.first_name,
+        'customer': Customer.objects.get(user = self.request.user),
+            })
+        return initial
 
     def form_valid(self, form):
         context = self.get_context_data()
-        if (self.kwargs.get('address_pk')):
-            self.object = form.save(commit=False)
-            self.object.id=self.kwargs.get('address_pk')
-            self.object.save()
-        else:
-            address_id = form.save()            
-            user = self.request.user
-            customer = Customer.objects.get(user=self.request.user)
-            customer.address_id = address_id
-            customer.save()        
-        return redirect('/customer/')
-    
+        card = form.save(commit=False)
+
+        customer = Customer.objects.get(user=self.request.user)
+        card.customer = customer
+        return super(CreateAddress, self).form_valid(card)
+
+class EditAddress(LoginRequiredMixin, UpdateView):
+    form_class = AddressForm
+    model = Address
+    success_url = "/customer/"
+
+
+
 class CreateCustomer(CreateView):
-    template_name = 'customers/customer.html'
+    template_name = 'customers/customer_form.html'
     form_class = CustomerForm
-    success_message = 'Form Sent'
-    fail_message = 'Failed!'
     success_url = '/customer/'
     
     def get(self, request, *args, **kwargs):
-        if self.request.user:
+        print self.request.user
+        if self.request.user == 'AnonymousUser':
             print 'already logedin!!'
             return HttpResponseRedirect('/accounts/logout/')
         
         self.object = None
-        return super(BaseCreateView, self).get(request, *args, **kwargs)
+        return super(CreateCustomer, self).get(request, *args, **kwargs)
 
         
     def get_context_data(self, **kwargs):
         context = super(CreateCustomer, self).get_context_data(**kwargs)
-        context['contact_form_success'] = 'success' in self.request.GET
-        context['success_message'] = self.success_message
         
         if self.request.POST:
             context['user_form'] = UserForm(self.request.POST)
@@ -133,18 +114,16 @@ class CreateCustomer(CreateView):
             context['user_form'] = UserForm()    
         return context
 
-    # def get_success_url(self):
-    #     return '%s?success' % self.request.path
-    
     def form_valid(self, form):
         context = self.get_context_data()
         user_form = context['user_form']
         if user_form.is_valid() and form.is_valid():
             user = user_form.save()
-            customer = form.save()
+            customer = form.save(commit=False)
 
             g = Group.objects.get(name=_settings.CUSTOMER_GROUP)
             user.groups.add(g)
+            user.email = user.username
             user.save()
             
             customer.user_id = user.id
@@ -165,3 +144,9 @@ class CreateCustomer(CreateView):
         else:
             response = self.render_to_response(self.get_context_data(form=form))    
         return response
+
+class EditCustomer(LoginRequiredMixin, UpdateView):
+    model = Customer
+    form_class = CustomerForm
+    success_url = '/customer/'
+
