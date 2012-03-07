@@ -1,3 +1,5 @@
+{% extends 'artists/base.html' %}
+{% block content%}
 {{artist}}
 <ul>
 	{% with works=artist.artistworkphoto_set.all%}
@@ -10,3 +12,5 @@
 		{% endfor%}
 	{% endwith%}	
 </ul>
+
+{% endblock%}

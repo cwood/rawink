@@ -1,3 +1,6 @@
+{% extends 'customers/base.html' %}
+{% block content%}
+
 <form action="./" method="post" >
 {{form.errors}}
 	{{ form.as_p }}
@@ -5,3 +8,4 @@
 	<button type="submit">Submit <small>&gt;&gt;</small></button>
 </form>
 <div >
+{% endblock %}

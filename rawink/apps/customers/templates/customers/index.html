@@ -1,3 +1,5 @@
+{% extends 'customers/base.html' %}
+{% block content %}
 {% load url from future%}
 {{customer}}
 <p><a href="/accounts/logout/">Logout</a></p>
@@ -13,3 +15,5 @@
 {% else%}
 	<p><a href="{% url 'add-card-customer'%}">Add Card</a></p>
 {% endif%}
+
+{% endblock %}
