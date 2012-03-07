@@ -21,7 +21,7 @@ class OrderListView(LoginRequiredMixin, ListView):
     model = Order
     
     def get_queryset(self):
-        return Order.objects.all().filter(user = self.request.user)
+        return Order.objects.all().filter(customer = Customer.objects.get(user=self.request.user))
 
 class CreateOrder(LoginRequiredMixin, CreateView):
     template_name = 'orders/order.html'
@@ -69,7 +69,7 @@ class OrderDetail(LoginRequiredMixin, DetailView):
         if self.request.session.get('usergroup') == 'artist':
             qs = qs.filter(product__artist__user = self.request.user)
         else:
-            qs = qs.filter(user = self.request.user)    
+            qs = qs.filter(customer= Customer.objects.get(user=self.request.user))
         return qs
 
 class EditOrder(LoginRequiredMixin, UpdateView):
@@ -80,7 +80,7 @@ class EditOrder(LoginRequiredMixin, UpdateView):
 
     def get_queryset(self, **kwargs):
         qs = super(EditOrder, self).get_queryset(**kwargs)
-        return qs.filter(user = self.request.user)
+        return qs.filter(customer= Customer.objects.get(user=self.request.user))
 
 class ArtistOrderList(OrderListView):
     
