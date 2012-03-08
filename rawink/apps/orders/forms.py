@@ -21,7 +21,7 @@ class OrderForm(forms.ModelForm):
     
     class Meta:
         model = Order
-        exclude = ('user', 'token', 'payment_price', )
+        exclude = ('customer', 'token', 'payment_price', )
 
 class OrderStatusUpdate(OrderForm):
     

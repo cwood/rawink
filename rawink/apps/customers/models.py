@@ -47,6 +47,9 @@ class Customer(models.Model):
     def __unicode__(self):
         return u'%s %s' % (self.user.first_name, self.user.last_name)
 
+    def get_card(self):    
+        return Card.objects.get(customer=self.id)
+        
 class Address(models.Model):
     customer = models.OneToOneField(Customer)
     street = models.CharField(max_length=255)

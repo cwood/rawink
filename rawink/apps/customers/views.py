@@ -140,7 +140,7 @@ class CreateCustomer(CreateView):
                     # Return a 'disabled account' error message
             else:
                 print 'User disabled!!'
-            response = super(CreateCustomer, self).form_valid(form)
+            return HttpResponseRedirect(self.request.META.get('http_referer'))
         else:
             response = self.render_to_response(self.get_context_data(form=form))    
         return response

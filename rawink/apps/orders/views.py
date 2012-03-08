@@ -38,24 +38,25 @@ class CreateOrder(LoginRequiredMixin, CreateView):
             'product' : get_object_or_404(ArtistWorkPhoto, slug=self.request.GET.get('product')).id,
             })
         
-        # address = customer.address_set.all()[0]
-        # card = customer.card_set.all()[0]
-        
-        initial.update({
-        'billing_first_name': customer.user.first_name,
-        'billing_last_name': customer.user.first_name,
-        'billing_street_address_1': customer.address.street,
-        'billing_state': customer.address.state,
-        'billing_postal_code': customer.address.zip_code,
-        'billing_phone': customer.phone,
-        'payment_card': customer.card.number,
-        'customer': customer
-            })
+        try:
+            initial.update({
+            'billing_first_name': customer.user.first_name,
+            'billing_last_name': customer.user.first_name,
+            'billing_street_address_1': customer.address.street,
+            'billing_state': customer.address.state,
+            'billing_postal_code': customer.address.zip_code,
+            'billing_phone': customer.phone,
+            'payment_card': customer.card.number,
+            'customer': customer
+                })
+        except:
+                print 'Address and Card is missing'
+                
         return initial
 
     def form_valid(self, form):
         order = form.save(commit=False)
-        order.user = self.request.user
+        order.customer = Customer.objects.get(user=self.request.user)
         return super(CreateView, self).form_valid(form)
 
 
