@@ -11,7 +11,6 @@ from django.contrib.auth.forms import UserCreationForm as _UserCreationForm, \
 
 from .models import Order
 
-from registration.forms import RegistrationFormUniqueEmail as _RegistrationFormUniqueEmail
 
 class UserForm(_UserCreationForm, forms.ModelForm):
     class Meta:
