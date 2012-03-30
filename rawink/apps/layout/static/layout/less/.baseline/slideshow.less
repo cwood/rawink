@@ -1,0 +1,69 @@
+
+@slideshowWidth:	962px;
+@slideshowHeight:	430px;
+@imageWidth:		710px;
+
+
+.slideshow {
+width: 100%;
+overflow: hidden;
+position: relative;
+
+	> div {
+	
+		width: @slideshowWidth;
+		margin: 0 auto;
+		
+		ul {
+		width: 1000%;
+		list-style: none;
+		padding: 0;
+		margin: 0 0 0 -@slideshowWidth;
+			
+			li {
+			padding: 0 1px;
+			.inline-block;
+			float: left;
+			
+			&.active {
+				figure {
+					img { width: auto }
+					figcaption { display: block }
+				}
+			}
+			&.previous {
+				figure {
+				text-align: right;
+				
+					img {
+					height: auto !important;
+					}
+				}
+			}
+			
+				figure {
+				margin: 0;
+				line-height: @slideshowHeight; // Allows us to vertically align images if though they are floated.
+				position: relative;
+				
+					img {
+					vertical-align: middle;
+					width: @imageWidth*.9;
+					}
+					
+					figcaption {
+					display: none;
+					position: absolute;
+					color: #fff;
+					top: 0;
+					right: 0;
+					}
+				
+					& .active {
+					width: 100%
+					}
+				}
+			}
+		}
+	}
+}

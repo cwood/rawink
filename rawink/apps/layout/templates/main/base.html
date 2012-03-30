@@ -1,0 +1,68 @@
+<!doctype html>
+
+<!--[if lt IE 7 ]> <html class="ie ie6 no-js" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie ie7 no-js" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie ie8 no-js" lang="en"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie ie9 no-js" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--><html class="no-js" lang="en"><!--<![endif]-->
+
+<head>
+	
+	<title></title>
+	<meta name="description" content="">
+	
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, width=device-width" />
+	<link rel="apple-touch-startup-image" href="{{ STATIC_URL }}layout/images/startup.jpg" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)" />
+	<link rel="apple-touch-startup-image" href="{{ STATIC_URL }}layout/images/startup2.jpg" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)" />
+<!-- 	<meta name="viewport" content="user-scalable=no, width=device-width" /> -->
+	
+	<link rel="shortcut icon" href="rawink.loc{{ STATIC_URL }}layout/images/favicon.ico">
+	<link rel="apple-touch-icon-precomposed" href="{{ STATIC_URL }}layout/images/apple-touch-icon.png">
+	<link rel="stylesheet" href="{{ STATIC_URL }}layout/css/mobile.css">
+	<link rel="stylesheet" href="{{ STATIC_URL }}layout/css/global.css">
+	
+	{% block css %}{% endblock %}
+	
+<!-- 	<script src="{{ STATIC_URL }}layout/third_party/modernizr.custom.35752.js"></script> -->
+	
+<!-- 	<script src="{{ STATIC_URL }}layout/third_party/klass.min.js"></script> -->
+	<script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js"></script>
+	
+<!-- 	<script src="{{ STATIC_URL }}layout/third_party/code.photoswipe.jquery-3.0.4.min.js"></script> -->
+	<script type="text/javascript" src="{{ STATIC_URL }}layout/third_party/jquery.cycle.all.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}layout/js/global.js"></script>
+	
+	<script type="text/javascript" src="http://use.typekit.com/nay5rxi.js"></script>
+	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+</head>
+
+{% block open_body_tag %}
+
+<body>
+{% endblock %}
+
+{% block body %}
+
+
+{% block main %}
+
+{% endblock %}
+
+
+<!--
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script>window.jQuery || document.write("<script src='{{ STATIC_URL }}layout/js/libs/jquery-1.7.1.min.js'>\x3C/script>")</script>
+-->
+
+
+
+
+{% block js %}{% endblock %}
+{% endblock %}
+  
+</body>
+</html>

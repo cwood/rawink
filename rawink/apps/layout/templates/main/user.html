@@ -1,0 +1,107 @@
+{% extends "main/base.html" %}
+
+{% block main %}
+
+<div data-role="page" class="user">
+	
+	<article data-role="content">
+		
+		<header>
+			<a href="/main/home" data-direction="reverse" title="Change Artist">
+				<img src="{{ STATIC_URL }}layout/images/ryan-klein.jpg" />
+				<i class="status"></i>
+				<span></span>
+			</a>
+		</header>
+		
+		<header class="edit-work">
+			<a href="/main/work" data-direction="reverse" title="Change Work">
+				<img src="{{ STATIC_URL }}layout/images/full/015.jpg" />
+				<i class="status"></i>
+				<span></span>
+			</a>
+		</header>
+		
+		<form action="/main/done">
+		
+			<div id="logo">
+				<img src="{{ STATIC_URL }}layout/images/logo-full-large.png" alt="Raw Ink" />
+			</div>
+			
+			<div id="intro" class="content">
+				<p>Awesome! We know who and what you want. Now we need a little information about you.</p>
+				<a href="#login">Log In</a>
+				<a href="#signup" rel="external">Sign Up</a>
+			</div>
+			
+			<div id="login" class="content">
+				<p>Log In with your email address and phone number. Just the numbers, no hyphens or other special characters.</p>
+				
+				<ul>
+					<li>
+						<label for="email_address">Email Address</label>
+						<input type="email" name="email_address" id="email_address" />
+					</li>
+					<li>
+						<label for="phone_number">Phone Number (eg. 30155569166)</label>
+						<input type="text" name="phone_number" id="phone_number" />
+					</li>
+				</ul>
+				
+				<button type="submit">Log In</button>
+			</div>
+			
+			<div id="signup" class="content">
+				
+				<ul>
+					<li>
+						<label for="name">Name (as appears on your State ID)</label>
+						<input type="text" name="name" id="name" />
+					</li>
+					<li>
+						<input type="checkbox" name="guardian" id="guardian" />
+						<span>
+							I&rsquo;m a guardian.
+						</span>
+						<div class="toggle">
+							<label for="tattooee">Tattooee&rsquo;s Name</label>
+							<input type="text" name="tattooee" id="tattooee" />
+						</div>
+					</li>
+					<li>
+						<label for="todays_date">Today&rsquo;s Date</label>
+						<input type="date" name="todays_date" id="todays_date" />
+					</li>
+					<li>
+						<label for="email_address">Email Address</label>
+						<input type="email" name="email_address" id="email_address" />
+					</li>
+					<li>
+						<label for="phone">Phone Number</label>
+						<input type="number" name="_phone" id="phone" />
+					</li>
+					<li>
+						<label for="street_address">Street Address</label>
+						<input type="text" name="street_address" id="street_address" />
+					</li>
+					<li>
+						<label for="zip">Zip Code</label>
+						<input type="number" name="zip" id="zip" />
+					</li>
+					
+				</ul>
+				
+				<button type="submit">Book Appointment</button>
+			</div>
+		
+		</form>
+		
+	</article>
+	
+</div>
+
+<script>
+
+</script>
+
+{% endblock %}

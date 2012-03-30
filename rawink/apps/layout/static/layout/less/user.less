@@ -1,0 +1,165 @@
+.user {
+
+	header {
+	.goback;
+		
+		&.edit-work {
+		left: 25%;
+		z-index: 2;
+		
+			&:after {
+			content: 'Select Another Style';
+			position: absolute;
+			z-index: 99;
+			bottom: 50px;
+			width: 100%;
+			text-align: center;
+			color: #fff;
+			text-shadow: 1px 1px #000;
+			font-size: 15px;
+			}
+		}
+		
+		&:after {
+		content: 'Change Artist';
+		position: absolute;
+		z-index: 99;
+		bottom: 50px;
+		width: 100%;
+		text-align: center;
+		color: #fff;
+		text-shadow: 1px 1px #000;
+		font-size: 15px;
+		}
+		
+		&.done {
+			&:after { content: '' !important; display: none !important }
+		}
+	}
+	
+	form {
+	.page;
+	padding-bottom: 30px;
+	
+		#logo {
+		width: 200px;
+		margin: 5em auto 0;
+		}
+		
+		.content {
+		width: 290px;
+		margin: 3em auto 0;
+		font-size: 15px;
+		line-height: 1.571428571;
+		color: #e7e2e2;
+		word-spacing: 0.3em;
+		letter-spacing: 0.07em;
+		text-shadow: 1px 1px #000;
+		display: none;
+		
+			&#intro { display: block }
+		
+			a {
+			.btn;
+			margin-top: 1.5em;
+			width: 30%;
+			
+				&[href='#signup'] { float: right }
+			}
+			
+			ul {
+			padding-top: 10px;
+			
+				li{
+				padding: 5px 0;
+				display: block;
+				text-align: left;
+				
+					label {
+					font-size: 13px;
+					text-align: left;
+					display: block;
+					
+						a {
+						padding: 0;
+						color: #e7e2e2;
+						background: none;
+						border: none;
+						display: inline;
+						text-shadow: none;
+						}
+					}
+					
+					input {
+					padding: 8px 8px;
+					width: 272px;
+					font-size: 13px;
+					line-height: 16px;
+					border: none;
+					
+						&[type='checkbox']{
+						width: 30px;
+						margin-right: 5px;
+						background: #fff;
+						
+							&[checked='checled'] {
+							background: green;
+							}
+						}
+					}
+					
+					.ui-checkbox {
+					
+						input {
+						background: #fff;
+						width: 32px;
+						height: 32px;
+						position: static;
+						padding: 0;
+						margin: 0 5px 5px 0;
+						float: left;
+						
+							&[checked]{
+							background: green;
+							}
+						}
+					}
+					
+					span {
+					font-size: 13px;
+					line-height: 32px;
+					}
+					
+					.toggle {
+					display: none;
+					padding-left: 37px;
+					
+						input { width: 235px }
+					}
+				}
+			}
+			
+			.ui-btn {
+			background: #b21a1a;
+			font-size: 13px;
+			color: #fff;
+			display: inline-block;
+			padding: 0 40px 0 10px;
+			line-height: 32px;
+			margin-top: 5px;
+			text-shadow: none;
+			position: relative;
+			overflow: hidden;
+			
+				button {
+				opacity: 0;
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				}
+			}
+		}
+	}
+}

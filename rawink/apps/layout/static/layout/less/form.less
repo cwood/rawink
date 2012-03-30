@@ -1,0 +1,132 @@
+form {
+margin-bottom: 5px;
+
+	.input {
+	-moz-box-shadow: inset 1px 1px 1px 1px rgba(0,0,0,.1);
+	-o-box-shadow: inset 1px 1px 1px 1px rgba(0,0,0,.1);
+	-ms-box-shadow: inset 1px 1px 1px 1px rgba(0,0,0,.1);
+	box-shadow: inset 1px 1px 1px 1px rgba(0,0,0,.1);
+	}
+
+	ul {
+		li {
+		.inline-block;
+		padding-bottom: 10px;
+		white-space: nowrap;
+		vertical-align: top;
+		
+			label {
+			color: #5f4222;
+			font-size: 12px;
+			font-weight: bold;
+			text-transform: uppercase;
+			}
+			
+			.chzn-container {
+			height: 22px;
+			font-size: 11px;
+			position: relative;
+			
+				.chzn-single {
+				position: absolute;
+				top: 0;
+				left: 0;
+				line-height: 12px;
+				padding: 5px;
+				color: #333;
+				margin: 1px;
+				font-size: 11px;
+				}
+				
+				input {
+				.input;
+				.border-radius(0,0,0,0);
+				line-height: 12px;
+				height: 12px;
+				padding: 5px 22px 5px 5px;
+				background: #fff url(../images/sprite.png) right 0 no-repeat;
+				
+					&[readonly=readonly] { cursor: pointer }
+					
+					&:focus {
+					border-color: @orange;
+					}
+				}
+				
+				.chzn-results {
+				.box-shadow;
+				position: absolute;
+				z-index: 89;
+				top: 22px;
+				left: 0;
+				width: 100%;
+				background: #fff;
+				color: #333;
+				display: none;
+				width: auto;
+					
+					li {
+					padding: 5px;
+					display: block;
+					
+						&.highlighted,
+						&.result-selected {
+						background: #ece6da;
+						}
+						
+						&.active-result { cursor: pointer }
+					}
+				}
+				
+				&.chzn-container-active {
+				
+					.chzn-results {
+					display: block;
+					}
+				}
+			}
+			
+			input[type=checkbox],
+			div.chbx {
+			.inline-block;
+			.input;
+			border: 1px solid #CCC;
+			height: 20px;
+			width: 20px;
+			cursor: pointer;
+			
+				&[data-checkbox=true] {
+				background: @orange;
+				}
+			}
+			
+			i {
+			clear: both;
+			font-style: normal;
+			display: block;
+			font-size: 10px;
+			text-transform: uppercase;
+			font-weight: bold;
+			
+				a {
+				text-decoration: underline;
+				color: #81a6a5;
+				}
+			}
+			
+			input[type=checkbox] { visibility: hidden }
+		}
+	}
+	
+	button {
+	.buttonBackground(@orange, @orange);
+	color: #fff;
+	border: none;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+	padding: 4px 11px 4px;
+	height: 22px;
+	line-height: 14px;
+	font-size: 12px;
+	}
+}

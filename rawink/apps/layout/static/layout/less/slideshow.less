@@ -1,0 +1,26 @@
+.slideshow {
+	ul li figure {
+	width: @slideshowWidth - 2;
+	}
+
+	.content {
+	position: absolute;
+	z-index: 3;
+	right: 50%;
+	bottom: 0;
+	width: 210px;
+	height: 390px;
+	margin-right: -480px; // 4px offset for inline block padding in modern browsers
+	background: #81A8A6;
+	padding: 20px;
+	font-size: 11px;
+	line-height: 1.295454545;
+	color: #fff;
+	overflow: auto;
+		
+		p {
+		font-size: inherit;
+		line-height: inherit;
+		}
+	}
+}

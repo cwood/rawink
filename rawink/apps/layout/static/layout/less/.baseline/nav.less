@@ -1,0 +1,88 @@
+// Horizontal Variation for Nav
+.horizontal {
+	
+	li {
+	.inline-block;
+	float: left;
+	
+		> a {
+		padding: 0 15px;
+		}	
+	}
+}
+
+// Super Nav
+.super {
+font-size: 11px;
+line-height: @navbarHeight;
+.horizontal;
+
+	ul {
+	float: right;
+	margin: @navbarHeight 0;
+		
+		a {
+		padding: 0 8px;
+		border-right: 1px solid @grayLighter;
+		}
+		
+		li:last-child > a,
+		li.last-child > a { border-right: none }
+	}
+}
+
+// Nav Basline
+nav{
+	ul {
+	margin-left: 0;
+	margin-bottom: @navbarHeight;
+	list-style: none;
+		
+		li.logo a:hover{ background: none }
+		> li > a {
+		display: block;
+			
+			&:hover {
+			text-decoration: none;
+			background-color: @grayLighter;
+			}
+		}
+	}
+	
+	// Horizontal Nav
+	/*
+	&.horizontal {
+		
+		li {
+		.inline-block;
+		float: left;
+		
+			> a {
+			padding: 0 15px;
+			}	
+		}
+	}
+	*/
+	
+	/*
+// Super Nav
+	&.super {
+	font-size: 11px;
+	line-height: @navbarHeight;
+	.horizontal;
+	
+		ul {
+		float: right;
+		margin: @navbarHeight 0;
+			
+			a {
+			padding: 0 5px;
+			border-right: 1px solid @grayLighter;
+			}
+			
+			li:last-child > a,
+			li.last-child > a { border-right: none }
+		}
+	}
+*/
+}

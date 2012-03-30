@@ -1,0 +1,94 @@
+{% extends "main/base.html" %}
+
+{% block main %}
+
+<div data-role="page" class="artists">
+	
+	<article data-role="content">
+	
+	<div id="logo">
+		<a href="/main/home" rel="external"><img src="{{ STATIC_URL }}layout/images/logo-full-large.png" alt="Raw Ink" /></a>
+		
+		<p>Select your preferred artist or piercer below</p>
+	</div>
+	
+		<ul>
+		
+			<li>
+				<figure data-target="#first-artist">
+					<span class="open"></span>
+					<span class="close"></span>
+					<span class="status"></span>
+					<img src="{{ STATIC_URL }}layout/images/robby-latos.jpg" />
+				</figure>
+				<section id="first-artist">
+					<header>
+						<h1>Bobby Weschler</h1>
+						<h2>Artist &amp; Owner</h2>
+						<a href="/main/work">Continue</a>
+					</header>
+					<p>I saw society opening up to tattooing but every tattoo I saw was the same! Probably because its all the same reference (google), so of course there will be similar 'copies'... My goal is to use unique reference and to give one of a kind tattoos by spending the right amount of time nailing down the design first with the customer, and then drawing the design to best fit the contours of the body.</p>
+				</section>
+			</li>
+		
+			<li>
+				<figure data-target="#second-artist">
+					<span class="open"></span>
+					<span class="close"></span>
+					<span class="status"></span>
+					<img src="{{ STATIC_URL }}layout/images/robby-latos.jpg" />
+				</figure>
+				<section id="second-artist">
+					<header>
+						<h1>Robby Latos</h1>
+						<h2>Tattoo Artist</h2>
+						<a href="/main/work">Continue</a>
+					</header>
+					<p>Latos has a formal art education that gave him a strong lead in his tattoo apprenticeship. Since then, Latos has attracted a lot of outside attention for his talents in tattooing. His realism and his ability to make fantastical concepts appear all but impossible make us all scratch our heads in wonder.</p>
+				</section>
+			</li>
+			
+			<li>
+				<figure data-target="#third-artist">
+					<span class="open"></span>
+					<span class="close"></span>
+					<span class="status"></span>
+					<img src="{{ STATIC_URL }}layout/images/ryan-klein.jpg" />
+				</figure>
+				<section id="third-artist">
+					<header>
+						<h1>Ryan Kaufman</h1>
+						<h2>Tattoo Artist</h2>
+						<a href="/main/work">Continue</a>
+					</header>
+					<p>Ryan Kaufman is a locally known artist with his art all over town... and you probably see them on a regular basis. For example, Growlers Brew Pub & Resaurant has a VIP room with an entire wall illustrated and painted by Ryan. He has even taken his tattoo talents to Costa Rica and to the Ukrane.</p>
+				</section>
+			</li>
+			
+			<li>
+				<figure data-target="#fourth-artist">
+					<span class="open"></span>
+					<span class="close"></span>
+					<span class="status"></span>
+					<img src="{{ STATIC_URL }}layout/images/ryan-klein.jpg" />
+				</figure>
+				<section id="fourth-artist">
+					<header>
+						<h1>Ryan Klein</h1>
+						<h2>Piercer &amp; Tattoo Artist</h2>
+						<a href="/main/work">Continue</a>
+					</header>
+					<p>Microdermal piercings are his personal favorite to perform, but he is an expert in all placements and can help with any deciding factors. RAW INK always advises against piercing and tattooing outside of a licensed, professional tattoo studio, however, we'll be glad to offer help and solutions for mistakes made before you found us. Ryan also boasts 9 years of tattooing experience in shops all over the East Coast so he can assist with any issue. Ryan's resumé even includes training many piercers his safe, expert techniques.</p>
+				</section>
+			</li>
+			
+		</ul>
+	</article>
+	
+</div>
+
+<script>
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,132 @@
+#buckets {
+.clearfix;
+padding: 5px 0 0 30px;
+color: #fff;
+
+	.bucket {
+	.box-shadow;
+	width: 280px;
+	background: #fff;
+	padding: 5px;
+	margin-right: 10px;
+	float: left;
+	
+	
+		&.first {
+			header, .content {
+			background: #81a6a5;
+			}
+		}
+		
+		&.second {
+			header, .content {
+			background: #604222;
+			}
+		}
+		
+		&.third {
+			header, .content {
+			background: @orange;
+			}
+		}
+			
+		header {
+		padding: 15px;
+		width: auto;
+		height: auto;
+		margin-bottom: 25px;
+		
+			h1 {
+			color: #fff;
+			}
+		}
+		
+		> div {
+		padding: 0 10px;
+		
+			[itemprop=description] {
+			float: left;
+			width: 178px;
+			padding: 0 0 0 10px;
+			}
+		}
+		
+		
+		ul {
+		.unstyled;
+		}
+	}
+		
+	form {
+		
+		ul {
+			li{
+
+				span.inline {
+				font-size: 10px;
+				color: #81a6a5;
+				text-transform: uppercase;
+				padding: 0 3px;
+				}
+				
+				select {
+				width: 115px;
+				}
+				
+				.chzn-container {
+				.inline-block;
+				position: relative;
+				
+					.chzn-single {
+					position: absolute;
+					top: 0;
+					left: 0;
+					line-height: 22px;
+					padding: 0 5px;
+					
+						input {
+		
+						}
+					}
+					
+					.chzn-results { width: 100% }
+				}
+				
+				label[for=available] {
+				width: 140px;
+				}
+				
+				ul {
+				width: 270px;
+				
+					li {
+					white-space: normal;
+					padding-bottom: 0;
+					
+						label {
+						width: 60px;
+						padding: 3px 5px 3px 25px;
+						float: left;
+						font-size: 9px;
+						line-height: 12px;
+						color: #81a6a5;
+						position: relative;
+						
+							input[type=checkbox],
+							div.chbx {
+							position: absolute;
+							top: 0;
+							left: 0;
+							visibility: hidden;
+							
+								&:not(input) {
+								visibility: visible;
+								}
+							}
+						}
+					}
+				}				
+			}
+		}
+	}
+}

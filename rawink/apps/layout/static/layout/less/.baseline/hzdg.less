@@ -1,0 +1,63 @@
+@import "nav.less";
+@import "slideshow.less";
+
+// Global Width
+.grid {
+	width: 960px;
+	margin: 0 auto;
+}
+
+// Box shadow
+.box-shadow (@left: 0, @top: 0, @distance: 4px, @color: rgba(0,0,0,0.65) ) {
+-moz-box-shadow: @left @top @distance @color;
+-ms-box-shadow: @left @top @distance @color;
+-o-box-shadow: @left @top @distance @color;
+box-shadow: @left @top @distance @color;
+}
+
+// Border Radius
+.border-radius (@tl: 5px, @tr: 5px, @bl: 5px, @br: 5px) {
+-moz-border-radius: @tl @tr @bl @br;
+-ms-border-radius: @tl @tr @bl @br;
+-o-border-radius: @tl @tr @bl @br;
+border-radius: @tl @tr @bl @br;
+}
+
+// Gradient
+.gradient(@rs: 204, @gs: 176, @bs: 0, @re: 245, @ge: 205, @be: 29) {
+background-image: linear-gradient(bottom, rgb(@rs,@gs,@bs) 6%, rgb(@re,@ge,@be) 53%);
+background-image: -o-linear-gradient(bottom, rgb(@rs,@gs,@bs) 6%, rgb(@re,@ge,@be) 53%);
+background-image: -moz-linear-gradient(bottom, rgb(@rs,@gs,@bs) 6%, rgb(@re,@ge,@be) 53%);
+background-image: -webkit-linear-gradient(bottom, rgb(@rs,@gs,@bs) 6%, rgb(@re,@ge,@be) 53%);
+background-image: -ms-linear-gradient(bottom, rgb(@rs,@gs,@bs) 6%, rgb(@re,@ge,@be) 53%);
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.06, rgb(@rs,@gs,@bs)),
+	color-stop(0.53, rgb(@re,@ge,@be))
+);
+}
+
+//Inline Block
+.inline-block {
+display: inline-block;
+	& .ie7 {
+	display: inline;
+	zoom: 1;
+	}
+}
+
+// Image Replacement
+.hide-text {
+text-indent: 100%;
+overflow: hidden;
+display: block;
+white-space: nowrap;
+}
+
+// Unstyle List Elements
+.unstyled {
+  margin-left: 0;
+  list-style: none;
+}
