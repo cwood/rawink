@@ -15,7 +15,7 @@ urlpatterns = patterns('',
     (r'^artist/', include('rawink.apps.artists.urls')),
     (r'^order/', include('rawink.apps.orders.urls')),
     
-    (r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'customers/login.html'}),
+    (r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'main/user.html'}),
     (r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'next_page':'/customer/',}),
     
 )

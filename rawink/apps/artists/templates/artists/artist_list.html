@@ -1,8 +1,37 @@
 {% extends 'artists/base.html' %}
-{% block content%}
-<ul>
-	{% for artist in object_list %}
-		<li><a href="{{artist.get_absolute_url}}">{{artist}}</a></li>
-	{%endfor%}	
-</ul>
+{% block main%}
+<div data-role="page" class="artists">
+	
+	<article data-role="content">
+	
+	<div id="logo">
+		<a href="/main/home" rel="external"><img src="{{ STATIC_URL }}layout/images/logo-full-large.png" alt="Raw Ink" /></a>
+		
+		<p>Select your preferred artist or piercer below</p>
+	</div>
+	<ul>
+		{% for artist in object_list %}
+		<li>
+			<figure data-target="#{{artist.slug}}">
+				<span class="open"></span>
+				<span class="close"></span>
+				<span class="status"></span>
+				<img src="{{artist.photo.url}}" />
+			</figure>
+			<section id="first-artist">
+				<header>
+					<h1>{{artist}}</h1>
+					<h2>{{artist.title}}</h2>
+					<a href="{{artist.get_absolute_url}}">Continue</a>
+				</header>
+				<p>{{artist.bio}}</p>
+			</section>
+		</li>
+		
+		{%endfor%}	
+	</ul>
+	
+	</article>
+</div>	
+
 {% endblock%}

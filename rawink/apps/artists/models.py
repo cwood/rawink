@@ -24,6 +24,8 @@ class Artist(models.Model):
     slug = models.SlugField(max_length=100)
     day = models.CharField(_("Days Available"), max_length=255)
     bio = models.TextField(_('Bio'))
+    title = models.CharField(_('Title'), max_length=100)
+    photo = models.ImageField(upload_to='artists')    
     
     def __unicode__(self):
         return u'%s %s' % (self.user.first_name, self.user.last_name)
