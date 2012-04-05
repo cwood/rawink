@@ -16,11 +16,11 @@ box-shadow: @left @top @distance @color;
 }
 
 // Border Radius
-.border-radius (@tl: 5px, @tr: 5px, @bl: 5px, @br: 5px) {
--moz-border-radius: @tl @tr @bl @br;
--ms-border-radius: @tl @tr @bl @br;
--o-border-radius: @tl @tr @bl @br;
-border-radius: @tl @tr @bl @br;
+.border-radius (@radius:5px) {
+-moz-border-radius: @radius;
+-ms-border-radius: @radius;
+-o-border-radius: @radius;
+border-radius: @radius;
 }
 
 // Gradient

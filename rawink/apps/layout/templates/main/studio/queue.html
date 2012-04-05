@@ -1,0 +1,166 @@
+{% extends "main/base.html" %}
+
+{% block main %}
+
+<div data-role="page" class="studio queue">
+	
+	<article data-role="content">
+		
+		<div id="logo">
+			<a href="/main/home" rel="external"><img src="{{ STATIC_URL }}layout/images/logo-full-large.png" alt="Raw Ink" /></a>
+			
+		</div>
+		
+		<section id="appointments">
+			<table>
+			
+				<tr>
+					<td>
+						<div class="name">John Doe</div>
+						<div class="email">e. john.doe@yahoo.com</div>
+						<div class="phone">p. 2023981127</div>
+						<br />
+						<div class="address">
+							450 Street Lane, Apt. 200<br />
+							Cityville, ST 11223
+						</div>
+					</td>
+					<td>
+						<div class="reference">Reference #000001</div>
+						<br />
+						<div class="status">Status: <span class="complete">Complete</span></div>
+						<div class="cost">Price: $720</div>
+					</td>
+					<td>
+					
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<div class="name">John Doe</div>
+						<div class="email">e. john.doe@yahoo.com</div>
+						<div class="phone">p. 2023981127</div>
+						<br />
+						<div class="address">
+							450 Street Lane, Apt. 200<br />
+							Cityville, ST 11223
+						</div>
+					</td>
+					<td>
+						<div class="reference">Reference #000001</div>
+						<br />
+						<div class="status">Status: <span class="complete">Complete</span></div>
+						<div class="cost">Price: $720</div>
+					</td>
+					<td>
+					
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<div class="name">John Doe</div>
+						<div class="email">e. john.doe@yahoo.com</div>
+						<div class="phone">p. 2023981127</div>
+						<br />
+						<div class="address">
+							450 Street Lane, Apt. 200<br />
+							Cityville, ST 11223
+						</div>
+					</td>
+					<td>
+						<div class="reference">Reference #000001</div>
+						<br />
+						<div class="status">Status: <span class="in-progress">In Progress</span></div>
+						<div class="cost">Price: $720</div>
+					</td>
+					<td>
+					
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<small>Guardian</small>
+						<div class="name">John Doe</div>
+						<div class="email">e. john.doe@yahoo.com</div>
+						<div class="phone">p. 2023981127</div>
+						<br />
+						<div class="address">
+							450 Street Lane, Apt. 200<br />
+							Cityville, ST 11223
+						</div>
+						<br />
+						<small>Tattooee</small>
+						<div class="name">Jane Doe</div>
+					</td>
+					<td>
+						<div class="reference">Reference #000001</div>
+						<br />
+						<div class="status">Status: <span class="confirmed">Confirmed</span></div>
+						<div class="actions">
+							<a href="#" class="cancel">Cancel</a>
+						</div>
+						<div class="cost">Price: (est 4.5 hours)</div>
+					</td>
+					<td>
+					
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<div class="name">John Doe</div>
+						<div class="email">e. john.doe@yahoo.com</div>
+						<div class="phone">p. 2023981127</div>
+						<br />
+						<div class="address">
+							450 Street Lane, Apt. 200<br />
+							Cityville, ST 11223
+						</div>
+					</td>
+					<td>
+						<div class="reference">Reference #000001</div>
+						<br />
+						<div class="status">Status: <span class="pending">Pending</span></div>
+						<div class="actions">
+							<a href="#" class="confirm">Confirm</a> <a href="#" class="cancel">Cancel</a>
+						</div>
+						<div class="cost">Price: TBD</div>
+					</td>
+					<td>
+					
+					</td>
+				</tr>				
+				
+			</table>
+			
+			<div class="pagination">
+				<a href="#">&lt;</a>
+				<a href="#">1</a>
+				<a class="selected" href="#">2</a>
+				<a href="#">3</a>
+				<a href="#">4</a>
+				<a href="#">5</a>
+				<a href="#">6</a>
+				<a href="#">7</a>
+				<a href="#">&gt;</a>
+			</div>
+			
+			<a href="#" class="date">Jump to Date</a>
+			
+			<form id="search">
+				<input type="search" name="s" />
+				<button type="submit">Search</button>
+			</form>
+		</section>
+	</article>
+	
+</div>
+
+<script>
+
+</script>
+
+{% endblock %}

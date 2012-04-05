@@ -1,0 +1,36 @@
+{% extends "main/base.html" %}
+
+{% block main %}
+
+<div data-role="page" class="studio log-in">
+	
+	<article data-role="content">
+		
+		<div id="logo">
+			<a href="/main/home" rel="external"><img src="{{ STATIC_URL }}layout/images/logo-full-large.png" alt="Raw Ink" /></a>
+			
+		</div>
+		
+		<form action="queue">
+			<ul>
+				<li>
+					<label for="email_address">Email Address</label>
+					<input type="email" name="email_address" id="email_address" />
+				</li>
+				<li>
+					<label for="password">Password</label>
+					<input type="password" name="password" id="password" />
+				</li>
+			</ul>
+			
+			<button type="submit">Log In</button>
+		</form>
+	</article>
+	
+</div>
+
+<script>
+
+</script>
+
+{% endblock %}

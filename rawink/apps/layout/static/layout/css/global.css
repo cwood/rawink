@@ -378,10 +378,10 @@ cite {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
-  -moz-border-radius: 5px 5px 5px 5px;
-  -ms-border-radius: 5px 5px 5px 5px;
-  -o-border-radius: 5px 5px 5px 5px;
-  border-radius: 5px 5px 5px 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
 }
 .btn-large [class^="icon-"] {
   margin-top: 1px;
@@ -825,10 +825,13 @@ nav ul > li > a:hover {
 
 }
 .artists ul li figure {
-  -moz-border-radius: 10px 10px 10px 10px;
-  -ms-border-radius: 10px 10px 10px 10px;
-  -o-border-radius: 10px 10px 10px 10px;
-  border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
   overflow: hidden;
   margin: 0;
@@ -1401,6 +1404,241 @@ nav ul > li > a:hover {
 /* @import "buckets.less"; */
 /* @import "form.less"; */
 /* @import "../css/chosen.css"; */
+.studio {
+  background: url(../images/texture.png) center fixed;
+  color: #E7E2E2;
+  word-spacing: 0.3em;
+  letter-spacing: 0.07em;
+  text-shadow: 1px 1px black;
+}
+.studio #logo {
+  width: 30%;
+  max-width: 300px;
+  margin: 3em auto;
+}
+.studio [data-role=content] {
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
+}
+.studio table {
+  width: 100%;
+  min-width: 728px;
+  max-width: 984px;
+  border-spacing: 2px 4px;
+  margin: 0 auto;
+  font-size: 14px;
+}
+.studio table tr {
+  background: rgba(0, 0, 0, 0.3);
+}
+.studio table tr td {
+  padding: 15px 20px;
+  vertical-align: top;
+  margin-bottom: 3px;
+  width: 33.333334%;
+}
+.studio table tr td:last-child {
+  border: none;
+}
+.studio table tr td .name,
+.studio table tr td .reference {
+  font-size: 17px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.studio table tr td .status span {
+  font-weight: bold;
+}
+.studio table tr td .status span.complete,
+.studio table tr td .status span.confirmed {
+  color: #3da05b;
+}
+.studio table tr td .status span.in-progress {
+  color: #1377e8;
+}
+.studio table tr td .status span.pending {
+  font-weight: normal;
+}
+.studio table tr td .actions a {
+  display: inline-block;
+  text-decoration: underline;
+  font-size: 14px;
+  margin-right: 1em;
+}
+.studio table tr td .actions a .ie7 {
+  display: inline;
+  zoom: 1;
+}
+.studio table tr td .actions a.confirm {
+  color: #3da05b;
+}
+.studio table tr td .actions a.cancel {
+  color: #f80000;
+}
+.studio table tr td small {
+  color: #0d70ea;
+  font-size: 11px;
+}
+.studio table tr td:last-child {
+  text-align: center;
+}
+.studio table tr:nth-child(even) {
+  background: rgba(0, 0, 0, 0.8);
+}
+.studio .pagination {
+  font-size: 17px;
+  float: right;
+  margin: 1em;
+}
+.studio .pagination a {
+  color: #ebe9e9;
+}
+.studio .pagination a.selected {
+  color: #17af17;
+}
+.studio .date {
+  float: left;
+  font-size: 17px;
+  color: #ebe9e9;
+  margin: 1em;
+}
+.studio .date:after {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  content: '17';
+  border: 2px solid #ebe9e9;
+  font-size: 10px;
+  padding: 3px;
+  width: 14px;
+  height: 10px;
+  line-height: 10px;
+  margin-left: 1em;
+  position: relative;
+  top: -3px;
+}
+.studio #search {
+  clear: both;
+  margin: 5em auto;
+  border: none;
+  width: 300px;
+  position: relative;
+}
+.studio #search input {
+  background-color: #6c686a;
+  background-image: -moz-linear-gradient(top, #686565, #736d71);
+  background-image: -ms-linear-gradient(top, #686565, #736d71);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#686565), to(#736d71));
+  background-image: -webkit-linear-gradient(top, #686565, #736d71);
+  background-image: -o-linear-gradient(top, #686565, #736d71);
+  background-image: linear-gradient(top, #686565, #736d71);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#686565', endColorstr='#736d71', GradientType=0);
+  border-color: #736d71 #736d71 #4c484a;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+  height: 15px;
+  line-height: 15px;
+  width: 195px;
+  padding: 10px 90px 10px 10px;
+  font-size: 15px;
+  border: 3px solid #514e50;
+}
+.studio #search .ui-btn {
+  background-color: #9b9e9b;
+  background-image: -moz-linear-gradient(top, #a6a9a6, #8a8e8b);
+  background-image: -ms-linear-gradient(top, #a6a9a6, #8a8e8b);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#a6a9a6), to(#8a8e8b));
+  background-image: -webkit-linear-gradient(top, #a6a9a6, #8a8e8b);
+  background-image: -o-linear-gradient(top, #a6a9a6, #8a8e8b);
+  background-image: linear-gradient(top, #a6a9a6, #8a8e8b);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a6a9a6', endColorstr='#8a8e8b', GradientType=0);
+  border-color: #8a8e8b #8a8e8b #646865;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  height: 100%;
+  width: 80px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  font-size: 18px;
+  color: #fff;
+  text-shadow: none;
+  position: absolute;
+  top: 3px;
+  right: 3px;
+}
+.studio #search .ui-btn button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+.studio #search .ui-input-clear {
+  display: none;
+}
+.log-in form {
+  width: 30%;
+  min-width: 300px;
+  margin: 0 auto;
+}
+.log-in form li {
+  padding: 5px 0;
+  display: block;
+  text-align: left;
+}
+.log-in form li label {
+  font-size: 13px;
+  text-align: left;
+  display: block;
+}
+.log-in form li input {
+  padding: 8px 8px;
+  width: 100%;
+  font-size: 13px;
+  line-height: 16px;
+  border: none;
+}
+.log-in form .ui-btn {
+  display: inline-block;
+  background: #B21A1A;
+  font-size: 13px;
+  color: white;
+  padding: 0 40px 0 10px;
+  line-height: 32px;
+  margin-top: 5px;
+  text-shadow: none;
+  position: relative;
+  overflow: hidden;
+}
+.log-in form .ui-btn button {
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 html,
 body {
   height: 100%;
