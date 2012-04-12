@@ -18,6 +18,30 @@
 		margin: 0 auto;
 	}
 	
+	.ui-btn {
+		.gradientBar(#a6a9a6,#8a8e8b);
+		.border-radius(5px);
+		height: 35px;
+		line-height: 35px;
+		text-align: center;
+		font-size: 13px;
+		color: #fff;
+		text-shadow: none;
+		display: inline-block;
+		padding: 0 15px;
+		position: relative;
+		
+		button {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			opacity: 0;
+		}
+	}
+
+	
 	table {
 		width: 100%;
 		min-width: 728px;
@@ -38,6 +62,31 @@
 				
 				&:last-child {
 					border: none;
+					vertical-align: middle;
+					
+					.alert {
+						line-height: 38px;
+						background: red;
+						color: #fff;
+						text-align: center;
+						font-weight: 15px;
+						font-weight: bold;
+						text-transform: uppercase;
+						margin-bottom: 1em;
+					}
+						
+					&.submit {
+						.ui-btn {
+							.gradientBar(#31a558,#168a3d);
+						}
+					}
+					
+					&.success {
+						.ui-btn {
+							.gradientBar(#1b1b1b,#000000);
+						}
+					}
+
 				}
 				
 				.name,
@@ -161,28 +210,12 @@
 		}
 		
 		.ui-btn {
-			.gradientBar(#a6a9a6,#8a8e8b);
-			.border-radius(5px);
-			height: 100%;
 			width: 80px;
-			height: 35px;
-			line-height: 35px;
-			text-align: center;
-			font-size: 18px;
-			color: #fff;
-			text-shadow: none;
 			position: absolute;
 			top: 3px;
 			right: 3px;
-			
-			button {
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-				opacity: 0;
-			}
+			font-size: 18px;
+			padding: 0;
 		}
 		
 		.ui-input-clear {

@@ -1421,6 +1421,43 @@ nav ul > li > a:hover {
   max-width: 1024px;
   margin: 0 auto;
 }
+.studio .ui-btn {
+  background-color: #9b9e9b;
+  background-image: -moz-linear-gradient(top, #a6a9a6, #8a8e8b);
+  background-image: -ms-linear-gradient(top, #a6a9a6, #8a8e8b);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#a6a9a6), to(#8a8e8b));
+  background-image: -webkit-linear-gradient(top, #a6a9a6, #8a8e8b);
+  background-image: -o-linear-gradient(top, #a6a9a6, #8a8e8b);
+  background-image: linear-gradient(top, #a6a9a6, #8a8e8b);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a6a9a6', endColorstr='#8a8e8b', GradientType=0);
+  border-color: #8a8e8b #8a8e8b #646865;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  font-size: 13px;
+  color: #fff;
+  text-shadow: none;
+  display: inline-block;
+  padding: 0 15px;
+  position: relative;
+}
+.studio .ui-btn button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
 .studio table {
   width: 100%;
   min-width: 728px;
@@ -1440,6 +1477,43 @@ nav ul > li > a:hover {
 }
 .studio table tr td:last-child {
   border: none;
+  vertical-align: middle;
+}
+.studio table tr td:last-child .alert {
+  line-height: 38px;
+  background: red;
+  color: #fff;
+  text-align: center;
+  font-weight: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 1em;
+}
+.studio table tr td:last-child.submit .ui-btn {
+  background-color: #269a4d;
+  background-image: -moz-linear-gradient(top, #31a558, #168a3d);
+  background-image: -ms-linear-gradient(top, #31a558, #168a3d);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#31a558), to(#168a3d));
+  background-image: -webkit-linear-gradient(top, #31a558, #168a3d);
+  background-image: -o-linear-gradient(top, #31a558, #168a3d);
+  background-image: linear-gradient(top, #31a558, #168a3d);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#31a558', endColorstr='#168a3d', GradientType=0);
+  border-color: #168a3d #168a3d #0b4820;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+}
+.studio table tr td:last-child.success .ui-btn {
+  background-color: #101010;
+  background-image: -moz-linear-gradient(top, #1b1b1b, #000000);
+  background-image: -ms-linear-gradient(top, #1b1b1b, #000000);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#1b1b1b), to(#000000));
+  background-image: -webkit-linear-gradient(top, #1b1b1b, #000000);
+  background-image: -o-linear-gradient(top, #1b1b1b, #000000);
+  background-image: linear-gradient(top, #1b1b1b, #000000);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1b1b1b', endColorstr='#000000', GradientType=0);
+  border-color: #000000 #000000 #000000;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
 .studio table tr td .name,
 .studio table tr td .reference {
@@ -1556,43 +1630,12 @@ nav ul > li > a:hover {
   border: 3px solid #514e50;
 }
 .studio #search .ui-btn {
-  background-color: #9b9e9b;
-  background-image: -moz-linear-gradient(top, #a6a9a6, #8a8e8b);
-  background-image: -ms-linear-gradient(top, #a6a9a6, #8a8e8b);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#a6a9a6), to(#8a8e8b));
-  background-image: -webkit-linear-gradient(top, #a6a9a6, #8a8e8b);
-  background-image: -o-linear-gradient(top, #a6a9a6, #8a8e8b);
-  background-image: linear-gradient(top, #a6a9a6, #8a8e8b);
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a6a9a6', endColorstr='#8a8e8b', GradientType=0);
-  border-color: #8a8e8b #8a8e8b #646865;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
-  border-radius: 5px;
-  height: 100%;
   width: 80px;
-  height: 35px;
-  line-height: 35px;
-  text-align: center;
-  font-size: 18px;
-  color: #fff;
-  text-shadow: none;
   position: absolute;
   top: 3px;
   right: 3px;
-}
-.studio #search .ui-btn button {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
+  font-size: 18px;
+  padding: 0;
 }
 .studio #search .ui-input-clear {
   display: none;
