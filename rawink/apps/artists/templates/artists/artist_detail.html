@@ -1,16 +1,44 @@
 {% extends 'artists/base.html' %}
-{% block content%}
-{{artist}}
-<ul>
-	{% with works=artist.artistworkphoto_set.all%}
-		{% for work in works%}
-		<li><ul>
-			<li>{{work.title}}</li>
-			<li><a href="{% url create-order %}?product={{work.slug}}">Lets do it</a></li>
-			<li><a href="{{work.original_image.url}}"><img src="{{work.original_image.url}}" width=200 height=200/></a></li>
-		</ul></li>
-		{% endfor%}
-	{% endwith%}	
-</ul>
+{% block main %}
 
+<div data-role="page" class="work">
+	
+	<article data-role="content">
+		
+		<header>
+			<a href="/main/home" data-direction="reverse" title="Change Artist">
+				<img src="{{ STATIC_URL }}layout/images/ryan-klein.jpg" />
+				<i class="status"></i>
+				<span></span>
+			</a>
+		</header>
+		
+		<div class="message">
+			<p>Please select a tattoo or piercing &ldquo;style&rdquo; that represents what you have in mind. Exact placement, size, etc will be discussed between you and the artist.</p>
+			<a href="#" class="btn">Got It!</a>
+		</div>
+		<span class="overlay"></span>
+		
+		
+		<ul>
+			{% with works=artist.artistworkphoto_set.all%}
+			{% for work in works%}
+			<li>
+				<figure>
+					<a href="{% url create-order %}?product={{work.slug}}">
+						<img data-parent="article li" data-target="#{{artist.slug}}" data-toggle="collapse" src="{{work.original_image.url}}" width=200 height=200/>
+						<figcaption>
+							<span>{{work.title}}</span>
+						</figcaption>
+					</a>
+				</figure>
+			</li>
+			{% endfor%}
+			{% endwith%}	
+		</ul>
+		<a rel="external" class="pagination noeffect" id="prev"></a>
+		<a rel="external" class="pagination noeffect" id="next"></a>
+		
+	</article>
+</div>		
 {% endblock%}

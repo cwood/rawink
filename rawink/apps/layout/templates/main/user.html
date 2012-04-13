@@ -22,7 +22,7 @@
 			</a>
 		</header>
 		
-		<form action="/main/done">
+		<form method="post" action="{% url django.contrib.auth.views.login %}">{% csrf_token %}
 		
 			<div id="logo">
 				<img src="{{ STATIC_URL }}layout/images/logo-full-large.png" alt="Raw Ink" />
@@ -39,15 +39,15 @@
 				
 				<ul>
 					<li>
-						<label for="email_address">Email Address</label>
-						<input type="email" name="email_address" id="email_address" />
+						{{ form.username.label_tag }}
+						{{ form.username }}
 					</li>
 					<li>
-						<label for="phone_number">Phone Number (eg. 30155569166)</label>
-						<input type="text" name="phone_number" id="phone_number" />
+						{{ form.password.label_tag }}
+						{{ form.password }}
 					</li>
 				</ul>
-				
+				<input type="hidden" name="next" value="{{ next }}" />
 				<button type="submit">Log In</button>
 			</div>
 			

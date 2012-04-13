@@ -1,10 +1,83 @@
 {% extends 'orders/base.html' %}
-
-{% block content%}
-<ul>
-	{% for order in order_list %}
-	<li><a href="{{order.get_absolute_url}}">{{order}}</a></li>
-	{% endfor%}
+{% load url from future%}
+{% block main%}
+<div data-role="page" class="studio queue">
+	<article data-role="content">
+		
+		<div id="logo">
+			<a href="/main/home" rel="external"><img src="{{ STATIC_URL }}layout/images/logo-full-large.png" alt="Raw Ink" /></a>
+			
+		</div>
+		
+		<section id="appointments">
+			<table>
+				{% for order in order_list %}
+				<tr>
+					<td>
+						{% with customer=order.customer%}
+						<div class="name">{{customer.user.full_name}}</div>
+						<div class="email">e. {{customer.user.email}}</div>
+						<div class="phone">p. {{customer.phone}}</div>
+						<br />
+						<div class="address">
+							{{customer.address.street}}<br />
+							{{customer.address.city}}, {{customer.address.state}}, {{customer.address.zip}}
+						</div>
+						{% endwith%}
+					</td>
+					<td>
+						<div class="reference">Reference #{{order.token}}</div>
+						<br />
+						<div class="status">Status: <span class="complete">{{order.status}}</span></div>
+						{% if order.status == "pending" %}
+						<div class="actions">
+							<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=confirm" class="confirm ui-link">Confirm</a> 
+							<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=canceled" class="cancel ui-link">Cancel</a>
+						</div>
+						{% elif order.status == 'confirmed' %}
+						<div class="actions">
+							<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=in_progress" class="confirm ui-link">In-progress</a> 
+							<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=canceled" class="cancel ui-link">Cancel</a>
+						</div>
+						{% elif order.status == 'in_progress' %}
+						<div class="actions">
+							<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=compled" class="confirm ui-link">Confirm</a>
+						</div>
+						{% endif %}
+						<div class="cost">Price: {{order.payment_price}}</div>
+					</td>
+					<td class="submit">
+						{% if order.status == "payment-pending"%}
+						<div class="alert">Bill Customer !!</div>
+						<button>Mark Appointment Closed</button>
+						<a href="{{order.get_absolute_url}}">{{order}}</a></li>
+						{% endif%}
+					</td>
+				</tr>
+				{% endfor%}
+			</table>
+			
+			<div class="pagination">
+				<a href="#">&lt;</a>
+				<a href="#">1</a>
+				<a class="selected" href="#">2</a>
+				<a href="#">3</a>
+				<a href="#">4</a>
+				<a href="#">5</a>
+				<a href="#">6</a>
+				<a href="#">7</a>
+				<a href="#">&gt;</a>
+			</div>
+			
+			<a href="#" class="date">Jump to Date</a>
+			
+			<form id="search">
+				<input type="search" name="s" />
+				<button type="submit">Search</button>
+			</form>
+		</section>
+	</article>
 	
-</ul>
+</div>
+
 {% endblock%}

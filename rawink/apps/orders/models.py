@@ -18,9 +18,12 @@ StatusChoices = Enum(
     ('payment-pending', 'payment-pending', 'Waiting for payment'),
     ('payment-complete','payment-complete', 'Paid'),
     ('payment-failed','payment-failed', 'Payment failed'),
-    ('started', 'started', 'Started'),
+    ('in_progress', 'in_progress', 'in-progress'),
     ('finished', 'finished', 'Finished'),
+    ('confirmed', 'confirmed', 'Confirmed'),
     ('cancelled', 'cancelled', 'Cancelled'),
+    ('pending', 'pending', 'Pending'),
+    
 )
 
 class OrderManager(models.Manager):
@@ -65,7 +68,7 @@ class Order(models.Model):
     payment_card =  models.CharField(_('Card number'), max_length=16)
     payment_price = models.DecimalField(_('Total price'), max_digits=12,
                                         decimal_places=4, default=0)
-    token = models.CharField(max_length=32, blank=True, default='')
+    token = models.CharField(max_length=6, blank=True, default='')
     
     objects = OrderManager()
     started = FilteredManager(status='started')
