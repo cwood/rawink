@@ -1,0 +1,47 @@
+{% extends "main/base.html" %}
+
+{% block main %}
+
+<div data-role="page" class="studio customer queue">
+	
+	<article data-role="content">
+		
+		<section id="appointments">
+			<h1>Bobby Weschler</h1>
+			
+			
+			<form action="hours">
+				
+				<label class="ui-btn ui-btn-icon-left ui-btn-corner-all ui-checkbox-on ui-btn-up-c">Antoine Butler</label>
+				
+				<label class="ui-btn ui-btn-icon-left ui-btn-corner-all ui-checkbox-on ui-btn-up-c">Half Sleeve &amp; Chest Tattoo...</label>
+				
+				<br />
+				
+				<label for="hourly">Hourly Rate</label>
+				<input type="radio" name="rate" checked="checked" id="hourly" value="hourly" />
+				
+				<label for="fixed">Fixed Rate</label>
+				<input type="radio" name="rate" id="fixed" value="fixed" />
+				
+				<br />
+				
+				<input type="text" name="cost" />
+				
+				<div class="submit">
+					<button type="submit">Confirm</button>
+				</div>
+			
+			</form>
+			
+				
+		</section>
+	</article>
+	
+</div>
+
+<script>
+
+</script>
+
+{% endblock %}

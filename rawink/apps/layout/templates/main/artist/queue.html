@@ -1,0 +1,40 @@
+{% extends "main/base.html" %}
+
+{% block main %}
+
+<div data-role="page" class="studio customer queue">
+	
+	<article data-role="content">
+		
+		<section id="appointments">
+			<h1>Bobby Weschler</h1>
+			
+			
+			<form action="confirm">
+				
+				<label for="antoine">Antoine Butler</label>
+				<input type="radio" name="customer" id="antoine" value="antoine" />
+			
+				<label for="john">John Doe</label>
+				<input type="radio" name="customer" id="john" value="john" />
+				
+				<label for="patrick">Patrick Bateman</label>
+				<input type="radio" name="customer" id="patrick" value="patrick" />
+				
+				<div class="submit">
+					<button type="submit">Confirm</button>
+				</div>
+			
+			</form>
+			
+				
+		</section>
+	</article>
+	
+</div>
+
+<script>
+
+</script>
+
+{% endblock %}
