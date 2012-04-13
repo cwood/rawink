@@ -4,6 +4,7 @@ from django.utils import translation
 from django.utils import simplejson as json
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404, get_list_or_404, redirect
+from django.utils import simplejson
 
 from .forms import *
 from .models import *
@@ -21,8 +22,28 @@ class OrderListView(LoginRequiredMixin, ListView):
     model = Order
     
     def get_queryset(self):
-        return Order.objects.all().filter(customer = Customer.objects.get(user=self.request.user))
+        return Order.objects.all().filter()
 
+def OrderStatusChangeView(request, pk):
+
+    if request.method == 'GET':
+        order = Order.objects.get(pk=pk)
+        form = OrderStatusUpdateFrom(request.GET, instance=order)
+        
+        clean = form.is_valid()
+        rdict = {'save': False}
+
+        if clean:
+            rdict.update({'save': True}) 
+            form.save()
+
+        json = simplejson.dumps(rdict, ensure_ascii=False)
+            # And send it off.
+        return HttpResponse( json, mimetype='application/javascript')
+    else:
+        return HttpResponseNotAllowed(['POST','GET'])
+
+    
 class CreateOrder(LoginRequiredMixin, CreateView):
     template_name = 'orders/order.html'
     form_class = OrderForm
@@ -96,6 +117,6 @@ class ArtistOrderList(OrderListView):
 
 class OrderStatusUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'orders/status_update.html'
-    form_class = OrderStatusUpdate
+    form_class = OrderStatusPriceUpdateForm
     model = Order
     success_url = '/order/artist'

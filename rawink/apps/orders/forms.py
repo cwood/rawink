@@ -23,8 +23,14 @@ class OrderForm(forms.ModelForm):
         model = Order
         exclude = ('customer', 'token', 'payment_price', )
 
-class OrderStatusUpdate(OrderForm):
+class OrderStatusPriceUpdateForm(OrderForm):
     
     class Meta:
         model = Order
         fields = ('status', 'payment_price',)
+
+class OrderStatusUpdateFrom(OrderForm):
+
+    class Meta:
+        model = Order
+        fields = ('status',)        
