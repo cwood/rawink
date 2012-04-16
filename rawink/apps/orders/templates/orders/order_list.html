@@ -15,7 +15,7 @@
 				<tr>
 					<td>
 						{% with customer=order.customer%}
-						<div class="name">{{customer.user.full_name}}</div>
+						<div class="name">{{customer.user.get_full_name}}</div>
 						<div class="email">e. {{customer.user.email}}</div>
 						<div class="phone">p. {{customer.phone}}</div>
 						<br />
@@ -31,17 +31,17 @@
 						<div class="status">Status: <span class="complete">{{order.status}}</span></div>
 						{% if order.status == "pending" %}
 						<div class="actions">
-							<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=confirm" class="confirm ui-link">Confirm</a> 
-							<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=canceled" class="cancel ui-link">Cancel</a>
+							<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=confirm" class="confirm">Confirm</a> 
+							<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=canceled" class="cancel">Cancel</a>
 						</div>
 						{% elif order.status == 'confirmed' %}
 						<div class="actions">
-							<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=in_progress" class="confirm ui-link">In-progress</a> 
-							<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=canceled" class="cancel ui-link">Cancel</a>
+							<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=in_progress" class="confirm">In-progress</a> 
+							<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=canceled" class="cancel">Cancel</a>
 						</div>
 						{% elif order.status == 'in_progress' %}
 						<div class="actions">
-							<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=compled" class="confirm ui-link">Confirm</a>
+							<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=compled" class="confirm">Confirm</a>
 						</div>
 						{% endif %}
 						<div class="cost">Price: {{order.payment_price}}</div>

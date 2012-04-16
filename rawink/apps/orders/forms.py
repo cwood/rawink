@@ -21,13 +21,13 @@ class OrderForm(forms.ModelForm):
     
     class Meta:
         model = Order
-        exclude = ('customer', 'token', 'payment_price', )
+        fields = ('product', 'customer')
 
 class OrderStatusPriceUpdateForm(OrderForm):
     
     class Meta:
         model = Order
-        fields = ('status', 'payment_price',)
+        fields = ('status', 'payment_type', 'payment_price',)
 
 class OrderStatusUpdateFrom(OrderForm):
 

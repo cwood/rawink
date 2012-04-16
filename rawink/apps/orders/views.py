@@ -47,38 +47,49 @@ def OrderStatusChangeView(request, pk):
 class CreateOrder(LoginRequiredMixin, CreateView):
     template_name = 'orders/order.html'
     form_class = OrderForm
-    success_url = '/order/'
-    
+
+    def get_context_data(self, **kwargs):
+        context = super(CreateView, self).get_context_data(**kwargs)
+        if self.request.GET.get('product'):    
+            product = get_object_or_404(ArtistWorkPhoto, slug=self.request.GET.get('product'))
+            context.update({"product": product})
+        elif self.request.GET.get('token'):
+            order = get_object_or_404(Order, token=self.request.GET.get('token'))
+            context.update({"order": order, 'product': order.product})
+            
+        context['order_created_success'] = 'success' in self.request.GET
+        return context
+
+    def get_success_url(self):
+        return '%s?success' % (self.request.path)
+        
     def get_initial(self):        
         initial = self.initial or {}
         context = self.get_context_data()
-        customer = get_object_or_404(Customer, user = self.request.user)
-    
-        if self.request.GET.get('product'):
-            initial.update({
-            'product' : get_object_or_404(ArtistWorkPhoto, slug=self.request.GET.get('product')).id,
-            })
+        customer = None
+        product = None
         
-        try:
-            initial.update({
-            'billing_first_name': customer.user.first_name,
-            'billing_last_name': customer.user.first_name,
-            'billing_street_address_1': customer.address.street,
-            'billing_state': customer.address.state,
-            'billing_postal_code': customer.address.zip_code,
-            'billing_phone': customer.phone,
-            'payment_card': customer.card.number,
-            'customer': customer
-                })
-        except:
-                print 'Address and Card is missing'
-                
+        if self.request.user:
+            customer = get_object_or_404(Customer, user = self.request.user)
+        if self.request.GET.get('product'):
+            product = get_object_or_404(ArtistWorkPhoto, slug=self.request.GET.get('product'))
+            
+        initial.update({
+            'customer' :customer,
+            'product' :product,
+        })
+                        
         return initial
 
     def form_valid(self, form):
-        order = form.save(commit=False)
-        order.customer = Customer.objects.get(user=self.request.user)
-        return super(CreateView, self).form_valid(form)
+        order = form.save()
+        url = self.request.path
+        if order:
+        # response = super(CreateOrder, self).form_valid(form)
+            token = order.token
+            url = '%s?token=%s&success' % (self.request.path, order.token)
+
+        return HttpResponseRedirect(url)
 
 
 class OrderDetail(LoginRequiredMixin, DetailView):
@@ -105,10 +116,11 @@ class EditOrder(LoginRequiredMixin, UpdateView):
         return qs.filter(customer= Customer.objects.get(user=self.request.user))
 
 class ArtistOrderList(OrderListView):
+    template_name = 'orders/artist_order_list.html'
     
     def get_queryset(self):
-        qs = Order.objects.all().filter(product__artist__user=self.request.user)
-        qs.query.group_by = ['status']
+        qs = Order.objects.all().filter(product__artist__user=self.request.user).filter(status='pending')
+        # qs.query.group_by = ['status']
         return qs
 
     def get_context_data(self, **kwargs):

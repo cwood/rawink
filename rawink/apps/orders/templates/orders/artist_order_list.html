@@ -1,0 +1,35 @@
+{% extends "orders/base.html" %}
+{% load url from future%}
+{% block main %}
+
+<div data-role="page" class="studio customer queue">
+	
+	<article data-role="content">
+		
+		<section id="appointments">
+			<h1>{{request.user.get_full_name}}</h1>
+				{% for order in order_list%}
+					{% with customer=order.customer%}
+					<label for="{{order.id}}">{{customer.user.get_full_name}}</label>
+					<input type="radio" name="customer" id="{{order.id}}" value="{{order.id}}" />
+					<a href="{% url 'artist-order-status-update' pk=order.pk %}" class="confirm">Continue</a> 
+					<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=canceled" class="cancel">Cancel</a>
+					{%endwith%}
+				{%endfor%}
+				<div class="submit">
+					
+				</div>
+			
+			</form>
+			
+				
+		</section>
+	</article>
+	
+</div>
+
+<script>
+
+</script>
+
+{% endblock %}

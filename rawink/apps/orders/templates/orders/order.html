@@ -1,10 +1,49 @@
 {% extends "orders/base.html"%}
-{% block content%}
-<form action="./" method="post">
-	{{ form.as_p }}
-	{% csrf_token %}
-	<input type="hidden" name="id" value="{{order_pk}}">	
-	<button type="submit">Submit <small>&gt;&gt;</small></button>
-</form>
+{% block main%}
+<div data-role="page" class="user">
+	
+	<article data-role="content">
+
+		<header class="done">
+			<a href="#" class="done">
+				<img src="{{product.artist.photo.url}}" />
+				<span></span>
+			</a>
+		</header>
+		
+		<header class="edit-work done">
+			<a href="#" class="done">
+				<img src="{{product.original_image.url}}" />
+				<span></span>
+			</a>
+		</header>
+		<form action="./" method="post">
+			{% if order_created_success%}
+				<div id="logo">
+					<img src="{{ STATIC_URL }}layout/images/logo-full-large.png" alt="Raw Ink" />
+				</div>
+			
+				<div id="intro" class="content">
+					<p>Your all set. Please hand the front desk attendant this iPad so he can confirm your tattoo reservation.</p>
+					<br />
+					<br />
+					<br />
+					<center><strong>ref: #{{order.token}}</strong></center>
+				</div>
+			{% else%}
+				{{ form.as_p }}
+				{% csrf_token %}
+				<input type="hidden" name="id" value="{{order_pk}}">	
+				<button type="submit">Submit <small>&gt;&gt;</small></button>
+			{% endif%}
+		</form>
+	</article>
 <div >
-{% endblock%}
+
+
+
+<script>
+
+</script>
+
+{% endblock %}

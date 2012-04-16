@@ -31,7 +31,7 @@ class OrderManager(models.Manager):
     # def get_query_set(self):
     #     return super(ProductManager, self).get_query_set().filter(is_enabled=True)
 
-
+BOOL_CHOICES = ((True, 'Hourly Rate'), (False, 'Fixed Rate'))
 class Order(models.Model):
     """
     Add this to your concrete model:
@@ -41,34 +41,17 @@ class Order(models.Model):
     customer = models.ForeignKey(Customer)
     
     status = models.CharField(_('order status'), max_length=32,
-                              choices=StatusChoices.choices(), default='checkout')
+                              choices=StatusChoices.choices(), default='pending')
     created = models.DateTimeField(default=datetime.datetime.now,
                                    editable=False, blank=True)
     last_status_change = models.DateTimeField(default=datetime.datetime.now,
                                    editable=False, blank=True)
     
-
-    billing_first_name = models.CharField(_("first name"),
-                                          max_length=256, blank=True)
-    billing_last_name = models.CharField(_("last name"),
-                                         max_length=256, blank=True)
-    billing_street_address_1 = models.CharField(_("street address 1"),
-                                                max_length=256, blank=True)
-    billing_street_address_2 = models.CharField(_("street address 2"),
-                                                max_length=256, blank=True)
-    billing_state = USStateField()
-    
-    billing_postal_code = models.CharField(_("postal code"),
-                                           max_length=20, blank=True)
-    billing_phone = PhoneNumberField(null=True,)
-    
-    payment_type = models.CharField(max_length=256, blank=True)
-    payment_type_name = models.CharField(_('name'), max_length=128, blank=True,
-                                         editable=False)
-    payment_card =  models.CharField(_('Card number'), max_length=16)
+    payment_type = models.BooleanField(choices=BOOL_CHOICES)
     payment_price = models.DecimalField(_('Total price'), max_digits=12,
                                         decimal_places=4, default=0)
     token = models.CharField(max_length=6, blank=True, default='')
+    
     
     objects = OrderManager()
     started = FilteredManager(status='started')
@@ -76,7 +59,7 @@ class Order(models.Model):
     def save(self, *args, **kwargs):
         if not self.token:
             for i in xrange(100):
-                token = ''.join(random.sample('0123456789abcdefghijklmnopqrstuvwxyz', 32))
+                token = ''.join(random.sample('0123456789abcdefghijklmnopqrstuvwxyz', 6))
                 if not type(self).objects.filter(token=token).exists():
                     self.token = token
                     break
