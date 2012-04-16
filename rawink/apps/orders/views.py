@@ -1,3 +1,5 @@
+import datetime
+
 from django.views.generic import CreateView, UpdateView, ListView, DetailView, TemplateView, FormView, View
 from django.conf import settings
 from django.utils import translation
@@ -131,4 +133,45 @@ class OrderStatusUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'orders/status_update.html'
     form_class = OrderStatusPriceUpdateForm
     model = Order
-    success_url = '/order/artist'
+    success_url = '/order/artist/time'
+
+class OrderTimeList(LoginRequiredMixin, DetailView):
+    template_name = 'orders/order_time_list.html'
+    model = Order
+    
+    def get_context_data(self, **kwargs):
+        context = super(OrderTimeList, self).get_context_data(**kwargs)
+        
+        # qs = self.get_queryset()
+        # print qs.id
+        # if qs.ordertime_set.all().filter(stop__isnull=True).order_by('-id')[0] is None:
+        #     context.update({'can_start': True})
+        
+        return context    
+
+
+def OrderTimeUpdateView(request, pk):
+    if request.method == 'GET':
+        is_saved = None
+        order = Order.objects.get(pk=pk)
+        if request.GET.get('action') == 'start':
+            if order.ordertime_set.all().filter(stop__isnull=True).order_by('-id')[0] is None:
+                sw = StopWatch.objects.create()
+                order_time = OrderTime(order=order, stop_watch=sw, start=datetime.datetime.now())
+                is_saved = order_time.save()
+
+        if request.GET.get('action') == 'stop':
+            order_time = order.ordertime_set.all().filter(stop__isnull=True).order_by('-id')[0]
+            order_time.stop=datetime.datetime.now()
+            is_saved = order_time.save()
+
+        rdict = {'save': False}
+
+        if is_saved:
+            rdict.update({'save': True}) 
+
+        json = simplejson.dumps(rdict, ensure_ascii=False)
+            # And send it off.
+        return HttpResponse( json, mimetype='application/javascript')
+    else:
+        return HttpResponseNotAllowed(['POST','GET'])

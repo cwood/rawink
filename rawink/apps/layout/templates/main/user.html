@@ -1,5 +1,5 @@
 {% extends "main/base.html" %}
-
+{% load url from future%}
 {% block main %}
 
 <div data-role="page" class="user">
@@ -7,22 +7,22 @@
 	<article data-role="content">
 		
 		<header>
-			<a href="/main/home" data-direction="reverse" title="Change Artist">
-				<img src="{{ STATIC_URL }}layout/images/ryan-klein.jpg" />
+			<a href="{% url 'artist-index' %}" data-direction="reverse" title="Change Artist">
+				<img src="{{product.artist.photo.url}}" />
 				<i class="status"></i>
 				<span></span>
 			</a>
 		</header>
 		
 		<header class="edit-work">
-			<a href="/main/work" data-direction="reverse" title="Change Work">
-				<img src="{{ STATIC_URL }}layout/images/full/015.jpg" />
+			<a href="{{product.artist.get_absolute_url}}" data-direction="reverse" title="Change Work">
+				<img src="{{product.original_image.url}}" />
 				<i class="status"></i>
 				<span></span>
 			</a>
 		</header>
 		
-		<form method="post" action="{% url django.contrib.auth.views.login %}">{% csrf_token %}
+		<form method="post" action="{% url 'login' %}">{% csrf_token %}
 		
 			<div id="logo">
 				<img src="{{ STATIC_URL }}layout/images/logo-full-large.png" alt="Raw Ink" />

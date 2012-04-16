@@ -1,0 +1,72 @@
+{% extends "main/base.html" %}
+{%load url from future%}
+{% block main %}
+
+<div data-role="page" class="studio customer queue">
+	
+	<article data-role="content">
+		
+		<section id="appointments">
+			<h1>{{order.product.artist.user.get_full_name}}</h1>
+			
+			
+			<form action="confirm">
+				
+				<label class="ui-btn ui-btn-icon-left ui-btn-corner-all ui-checkbox-on ui-btn-up-c">{{order.customer.user.get_full_name}}: {{order.product.title}}</label>
+				
+				<br />
+				
+				<table>
+					<tr>
+						<td>Started</td>
+						<td>End</td>
+					</tr>
+
+					{% with ots=order.ordertime_set.all%}
+					{% for ot in ots%}
+					<tr>
+						<td>{{ot.start}}</td>
+						<td>{%if ot.stop%}{{ot.stop}}{%endif%}</td>
+					</tr>
+					{%endfor%}
+					{%endwith%}
+					<tfoot>
+						<tr>
+							<td>Total</td>
+							<td>5.5 Hours</td>
+						</tr>
+					</tfoot>
+				</table>
+				
+				<br />
+				{% if can_start %}
+				<div class="start">
+					<a href="{%url 'artist-order-time-update' pk=order.id%}?action=start">Start</a>
+				</div>
+				{% else%}
+				<div class="stop">
+					<a href="{%url 'artist-order-time-update' pk=order.id%}?action=stop">Stop</a>
+				</div>
+				{% endif%}
+				
+				<br />
+				
+				<label class="ui-btn ui-btn-icon-left ui-btn-corner-all ui-checkbox-on ui-btn-up-c">$660</label>
+				
+				<div class="submit">
+					<button type="submit">Finished</button>
+				</div>
+			
+			</form>
+			
+				
+		</section>
+	</article>
+	
+</div>
+
+<script>
+
+</script>
+
+{% endblock %}

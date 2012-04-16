@@ -76,3 +76,13 @@ class Order(models.Model):
             
     def __unicode__(self):
         return "%s %s" % (self.product, self.last_status_change)    
+
+class StopWatch(models.Model):        
+    order = models.ManyToManyField(Order, through='OrderTime')
+
+class OrderTime(models.Model):
+    order = models.ForeignKey(Order)    
+    stop_watch = models.ForeignKey(StopWatch)
+    start = models.DateTimeField()
+    stop = models.DateTimeField(null=True, blank=True)
+    
