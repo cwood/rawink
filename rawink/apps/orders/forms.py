@@ -18,10 +18,10 @@ class UserForm(_UserCreationForm, forms.ModelForm):
         fields = ('first_name', 'last_name', 'email', 'username',)
         
 class OrderForm(forms.ModelForm):
-    
+    # is_guardian = forms.BooleanField()
     class Meta:
         model = Order
-        fields = ('product', 'customer')
+        fields = ('product', 'customer', 'tattooee',)
 
 class OrderStatusPriceUpdateForm(OrderForm):
     

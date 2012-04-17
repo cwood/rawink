@@ -40,39 +40,11 @@ CardType = Enum(
 
 class Customer(models.Model):
     user = models.OneToOneField(User, null=True)
-    gender = models.CharField(max_length=1, choices=Gender.choices())
     phone = PhoneNumberField(null=True,)
-    birthday = models.DateField(null=True)
+    street = models.CharField(max_length=255)
+    city = models.CharField(blank=True, max_length=255)
+    state = USStateField(blank=True)
+    zip_code = models.CharField(max_length=10)
     
     def __unicode__(self):
         return u'%s %s' % (self.user.first_name, self.user.last_name)
-
-    def get_card(self):    
-        return Card.objects.get(customer=self.id)
-        
-class Address(models.Model):
-    customer = models.OneToOneField(Customer)
-    street = models.CharField(max_length=255)
-    city = models.CharField(max_length=255)
-    state = USStateField()
-    zip_code = models.CharField(max_length=10)
-
-    def __unicode__(self):
-        return u'%s, %s, %s %s' % (self.street, self.city, self.state, self.zip_code)
-
-
-class Card(models.Model):
-    customer = models.OneToOneField(Customer)
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-    id_number = models.CharField(max_length=25)
-    number = models.CharField(_('Card number'), max_length=16)
-    type = models.CharField(max_length=2, choices=CardType.choices())
-    security_code = models.CharField(max_length=255)
-    expiry_date = models.DateField()
-
-    class Meta():
-        unique_together = ('customer', 'number')
-
-    def __unicode__(self):
-        return u'%s, %s' % (self.customer, self.number)

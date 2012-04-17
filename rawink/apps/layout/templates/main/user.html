@@ -50,47 +50,21 @@
 				<input type="hidden" name="next" value="{{ next }}" />
 				<button type="submit">Log In</button>
 			</div>
-			
-			<div id="signup" class="content">
-				
+		</form>
+		<form method="post" action="{% url 'create-customer' %}">{% csrf_token %}	
+			<div id="signup" class="content" style="display:block">
 				<ul>
-					<li>
-						<label for="name">Name (as appears on your State ID)</label>
-						<input type="text" name="name" id="name" />
-					</li>
-					<li>
-						<input type="checkbox" name="guardian" id="guardian" />
-						<span>
-							I&rsquo;m a guardian.
-						</span>
-						<div class="toggle">
-							<label for="tattooee">Tattooee&rsquo;s Name</label>
-							<input type="text" name="tattooee" id="tattooee" />
-						</div>
-					</li>
-					<li>
-						<label for="todays_date">Today&rsquo;s Date</label>
-						<input type="date" name="todays_date" id="todays_date" />
-					</li>
-					<li>
-						<label for="email_address">Email Address</label>
-						<input type="email" name="email_address" id="email_address" />
-					</li>
-					<li>
-						<label for="phone">Phone Number</label>
-						<input type="number" name="_phone" id="phone" />
-					</li>
-					<li>
-						<label for="street_address">Street Address</label>
-						<input type="text" name="street_address" id="street_address" />
-					</li>
-					<li>
-						<label for="zip">Zip Code</label>
-						<input type="number" name="zip" id="zip" />
-					</li>
-					
+					<li><label for="id_first_name">First name:</label> <input id="id_first_name" type="text" name="first_name" maxlength="30" /></li>
+					<li><label for="id_last_name">Last name:</label> <input id="id_last_name" type="text" name="last_name" maxlength="30" /></li>
+					<li><label for="id_username">Username:</label> <input id="id_username" type="text" name="username" maxlength="64" /> <span class="helptext">The person's email address.</span></li>
+					<li><label for="id_password1">Password:</label> <input type="password" name="password1" id="id_password1" /></li>
+					<li><label for="id_password2">Password confirmation:</label> <input type="password" name="password2" id="id_password2" /> <span class="helptext">Enter the same password as above, for verification.</span></li>
+					<li><label for="id_phone">Phone:</label> <input id="id_phone" type="text" name="phone" maxlength="20" /></li>
+					<li><label for="id_street">Street:</label> <input id="id_street" type="text" name="street" maxlength="255" /></li>
+					<li><label for="id_city">City:</label> <input id="id_city" type="text" name="city" maxlength="255" /></li>
+					<li><label for="id_zip_code">Zip code:</label> <input id="id_zip_code" type="text" name="zip_code" maxlength="10" /></li>
 				</ul>
-				
+				<input type="hidden" name="next" value="{{ next }}" />
 				<button type="submit">Book Appointment</button>
 			</div>
 		

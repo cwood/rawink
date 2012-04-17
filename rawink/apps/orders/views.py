@@ -77,21 +77,23 @@ class CreateOrder(LoginRequiredMixin, CreateView):
             product = get_object_or_404(ArtistWorkPhoto, slug=self.request.GET.get('product'))
             
         initial.update({
-            'customer' :customer,
-            'product' :product,
+            'customer' : customer,
+            'product' : product,
         })
                         
         return initial
 
     def form_valid(self, form):
-        order = form.save()
-        url = self.request.path
-        if order:
-        # response = super(CreateOrder, self).form_valid(form)
-            token = order.token
-            url = '%s?token=%s&success' % (self.request.path, order.token)
-
-        return HttpResponseRedirect(url)
+        if form.is_valid():
+            order = form.save()
+            url = self.request.path
+            if order:
+            
+                token = order.token
+                url = '%s?token=%s&success' % (self.request.path, order.token)                
+                return HttpResponseRedirect(url)
+        else:
+            response = super(CreateOrder, self).form_valid(form)    
 
 
 class OrderDetail(LoginRequiredMixin, DetailView):
@@ -142,34 +144,34 @@ class OrderTimeList(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(OrderTimeList, self).get_context_data(**kwargs)
         
-        # qs = self.get_queryset()
-        # print qs.id
-        # if qs.ordertime_set.all().filter(stop__isnull=True).order_by('-id')[0] is None:
-        #     context.update({'can_start': True})
+        order = self.get_object()
+        if not order.ordertime_set.all().filter(stop__isnull=True).order_by('-id')[:0].count():
+            context.update({'can_start': True})
         
         return context    
 
 
 def OrderTimeUpdateView(request, pk):
+    rdict = {'save': False}
     if request.method == 'GET':
         is_saved = None
         order = Order.objects.get(pk=pk)
+
         if request.GET.get('action') == 'start':
-            if order.ordertime_set.all().filter(stop__isnull=True).order_by('-id')[0] is None:
+            if not order.ordertime_set.all().filter(stop__isnull=True).order_by('-id')[:0].count():
                 sw = StopWatch.objects.create()
                 order_time = OrderTime(order=order, stop_watch=sw, start=datetime.datetime.now())
                 is_saved = order_time.save()
+                rdict.update({'save': True}) 
 
-        if request.GET.get('action') == 'stop':
-            order_time = order.ordertime_set.all().filter(stop__isnull=True).order_by('-id')[0]
-            order_time.stop=datetime.datetime.now()
-            is_saved = order_time.save()
-
-        rdict = {'save': False}
-
-        if is_saved:
-            rdict.update({'save': True}) 
-
+        elif request.GET.get('action') == 'stop':
+            order_time = order.ordertime_set.all().filter(stop__isnull=True).order_by('-id')
+            if order_time[:0].count():
+                order_time = order_time[0]
+                order_time.stop=datetime.datetime.now()
+                is_saved = order_time.save()
+                rdict.update({'save': True}) 
+            
         json = simplejson.dumps(rdict, ensure_ascii=False)
             # And send it off.
         return HttpResponse( json, mimetype='application/javascript')

@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404, get_list_or_404, redirect
 
 from .forms import *
-from .models import Customer, Address
+from .models import Customer
 import settings as _settings
 from django.contrib.auth.models import Group
 
@@ -25,69 +25,6 @@ class CustomerView(LoginRequiredMixin, TemplateView):
             return context
         else:
             return logout(self.request)
-
-
-
-class CreateCard(LoginRequiredMixin, CreateView):
-    form_class = CardForm
-    success_url = '/customer/'
-    template_name = 'customers/card_form.html'
-
-    def get_success_url(self):
-        return self.success_url
-                
-    def get_initial(self):        
-        initial = self.initial or {}
-        initial.update({
-        'first_name': self.request.user.first_name,
-        'last_name': self.request.user.first_name,
-        'customer': Customer.objects.get(user = self.request.user),
-            })
-        return initial
-
-    def form_valid(self, form):
-        context = self.get_context_data()
-        card = form.save(commit=False)
-
-        customer = Customer.objects.get(user=self.request.user)
-        card.customer = customer
-        return super(CreateCard, self).form_valid(card)
-
-class EditCard(LoginRequiredMixin, UpdateView):
-    form_class = CardForm
-    model = Card
-    success_url = "/customer/"
-
-class CreateAddress(LoginRequiredMixin, CreateView):
-    form_class = AddressForm
-    success_url = '/customer/'
-    template_name = 'customers/address_form.html'
-    
-    def get_success_url(self):
-        return self.success_url
-
-    def get_initial(self):        
-        initial = self.initial or {}
-        initial.update({
-        'first_name': self.request.user.first_name,
-        'last_name': self.request.user.first_name,
-        'customer': Customer.objects.get(user = self.request.user),
-            })
-        return initial
-
-    def form_valid(self, form):
-        context = self.get_context_data()
-        card = form.save(commit=False)
-
-        customer = Customer.objects.get(user=self.request.user)
-        card.customer = customer
-        return super(CreateAddress, self).form_valid(card)
-
-class EditAddress(LoginRequiredMixin, UpdateView):
-    form_class = AddressForm
-    model = Address
-    success_url = "/customer/"
-
 
 
 class CreateCustomer(CreateView):
@@ -111,7 +48,7 @@ class CreateCustomer(CreateView):
         if self.request.POST:
             context['user_form'] = UserForm(self.request.POST)
         else:
-            context['user_form'] = UserForm()    
+            context['user_form'] = UserForm()
         return context
 
     def form_valid(self, form):
@@ -140,7 +77,8 @@ class CreateCustomer(CreateView):
                     # Return a 'disabled account' error message
             else:
                 print 'User disabled!!'
-            return HttpResponseRedirect(self.request.META.get('http_referer'))
+            return HttpResponseRedirect(self.request.POST.get('next'))
+            
         else:
             response = self.render_to_response(self.get_context_data(form=form))    
         return response

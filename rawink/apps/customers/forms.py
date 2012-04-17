@@ -30,35 +30,11 @@ class UserForm(_UserCreationForm, forms.ModelForm):
             email = self.cleaned_data['username']
             return email    
 
-class AddressForm(forms.ModelForm):
-
-    class Meta:
-        model = Address
-        exclude = ('customer', )
-
-class CardForm(forms.ModelForm):
-    number = CreditCardField(required=True)
-    expiry_date = ExpiryDateField(required=True)
-    security_code = VerificationValueField(required=True)
-            
-    class Meta:
-        model = Card
-        exclude = ('customer',)
-        
-    # def validate_unique(self):
-    #     exclude = self._get_validation_exclusions()
-    #     exclude.remove('customer') # allow checking against the missing attribute
-    #     try:
-    #         self.instance.validate_unique(exclude=exclude)
-    #     except ValidationError, e:
-    #         self._update_errors(e.message_dict)
-
-
 class CustomerForm(forms.ModelForm):
     
     class Meta:
         model = Customer
-        exclude = ('user', 'address', 'card')
+        exclude = ('user','state',)
 
 class PasswordResetForm(_PasswordResetForm):
     pass

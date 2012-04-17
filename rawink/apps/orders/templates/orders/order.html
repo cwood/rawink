@@ -31,7 +31,8 @@
 					<center><strong>ref: #{{order.token}}</strong></center>
 				</div>
 			{% else%}
-				{{ form.as_p }}
+				{{ form.errors }}
+				{{ form.as_ul }}
 				{% csrf_token %}
 				<input type="hidden" name="id" value="{{order_pk}}">	
 				<button type="submit">Submit <small>&gt;&gt;</small></button>

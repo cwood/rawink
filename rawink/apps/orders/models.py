@@ -31,7 +31,7 @@ class OrderManager(models.Manager):
     # def get_query_set(self):
     #     return super(ProductManager, self).get_query_set().filter(is_enabled=True)
 
-BOOL_CHOICES = ((True, 'Hourly Rate'), (False, 'Fixed Rate'))
+rate_choices = ((True, 'Hourly Rate'), (False, 'Fixed Rate'))
 class Order(models.Model):
     """
     Add this to your concrete model:
@@ -39,7 +39,7 @@ class Order(models.Model):
     """
     product = models.ForeignKey(ArtistWorkPhoto)
     customer = models.ForeignKey(Customer)
-    
+    tattooee =models.CharField(max_length=100, blank=True)
     status = models.CharField(_('order status'), max_length=32,
                               choices=StatusChoices.choices(), default='pending')
     created = models.DateTimeField(default=datetime.datetime.now,
@@ -47,7 +47,7 @@ class Order(models.Model):
     last_status_change = models.DateTimeField(default=datetime.datetime.now,
                                    editable=False, blank=True)
     
-    payment_type = models.BooleanField(choices=BOOL_CHOICES)
+    payment_type = models.BooleanField(choices=rate_choices)
     payment_price = models.DecimalField(_('Total price'), max_digits=12,
                                         decimal_places=4, default=0)
     token = models.CharField(max_length=6, blank=True, default='')
