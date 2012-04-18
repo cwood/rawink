@@ -27,15 +27,15 @@ class OrderListView(LoginRequiredMixin, ListView):
         return Order.objects.all().filter()
 
 def OrderStatusChangeView(request, pk):
-
+    rdict = {'save': False}
     if request.method == 'GET':
         order = Order.objects.get(pk=pk)
         form = OrderStatusUpdateFrom(request.GET, instance=order)
-        
-        clean = form.is_valid()
-        rdict = {'save': False}
+        if form.is_valid():
+            if request.GET.get('status') == 'finished':
+                form = form.save(commit=False)
+                form.total_time=_sum_timedelta(order.id)
 
-        if clean:
             rdict.update({'save': True}) 
             form.save()
 
@@ -123,8 +123,7 @@ class ArtistOrderList(OrderListView):
     template_name = 'orders/artist_order_list.html'
     
     def get_queryset(self):
-        qs = Order.objects.all().filter(product__artist__user=self.request.user).filter(status='pending')
-        # qs.query.group_by = ['status']
+        qs = Order.objects.all().filter(product__artist__user=self.request.user)
         return qs
 
     def get_context_data(self, **kwargs):
@@ -135,7 +134,10 @@ class OrderStatusUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'orders/status_update.html'
     form_class = OrderStatusPriceUpdateForm
     model = Order
-    success_url = '/order/artist/time'
+    success_url = '/order/artist/time/%d'
+    
+    def get_success_url(self):
+        return self.success_url % (self.object.id)
 
 class OrderTimeList(LoginRequiredMixin, DetailView):
     template_name = 'orders/order_time_list.html'
@@ -145,9 +147,9 @@ class OrderTimeList(LoginRequiredMixin, DetailView):
         context = super(OrderTimeList, self).get_context_data(**kwargs)
         
         order = self.get_object()
-        if not order.ordertime_set.all().filter(stop__isnull=True).order_by('-id')[:0].count():
+        if not order.ordertime_set.all().filter(stop__isnull=True).order_by('-id')[:1].count():
             context.update({'can_start': True})
-        
+        context.update({'total_time':_sum_timedelta(order.id)})
         return context    
 
 
@@ -155,25 +157,48 @@ def OrderTimeUpdateView(request, pk):
     rdict = {'save': False}
     if request.method == 'GET':
         is_saved = None
-        order = Order.objects.get(pk=pk)
+        try:
+            order = Order.objects.get(id=pk)
+            if order:
+                if request.GET.get('action') == 'start':
+                    if order.ordertime_set.all().filter(stop__isnull=True).order_by('-id')[:1].count() == 0:
+                        if order.status=='confirmed':
+                            order.status='in-progress'
+                            order.save()
+                        sw = StopWatch.objects.create()
+                        order_time = OrderTime(order=order, stop_watch=sw, start=datetime.datetime.now())
+                        is_saved = order_time.save()
+                        rdict.update({'save': True}) 
 
-        if request.GET.get('action') == 'start':
-            if not order.ordertime_set.all().filter(stop__isnull=True).order_by('-id')[:0].count():
-                sw = StopWatch.objects.create()
-                order_time = OrderTime(order=order, stop_watch=sw, start=datetime.datetime.now())
-                is_saved = order_time.save()
-                rdict.update({'save': True}) 
-
-        elif request.GET.get('action') == 'stop':
-            order_time = order.ordertime_set.all().filter(stop__isnull=True).order_by('-id')
-            if order_time[:0].count():
-                order_time = order_time[0]
-                order_time.stop=datetime.datetime.now()
-                is_saved = order_time.save()
-                rdict.update({'save': True}) 
-            
+                elif request.GET.get('action') == 'stop':
+                    order_time = order.ordertime_set.all().filter(stop__isnull=True).order_by('-id')
+                    if order_time[:1].count():
+                        order_time = order_time[0]
+                        order_time.stop=datetime.datetime.now()
+                        is_saved = order_time.save()
+                        rdict.update({'save': True}) 
+        except:
+            pass
         json = simplejson.dumps(rdict, ensure_ascii=False)
             # And send it off.
         return HttpResponse( json, mimetype='application/javascript')
     else:
         return HttpResponseNotAllowed(['POST','GET'])
+
+import datetime
+from time import mktime
+
+def _sum_timedelta(order):
+    total_time = 0
+    try:
+        order = Order.objects.get(pk=order)
+        sw = order.ordertime_set.all()
+        for s in sw:
+            time_diff = 0
+            if s.stop and s.start:
+                time_diff = mktime(s.stop.timetuple())-mktime(s.start.timetuple())
+            total_time +=time_diff
+        return round(total_time/(60*60),2)    
+    except:
+        return 0
+    

@@ -27,10 +27,17 @@ class OrderStatusPriceUpdateForm(OrderForm):
     
     class Meta:
         model = Order
-        fields = ('status', 'payment_type', 'payment_price',)
+        fields = ('status', 'payment_type', 'payment_rate',)
 
 class OrderStatusUpdateFrom(OrderForm):
 
     class Meta:
         model = Order
         fields = ('status',)        
+
+class OrderFinishedFrom(OrderForm):
+
+    class Meta:
+        model = Order
+        fields = ('status',)        
+        

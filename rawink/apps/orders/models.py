@@ -48,10 +48,15 @@ class Order(models.Model):
                                    editable=False, blank=True)
     
     payment_type = models.BooleanField(choices=rate_choices)
-    payment_price = models.DecimalField(_('Total price'), max_digits=12,
-                                        decimal_places=4, default=0)
+
+    payment_rate = models.DecimalField(_('payment rate'), max_digits=12,
+                                        decimal_places=2, default=0)
+    payment_price = models.DecimalField(_('Payment price'), max_digits=12,
+                                        decimal_places=2, default=0)
+    total_time = models.DecimalField(_('Total time'), max_digits=12,
+                                        decimal_places=2, default=0)
+
     token = models.CharField(max_length=6, blank=True, default='')
-    
     
     objects = OrderManager()
     started = FilteredManager(status='started')

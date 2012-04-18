@@ -1,4 +1,5 @@
 {% extends "orders/base.html"%}
+{% load url from future%}
 {% block main%}
 <div data-role="page" class="user">
 	
@@ -17,7 +18,7 @@
 				<span></span>
 			</a>
 		</header>
-		<form action="./" method="post">
+		<form action="{% url 'create-order' %}" method="post">
 			{% if order_created_success%}
 				<div id="logo">
 					<img src="{{ STATIC_URL }}layout/images/logo-full-large.png" alt="Raw Ink" />
@@ -33,7 +34,7 @@
 			{% else%}
 				{{ form.errors }}
 				{{ form.as_ul }}
-				{% csrf_token %}
+				{# {% csrf_token %} #}
 				<input type="hidden" name="id" value="{{order_pk}}">	
 				<button type="submit">Submit <small>&gt;&gt;</small></button>
 			{% endif%}

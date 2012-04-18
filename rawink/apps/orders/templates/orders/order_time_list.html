@@ -33,12 +33,13 @@
 					<tfoot>
 						<tr>
 							<td>Total</td>
-							<td>5.5 Hours</td>
+							<td>{{total_time}}</td>
 						</tr>
 					</tfoot>
 				</table>
 				
 				<br />
+				{% if order.status == 'confirmed' or order.status == 'in-progress'%}
 				{% if can_start %}
 				<div class="start">
 					<a href="{%url 'artist-order-time-update' pk=order.id%}?action=start">Start</a>
@@ -48,15 +49,15 @@
 					<a href="{%url 'artist-order-time-update' pk=order.id%}?action=stop">Stop</a>
 				</div>
 				{% endif%}
-				
+				{% endif%}
 				<br />
 				
-				<label class="ui-btn ui-btn-icon-left ui-btn-corner-all ui-checkbox-on ui-btn-up-c">$660</label>
-				
+				<label class="ui-btn ui-btn-icon-left ui-btn-corner-all ui-checkbox-on ui-btn-up-c">{{total_time}}</label>
+				{% if can_start and order.status == 'confirmed'%}
 				<div class="submit">
-					<button type="submit">Finished</button>
+					<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=finished" class="confirm">Finished</a>
 				</div>
-			
+				{% endif%}
 			</form>
 			
 				

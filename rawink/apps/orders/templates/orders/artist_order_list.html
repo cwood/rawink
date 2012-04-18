@@ -11,18 +11,15 @@
 				{% for order in order_list%}
 					{% with customer=order.customer%}
 					<label for="{{order.id}}">{{customer.user.get_full_name}}</label>
-					<input type="radio" name="customer" id="{{order.id}}" value="{{order.id}}" />
+					{%if order.pending%}
 					<a href="{% url 'artist-order-status-update' pk=order.pk %}" class="confirm">Continue</a> 
 					<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=canceled" class="cancel">Cancel</a>
+					{% else %}
+					<a href="{% url 'artist-order-time' pk=order.pk %}" class="Time">Time</a> 
+					{%endif%}
 					{%endwith%}
 				{%endfor%}
-				<div class="submit">
-					
-				</div>
-			
-			</form>
-			
-				
+
 		</section>
 	</article>
 	
