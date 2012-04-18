@@ -23,43 +23,17 @@ class OrderListView(LoginRequiredMixin, ListView):
     template_name = 'orders/order_list.html'
     model = Order
     
+    def get(self, request, *args, **kwargs):
+        get = super(OrderListView, self).get(request, *args, **kwargs)
+        print self.request.session.get('usergroup')
+        if self.request.session.get('usergroup') in ('admin',):
+            return get
+        else:
+            return HttpResponseRedirect(reverse('logout'))
+        
     def get_queryset(self):
         return Order.objects.all().filter()
 
-def OrderBillView(request, pk):
-    rdict = {'save': False}
-    if request.method == 'POST':
-        order = Order.objects.get(pk=pk)
-        if order.status == 'completed':
-            form = OrderBillFrom(request.POST, instance=order)
-            if form.is_valid():
-                form.save()
-                rdict.update({'save': True}) 
-            
-        json = simplejson.dumps(rdict, ensure_ascii=False)
-            # And send it off.
-        return HttpResponse( json, mimetype='application/javascript')
-    else:
-        return HttpResponseNotAllowed(['POST','GET'])
-
-def OrderStatusChangeView(request, pk):
-    rdict = {'save': False}
-    if request.method == 'GET':
-        order = Order.objects.get(pk=pk)
-        form = OrderStatusUpdateFrom(request.GET, instance=order)
-        if form.is_valid():
-            if request.GET.get('status') == 'completed':
-                form = form.save(commit=False)
-                form.total_time=_sum_timedelta(order.id)
-
-            rdict.update({'save': True}) 
-            form.save()
-
-        json = simplejson.dumps(rdict, ensure_ascii=False)
-            # And send it off.
-        return HttpResponse( json, mimetype='application/javascript')
-    else:
-        return HttpResponseNotAllowed(['POST','GET'])
 
     
 class CreateOrder(LoginRequiredMixin, CreateView):
@@ -195,6 +169,41 @@ def OrderTimeUpdateView(request, pk):
                         rdict.update({'save': True}) 
         except:
             pass
+        json = simplejson.dumps(rdict, ensure_ascii=False)
+            # And send it off.
+        return HttpResponse( json, mimetype='application/javascript')
+    else:
+        return HttpResponseNotAllowed(['POST','GET'])
+
+def OrderBillView(request, pk):
+    rdict = {'save': False}
+    if request.method == 'POST':
+        order = Order.objects.get(pk=pk)
+        if order.status == 'completed':
+            form = OrderBillFrom(request.POST, instance=order)
+            if form.is_valid():
+                form.save()
+                rdict.update({'save': True}) 
+
+        json = simplejson.dumps(rdict, ensure_ascii=False)
+            # And send it off.
+        return HttpResponse( json, mimetype='application/javascript')
+    else:
+        return HttpResponseNotAllowed(['POST','GET'])
+
+def OrderStatusChangeView(request, pk):
+    rdict = {'save': False}
+    if request.method == 'GET':
+        order = Order.objects.get(pk=pk)
+        form = OrderStatusUpdateFrom(request.GET, instance=order)
+        if form.is_valid():
+            if request.GET.get('status') == 'completed':
+                form = form.save(commit=False)
+                form.total_time=_sum_timedelta(order.id)
+
+            rdict.update({'save': True}) 
+            form.save()
+
         json = simplejson.dumps(rdict, ensure_ascii=False)
             # And send it off.
         return HttpResponse( json, mimetype='application/javascript')
