@@ -8,18 +8,22 @@
 		
 		<section id="appointments">
 			<h1>{{request.user.get_full_name}}</h1>
+			<ul>
 				{% for order in order_list%}
-					{% with customer=order.customer%}
+				<li>
+				{% with customer=order.customer%}
 					<label for="{{order.id}}">{{customer.user.get_full_name}}</label>
-					{%if order.pending%}
+					{% if order.status == 'pending' %}
 					<a href="{% url 'artist-order-status-update' pk=order.pk %}" class="confirm">Continue</a> 
 					<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=canceled" class="cancel">Cancel</a>
 					{% else %}
 					<a href="{% url 'artist-order-time' pk=order.pk %}" class="Time">Time</a> 
 					{%endif%}
-					{%endwith%}
+				{%endwith%}
 				{%endfor%}
+				</li>
 
+			</ul>
 		</section>
 	</article>
 	

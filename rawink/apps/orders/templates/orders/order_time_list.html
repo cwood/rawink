@@ -53,9 +53,9 @@
 				<br />
 				
 				<label class="ui-btn ui-btn-icon-left ui-btn-corner-all ui-checkbox-on ui-btn-up-c">{{total_time}}</label>
-				{% if can_start and order.status == 'confirmed'%}
+				{% if can_start and order.status == 'confirmed' or order.status == 'in-progress'%}
 				<div class="submit">
-					<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=finished" class="confirm">Finished</a>
+					<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=completed" class="confirm">Completed</a>
 				</div>
 				{% endif%}
 			</form>

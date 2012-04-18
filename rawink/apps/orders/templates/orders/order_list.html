@@ -39,18 +39,21 @@
 							<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=in-progress" class="confirm">In-progress</a> 
 							<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=canceled" class="cancel">Cancel</a>
 						</div>
-						{% elif order.status == 'in_progress' %}
+						{% elif order.status == 'in-progress' %}
 						<div class="actions">
-							<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=compled" class="confirm">Confirm</a>
+							<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=completed" class="completed">Completed</a>
 						</div>
 						{% endif %}
-						<div class="cost">Price: {{order.get_payment_price}}</div>
+						<div class="cost">Price: {{order.get_billable_price}} {% if order.payment_price%} | {{order.payment_price}}{% endif%}</div>
 					</td>
 					<td class="submit">
-						{% if order.status == "payment-pending"%}
+						{% if order.status == "completed"%}
+						<form action="{% url 'order-bill' pk=order.pk %}" method="post" accept-charset="utf-8">
+							<input type="text" name="payment_price" value="{{order.get_billable_price}}" id="">
+							<input type="hidden" name="status" value="payment-complete" id="">
+							<p><input type="submit" value="Continue &rarr;"></p>
+						</form>
 						<div class="alert">Bill Customer !!</div>
-						<button>Mark Appointment Closed</button>
-						<a href="{{order.get_absolute_url}}">{{order}}</a></li>
 						{% endif%}
 					</td>
 				</tr>

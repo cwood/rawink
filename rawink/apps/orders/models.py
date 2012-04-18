@@ -18,8 +18,8 @@ StatusChoices = Enum(
     ('payment-pending', 'payment-pending', 'Waiting for payment'),
     ('payment-complete','payment-complete', 'Paid'),
     ('payment-failed','payment-failed', 'Payment failed'),
-    ('in_progress', 'in_progress', 'in-progress'),
-    ('finished', 'finished', 'Finished'),
+    ('in-progress', 'in-progress', 'in-progress'),
+    ('completed', 'completed', 'Completed'),
     ('confirmed', 'confirmed', 'Confirmed'),
     ('cancelled', 'cancelled', 'Cancelled'),
     ('pending', 'pending', 'Pending'),
@@ -80,9 +80,9 @@ class Order(models.Model):
         return reverse('order-detail', kwargs=dict(pk=self.id))
     
     @property
-    def get_payment_price(self):
+    def get_billable_price(self):
         if self.payment_type: 
-            return self.payment_rate * self.total_time
+            return round(self.payment_rate * self.total_time, 2)
         else:
             return self.payment_rate
             

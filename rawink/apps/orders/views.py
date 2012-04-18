@@ -4,7 +4,7 @@ from django.views.generic import CreateView, UpdateView, ListView, DetailView, T
 from django.conf import settings
 from django.utils import translation
 from django.utils import simplejson as json
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseNotAllowed
 from django.shortcuts import get_object_or_404, get_list_or_404, redirect
 from django.utils import simplejson
 
@@ -26,13 +26,29 @@ class OrderListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return Order.objects.all().filter()
 
+def OrderBillView(request, pk):
+    rdict = {'save': False}
+    if request.method == 'POST':
+        order = Order.objects.get(pk=pk)
+        if order.status == 'completed':
+            form = OrderBillFrom(request.POST, instance=order)
+            if form.is_valid():
+                form.save()
+                rdict.update({'save': True}) 
+            
+        json = simplejson.dumps(rdict, ensure_ascii=False)
+            # And send it off.
+        return HttpResponse( json, mimetype='application/javascript')
+    else:
+        return HttpResponseNotAllowed(['POST','GET'])
+
 def OrderStatusChangeView(request, pk):
     rdict = {'save': False}
     if request.method == 'GET':
         order = Order.objects.get(pk=pk)
         form = OrderStatusUpdateFrom(request.GET, instance=order)
         if form.is_valid():
-            if request.GET.get('status') == 'finished':
+            if request.GET.get('status') == 'completed':
                 form = form.save(commit=False)
                 form.total_time=_sum_timedelta(order.id)
 
