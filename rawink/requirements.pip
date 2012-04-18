@@ -11,3 +11,4 @@ django-classy-tags==0.3.4.1
 -e git://github.com/matthewwithanm/django-html5boilerplate.git@9f3234e7d62a50ba719b1653222b42d6bd728d44#egg=django_html5boilerplate-dev
 -e git://github.com/jdriscoll/django-imagekit.git@c5c0402c89351124a49a17eaf058dacdbda91a17#egg=django_imagekit-dev
 -e git://github.com/hzdg/django-modeltools.git@137eef0ec44030cf62ec049d171f90a792936f7e#egg=django_modeltools-dev
+-e git://github.com/stefanfoulis/django-class-based-auth-views.git@b4943a34af3deedcd02316f2d1654db7424eb8bd#egg=django_class_based_auth_views-develop

@@ -78,6 +78,13 @@ class Order(models.Model):
 
     def get_absolute_url(self):
         return reverse('order-detail', kwargs=dict(pk=self.id))
+    
+    @property
+    def get_payment_price(self):
+        if self.payment_type: 
+            return self.payment_rate * self.total_time
+        else:
+            return self.payment_rate
             
     def __unicode__(self):
         return "%s %s" % (self.product, self.last_status_change)    
