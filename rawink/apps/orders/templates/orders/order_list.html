@@ -5,7 +5,7 @@
 	<article data-role="content">
 		
 		<div id="logo">
-			<a href="/main/home" rel="external"><img src="{{ STATIC_URL }}layout/images/logo-full-large.png" alt="Raw Ink" /></a>
+			<a href="/order/" rel="external"><img src="{{ STATIC_URL }}layout/images/logo-full-large.png" alt="Raw Ink" /></a>
 			
 		</div>
 		
@@ -48,36 +48,34 @@
 					</td>
 					<td class="submit">
 						{% if order.status == "completed"%}
+						<div class="alert">Bill Customer !!</div>
 						<form action="{% url 'order-bill' pk=order.pk %}" method="post" accept-charset="utf-8">
 							<input type="text" name="payment_price" value="{{order.get_billable_price}}" id="">
 							<input type="hidden" name="status" value="payment-complete" id="">
-							<p><input type="submit" value="Continue &rarr;"></p>
+							<input type="submit" value="Confirm Billing" />
 						</form>
-						<div class="alert">Bill Customer !!</div>
 						{% endif%}
 					</td>
 				</tr>
 				{% endfor%}
 			</table>
-			{% if is_paginated %}
-			        <div class="pagination">
-			            <span class="page-links">
-			                {% if page_obj.has_previous %}
-			                    <a href="{% url 'order-list' %}?page={{ page_obj.previous_page_number }}">previous</a>
-			                {% endif %}
-			                <span class="page-current">
-			                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-			                </span>
-			                {% if page_obj.has_next %}
-			                    <a href="{% url 'order-list' %}?page={{ page_obj.next_page_number }}">next</a>
-			                {% endif %}
-			            </span>
-			        </div>
-			{% else %}
-			    <h3>My Cars</h3>
-			    <p>No cars found!!! :(</p>
-			{% endif %}
+			
+<!--
+			<div class="pagination">
+				<a href="#">&lt;</a>
+				<a href="#">1</a>
+				<a class="selected" href="#">2</a>
+				<a href="#">3</a>
+				<a href="#">4</a>
+				<a href="#">5</a>
+				<a href="#">6</a>
+				<a href="#">7</a>
+				<a href="#">&gt;</a>
+			</div>
+			
 			<a href="#" class="date">Jump to Date</a>
+-->
+			
 			<form id="search">
 				<input type="search" name="s" />
 				<button type="submit">Search</button>
