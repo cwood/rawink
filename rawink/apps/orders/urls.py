@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .views import *
 
 urlpatterns = patterns('',
-    url(r'^$', OrderListView.as_view(), name="order"),
+    url(r'^$', OrderListView.as_view(), name="order-list"),
     url(r'^status-update/(?P<pk>\d*)$', OrderStatusChangeView, name="order-status-cahnge"),
     url(r'^new/$', CreateOrder.as_view(), name="create-order"),  
     url(r'^edit/(?P<pk>\d*)/$', EditOrder.as_view(), name="edit-order"),

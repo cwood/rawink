@@ -1,22 +1,4 @@
-{% extends 'base.html'%}
+{% extends "main/base.html" %}
 
 {% block main%}
-<h1>Order</h1>
-{{request.user}}<br />
-{{request.user.id}}<br />
-{{request.user.group}}<br />
-
-{% if order %}
-<ul>
-	<li>{{order}}</li>
-	<li>{{order.status}}</li>
-	<li>{{order.billing_first_name}}</li>
-	<li>{{order.billing_last_name}}</li>
-	<li>{{order.billing_street_address_1}}</li>
-	<li>{{order.billing_phone}}</li>
-	
-</ul>
-{% endif%}
-
-
 {% endblock%}

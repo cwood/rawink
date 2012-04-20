@@ -22,11 +22,12 @@ from rawink.apps.main.mixins import LoginRequiredMixin
 class OrderListView(LoginRequiredMixin, ListView):
     template_name = 'orders/order_list.html'
     model = Order
+    paginate_by = 2 
     
     def get(self, request, *args, **kwargs):
         get = super(OrderListView, self).get(request, *args, **kwargs)
         print self.request.session.get('usergroup')
-        if self.request.session.get('usergroup') in ('admin',):
+        if self.request.session.get('usergroup') in ('admin', 'artist',):
             return get
         else:
             return HttpResponseRedirect(reverse('logout'))
