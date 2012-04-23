@@ -14,5 +14,5 @@ urlpatterns = patterns('',
     url(r'^artist/$', ArtistOrderList.as_view(), name="artist-order-list"),
     url(r'^artist/time/(?P<pk>\d*)$', OrderTimeList.as_view(), name="artist-order-time"),
     url(r'^artist/time-update/(?P<pk>\d*)$', OrderTimeUpdateView, name="artist-order-time-update"),
-    url(r'^artist/update/(?P<pk>\d*)/$', OrderStatusUpdate.as_view(), name="artist-order-status-update"),
+    url(r'^artist/update/(?P<pk>\d*)/$', OrderConfirm.as_view(), name="artist-order-confirm"),
 )

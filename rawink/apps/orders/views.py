@@ -121,7 +121,7 @@ class ArtistOrderList(OrderListView):
         context = super(ArtistOrderList, self).get_context_data(**kwargs)
         return context
 
-class OrderStatusUpdate(LoginRequiredMixin, UpdateView):
+class OrderConfirm(LoginRequiredMixin, UpdateView):
     template_name = 'orders/status_update.html'
     form_class = OrderStatusPriceUpdateForm
     model = Order
@@ -129,6 +129,20 @@ class OrderStatusUpdate(LoginRequiredMixin, UpdateView):
     
     def get_success_url(self):
         return self.success_url % (self.object.id)
+        
+    def get_initial(self):        
+        initial = self.initial or {}
+        payment_rate = self.request.POST.get('payment_rate')
+
+        if payment_rate is None or payment_rate == 0:
+            payment_rate = settings.PAYMENT_RATE
+
+        initial.update({
+            'payment_rate' : payment_rate,
+            'status' : 'confirmed',
+        })
+        return initial
+        
 
 class OrderTimeList(LoginRequiredMixin, DetailView):
     template_name = 'orders/order_time_list.html'

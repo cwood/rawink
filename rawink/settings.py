@@ -256,6 +256,7 @@ DEBUG_TOOLBAR_CONFIG = {
     'TAG': 'div',
     'ENABLE_STACKTRACES' : True,
 }
+PAYMENT_RATE = 120
 try:
     from local_settings import *
 except ImportError:

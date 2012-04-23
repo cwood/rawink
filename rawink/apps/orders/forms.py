@@ -8,6 +8,7 @@ from django.contrib.auth.forms import UserCreationForm as _UserCreationForm, \
     SetPasswordForm as _SetPasswordForm, \
     PasswordChangeForm as _PasswordChangeForm
 
+from django.forms import RadioSelect, HiddenInput
 
 from .models import Order
 
@@ -28,6 +29,10 @@ class OrderStatusPriceUpdateForm(OrderForm):
     class Meta:
         model = Order
         fields = ('status', 'payment_type', 'payment_rate',)
+        widgets = {
+            'payment_type': RadioSelect,
+            'status': HiddenInput,
+        }
 
 class OrderStatusUpdateFrom(OrderForm):
 
