@@ -1,13 +1,14 @@
 {% extends "orders/base.html"%}
 {% load url from future%}
 {% block main%}
-<div data-role="page" class="user">
+<div data-role="page" class="user confirm">
 	
 	<article data-role="content">
 
 		<header class="done">
 			<a href="#" class="done">
 				<img src="{{product.artist.photo.url}}" />
+				<i class="status"></i>
 				<span></span>
 			</a>
 		</header>
@@ -15,14 +16,16 @@
 		<header class="edit-work done">
 			<a href="#" class="done">
 				<img src="{{product.original_image.url}}" />
+				<i class="status"></i>
 				<span></span>
 			</a>
 		</header>
 		<form action="{% url 'create-order' %}" method="post">
-			{% if order_created_success%}
 				<div id="logo">
 					<img src="{{ STATIC_URL }}layout/images/logo-full-large.png" alt="Raw Ink" />
 				</div>
+			
+			{% if order_created_success%}
 			
 				<div id="intro" class="content">
 					<p>Your all set. Please hand the front desk attendant this iPad so he can confirm your tattoo reservation.</p>
@@ -30,13 +33,19 @@
 					<br />
 					<br />
 					<center><strong>ref: #{{order.token}}</strong></center>
+					<br />
+					<center><a href="{% url 'logout'%}">Logout</a></center>
 				</div>
 			{% else%}
+			<div class="content">
+				<ul>
 				{{ form.errors }}
 				{{ form.as_ul }}
 				{# {% csrf_token %} #}
 				<input type="hidden" name="id" value="{{order_pk}}">	
-				<button type="submit">Submit <small>&gt;&gt;</small></button>
+				<button type="submit">Confirm Appointment</button>
+				</ul>
+			</div>
 			{% endif%}
 		</form>
 	</article>

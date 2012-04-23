@@ -1238,6 +1238,12 @@ nav ul > li > a:hover {
   content: '' !important;
   display: none !important;
 }
+.user.confirm form .content {
+  display: block;
+}
+.user.confirm form .content .ui-select {
+  display: none;
+}
 .user form {
   height: 100%;
   width: 50%;
