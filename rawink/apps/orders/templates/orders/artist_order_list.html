@@ -14,7 +14,7 @@
 				{% with customer=order.customer%}
 					<label for="{{order.id}}">{{customer.user.get_full_name}}</label>
 					{% if order.status == 'pending' %}
-					<a href="{% url 'artist-order-status-update' pk=order.pk %}" class="confirm">Continue</a> 
+					<a href="{% url 'artist-order-confirm' pk=order.pk %}" class="confirm">Continue</a> 
 					<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=canceled" class="cancel">Cancel</a>
 					{% else %}
 					<a href="{% url 'artist-order-time' pk=order.pk %}" class="Time">Time</a> 

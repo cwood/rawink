@@ -14,7 +14,7 @@
 </ul>
 {{request.user.group.all}}
 {% ifusergroup Artist%}
-	<a href="{% url 'artist-order-status-update' pk=order.id %}">EDIT</a>
+	<a href="{% url 'artist-order-confirm' pk=order.id %}">EDIT</a>
 	{% else %}
 		<a href="{% url 'edit-order' pk=order.id %}">EDIT</a>
 {% endifusergroup%}
