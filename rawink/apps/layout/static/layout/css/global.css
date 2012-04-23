@@ -1264,6 +1264,9 @@ nav ul > li > a:hover {
 .user form .content#intro {
   display: block;
 }
+.user form .content#signup {
+  margin-top: 0;
+}
 .user form .content a {
   display: inline-block;
   padding: 4px 10px 4px;
@@ -1320,6 +1323,22 @@ nav ul > li > a:hover {
 }
 .user form .content a[href='#signup'] {
   float: right;
+}
+.user form .content a.back {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  -moz-box-shadow: none 0 4px rgba(0, 0, 0, 0.65);
+  -ms-box-shadow: none 0 4px rgba(0, 0, 0, 0.65);
+  -o-box-shadow: none 0 4px rgba(0, 0, 0, 0.65);
+  box-shadow: none 0 4px rgba(0, 0, 0, 0.65);
+  float: right;
+  margin-top: 5px;
+  background: none;
+  color: #fff;
+  text-align: right;
+  font-weight: normal;
+  border: none;
 }
 .user form .content ul {
   padding-top: 10px;
@@ -1640,6 +1659,11 @@ nav ul > li > a:hover {
   padding: 0;
 }
 .studio #search .ui-input-clear {
+  display: none;
+}
+.log-in #intro,
+.log-in #new,
+.log-in .back {
   display: none;
 }
 .log-in form {

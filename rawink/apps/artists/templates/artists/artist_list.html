@@ -1,4 +1,5 @@
 {% extends 'artists/base.html' %}
+{% load url from future%}
 {% block main%}
 <div data-role="page" class="artists">
 	
@@ -30,6 +31,15 @@
 		
 		{%endfor%}	
 	</ul>
+	
+	{% if customer %}
+	<a href="{% url 'logout'%}">Logout</a>
+	
+	{% else %}
+		<a href="accounts/login/?next=/customer/">Customer Log In</a>&nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href="accounts/login/?next=/studio/">Studio Log In</a>&nbsp;&nbsp; | &nbsp;&nbsp;
+		<a rel="external" href="http://www.rawinkstudio.com/">www.RawInkStudio.com</a>
+	{% endif %}
 	
 	</article>
 </div>	

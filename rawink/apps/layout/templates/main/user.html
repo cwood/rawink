@@ -2,10 +2,11 @@
 {% load url from future%}
 {% block main %}
 
-<div data-role="page" class="user">
+<div data-role="page" {% if product.artist %}class="user"{% else %}class="studio log-in"{% endif %}>
 	
 	<article data-role="content">
 		
+		{% if product.artist %}
 		<header>
 			<a href="{% url 'artist-index' %}" data-direction="reverse" title="Change Artist">
 				<img src="{{product.artist.photo.url}}" />
@@ -13,7 +14,9 @@
 				<span></span>
 			</a>
 		</header>
+		{% endif %}
 		
+		{% if product.original_image %}
 		<header class="edit-work">
 			<a href="{{product.artist.get_absolute_url}}" data-direction="reverse" title="Change Work">
 				<img src="{{product.original_image.url}}" />
@@ -21,6 +24,7 @@
 				<span></span>
 			</a>
 		</header>
+		{% endif %}
 		
 		<form method="post" action="{% url 'login' %}">{% csrf_token %}
 		
@@ -35,7 +39,7 @@
 			</div>
 			
 			<div id="login" class="content">
-				<p>Log In with your email address and phone number. Just the numbers, no hyphens or other special characters.</p>
+				<p>Log In with your user name and password.</p>
 				
 				<ul>
 					<li>
@@ -49,9 +53,11 @@
 				</ul>
 				<input type="hidden" name="next" value="{{ next }}" />
 				<button type="submit">Log In</button>
+				
+				<a href="#intro" class="back" rel="external">Go Back</a>
 			</div>
 		</form>
-		<form method="post" action="{% url 'create-customer' %}">{% csrf_token %}	
+		<form method="post" id="new" action="{% url 'create-customer' %}">{% csrf_token %}	
 			<div id="signup" class="content">
 				<ul>
 					<li><label for="id_first_name">First name:</label> <input id="id_first_name" type="text" name="first_name" maxlength="30" /></li>
@@ -66,6 +72,8 @@
 				</ul>
 				<input type="hidden" name="next" value="{{ next }}" />
 				<button type="submit">Book Appointment</button>
+				
+				<a href="#intro" class="back" rel="external">Go Back</a>
 			</div>
 		
 		</form>

@@ -81,12 +81,14 @@ loadjs("/static/layout/js/mega-dropdown.js", "js");
 		.live('pageshow', function(e){
 		if(userShown == 0){
 			userShown = 1;
-			$('#intro a').live('click',function(event){
+			$('#intro a, .back').live('click',function(event){
 				event.preventDefault();
-				var tgt = $( $(this).attr('href') );
+				var selector = $(this).attr('href');
+				var tgt = $( selector );
 				var intro = $('#intro');
 				intro.closest('.content').fadeOut(300, function(){
 					tgt.fadeIn();
+					if( selector == '#intro' ) $('#signup').fadeOut();
 				})
 			});
 			
