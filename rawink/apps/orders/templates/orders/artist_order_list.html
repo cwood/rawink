@@ -2,7 +2,7 @@
 {% load url from future%}
 {% block main %}
 
-<div data-role="page" class="studio customer queue">
+<div data-role="page" class="studio customer queue list">
 	
 	<article data-role="content">
 		
@@ -14,14 +14,15 @@
 				{% with customer=order.customer%}
 					<label for="{{order.id}}">{{customer.user.get_full_name}}</label>
 					{% if order.status == 'pending' %}
-					<a href="{% url 'artist-order-confirm' pk=order.pk %}" class="confirm">Continue</a> 
-					<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=canceled" class="cancel">Cancel</a>
+					<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=canceled" class="ui-btn cancel">Cancel</a>
+					<a href="{% url 'artist-order-confirm' pk=order.pk %}" class="confirm ui-btn">Continue</a> 
 					{% else %}
-					<a href="{% url 'artist-order-time' pk=order.pk %}" class="Time">Time</a> 
+					<a href="{% url 'artist-order-time' pk=order.pk %}" class="Time ui-btn">Time</a> 
 					{%endif%}
 				{%endwith%}
-				{%endfor%}
 				</li>
+				{%endfor%}
+				
 
 			</ul>
 		</section>

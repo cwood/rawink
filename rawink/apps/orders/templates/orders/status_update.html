@@ -4,10 +4,10 @@
 	<article data-role="content">
 		<section id="appointments">
 			<form action="./" method="post">
+				<h1>{{request.user.get_full_name}}</h1>
 				<label class="ui-btn ui-btn-icon-left ui-btn-corner-all ui-checkbox-on ui-btn-up-c">{{order.customer.user.get_full_name}}</label>
+				<img src="{{order.product.original_image.url}}" />
 				<label class="ui-btn ui-btn-icon-left ui-btn-corner-all ui-checkbox-on ui-btn-up-c">{{order.product.title}}</label>
-				<label class="ui-btn ui-btn-icon-left ui-btn-corner-all ui-checkbox-on ui-btn-up-c">{{order.product.artist.user.get_full_name}}</label>
-				<img src="{{order.product.original_image.url}}" width="200" height="200"/>
 				<br />
 				{# <label for="hourly">Hourly Rate</label> #}
 				{# <input type="radio" name="payment_type" checked="checked" id="hourly" value="True" /> #}
@@ -16,7 +16,7 @@
 				{# <br /> #}
 				{# <input type="hidden" name="status" value="confirmed"  /> #}
 				{# <input type="text" name="payment_rate" value="{{payment_rate}}"/> #}
-				{{form.as_ul}}
+				{{form}}
 				<input type="hidden" name="id" value="{{order.id}}">	
 				<div class="submit">
 					<button type="submit">Confirm</button>
