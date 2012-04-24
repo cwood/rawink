@@ -99,9 +99,36 @@ loadjs("/static/layout/js/mega-dropdown.js", "js");
 					$(this).closest('.ui-checkbox').siblings('.toggle').slideUp();
 				}
 			});
+			
+			$('input[name=payment_type]').change(function(){
+				alert('poop');
+				if( $('#id_payment_type_0:checked') ) $('#id_payment_rate').val('120')
+			});
 		}
 	});
-		
+	
+	$('.customer')
+		.live('pageshow', function(e){
+			
+			$('input[name=payment_type]').change(function(){
+				if( $('#id_payment_type_0:checked') ) $('#id_payment_rate').val('120')
+			});
+			
+			refreshPage = function(){
+				// $('#appointments form').submit();
+				var form = document.createElement('form');
+				form.method = 'post';
+		        form.action = './';
+		        document.body.appendChild(form);
+		        form.submit();
+			}
+			
+			$('.start a, .stop a').click(function(event){
+				event.preventDefault();
+				var tgt = $(this).attr('href');
+				$('#ajax').load( tgt, refreshPage );
+			});
+		});
 		
 	
 	function chbx() {
