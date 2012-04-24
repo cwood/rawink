@@ -32,12 +32,13 @@
 		{%endfor%}	
 	</ul>
 	
-	{% if customer %}
-	<a href="{% url 'logout'%}">Logout</a>
+	{% if request.user.is_authenticated %}
+	<a rel="external" href="{% url 'logout' %}?next=/">Logout</a>
 	
 	{% else %}
-		<a href="accounts/login/?next=/customer/">Customer Log In</a>&nbsp;&nbsp; | &nbsp;&nbsp;
-		<a href="accounts/login/?next=/studio/">Studio Log In</a>&nbsp;&nbsp; | &nbsp;&nbsp;
+<!-- 		<a href="accounts/login/?next=/customer/">Customer Log In</a>&nbsp;&nbsp; | &nbsp;&nbsp; -->
+		<a href="accounts/login/?next=/order/">Studio Log In</a>&nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href="accounts/login/?next=/order/artist/">Artist Log In</a>&nbsp;&nbsp; | &nbsp;&nbsp;
 		<a rel="external" href="http://www.rawinkstudio.com/">www.RawInkStudio.com</a>
 	{% endif %}
 	
