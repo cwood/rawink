@@ -257,6 +257,7 @@ DEBUG_TOOLBAR_CONFIG = {
     'ENABLE_STACKTRACES' : True,
 }
 PAYMENT_RATE = 120
+PAGINATE_BY = 2
 try:
     from local_settings import *
 except ImportError:

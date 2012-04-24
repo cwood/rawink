@@ -31,7 +31,7 @@
 						<div class="status">Status: <span class="complete">{{order.status}}</span></div>
 						{% if order.status == "pending" %}
 						<div class="actions">
-							<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=confirm" class="confirm">Confirm</a> 
+							<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=booked" class="confirm">Booked</a> 
 							<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=canceled" class="cancel">Cancel</a>
 						</div>
 						{% elif order.status == 'confirmed' %}
@@ -60,24 +60,23 @@
 				{% endfor%}
 			</table>
 			
-<!--
+			{% if is_paginated %}
 			<div class="pagination">
-				<a href="#">&lt;</a>
-				<a href="#">1</a>
-				<a class="selected" href="#">2</a>
-				<a href="#">3</a>
-				<a href="#">4</a>
-				<a href="#">5</a>
-				<a href="#">6</a>
-				<a href="#">7</a>
-				<a href="#">&gt;</a>
+				<span class="page-links">
+					{% if page_obj.has_previous %}
+					<a href="{% url 'order-list' %}?page={{ page_obj.previous_page_number }}">previous</a>
+					{% endif %}
+					<span class="page-current">
+						Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+					</span>
+					{% if page_obj.has_next %}
+					<a href="{% url 'order-list' %}?page={{ page_obj.next_page_number }}">next</a>
+					{% endif %}
+				</span>
 			</div>
-			
-			<a href="#" class="date">Jump to Date</a>
--->
-			
-			<form id="search">
-				<input type="search" name="s" />
+			{% endif %}
+			<form id="search" data-ajax="false" media="GET" >
+				<input type="search" name="token" />
 				<button type="submit">Search</button>
 			</form>
 		</section>

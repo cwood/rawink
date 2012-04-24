@@ -22,7 +22,7 @@ from rawink.apps.main.mixins import LoginRequiredMixin
 class OrderListView(LoginRequiredMixin, ListView):
     template_name = 'orders/order_list.html'
     model = Order
-    paginate_by = 2 
+    paginate_by = settings.PAGINATE_BY or 10 
     
     def get(self, request, *args, **kwargs):
         get = super(OrderListView, self).get(request, *args, **kwargs)
@@ -32,8 +32,11 @@ class OrderListView(LoginRequiredMixin, ListView):
         else:
             return HttpResponseRedirect(reverse('logout'))
         
-    def get_queryset(self):
-        return Order.objects.all().filter()
+    def get_queryset(self, **kwargs):
+        qs = super(OrderListView, self).get_queryset(**kwargs)
+        if self.request.GET.get('token'):
+            qs = qs.filter(token=self.request.GET.get('token'))
+        return qs
 
 
     
@@ -173,7 +176,7 @@ def OrderTimeUpdateView(request, pk):
                         sw = StopWatch.objects.create()
                         order_time = OrderTime(order=order, stop_watch=sw, start=datetime.datetime.now())
                         is_saved = order_time.save()
-                        rdict.update({'save': True}) 
+                        rdict.update({'save': True }) 
 
                 elif request.GET.get('action') == 'stop':
                     order_time = order.ordertime_set.all().filter(stop__isnull=True).order_by('-id')
@@ -216,7 +219,7 @@ def OrderStatusChangeView(request, pk):
                 form = form.save(commit=False)
                 form.total_time=_sum_timedelta(order.id)
 
-            rdict.update({'save': True}) 
+            rdict.update({'save': True, 'status': request.GET.get('status')}) 
             form.save()
 
         json = simplejson.dumps(rdict, ensure_ascii=False)

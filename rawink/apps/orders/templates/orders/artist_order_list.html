@@ -13,10 +13,10 @@
 				<li>
 				{% with customer=order.customer%}
 					<label for="{{order.id}}">{{customer.user.get_full_name}}</label>
-					{% if order.status == 'pending' %}
+					{% if order.status == 'booked' %}
 					<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=canceled" class="ui-btn cancel">Cancel</a>
 					<a href="{% url 'artist-order-confirm' pk=order.pk %}" class="confirm ui-btn">Continue</a> 
-					{% else %}
+					{% elif order.status == 'confirmed'%}
 					<a href="{% url 'artist-order-time' pk=order.pk %}" class="Time ui-btn">Time</a> 
 					{%endif%}
 				{%endwith%}

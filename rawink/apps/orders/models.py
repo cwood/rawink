@@ -21,6 +21,7 @@ StatusChoices = Enum(
     ('in-progress', 'in-progress', 'in-progress'),
     ('completed', 'completed', 'Completed'),
     ('confirmed', 'confirmed', 'Confirmed'),
+    ('booked', 'booked', 'Booked'),
     ('cancelled', 'cancelled', 'Cancelled'),
     ('pending', 'pending', 'Pending'),
     
