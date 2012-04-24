@@ -12,7 +12,8 @@
 			
 			<form action="confirm">
 				
-				<label class="ui-btn ui-btn-icon-left ui-btn-corner-all ui-checkbox-on ui-btn-up-c">{{order.customer.user.get_full_name}}: {{order.product.title}}</label>
+				<label class="ui-btn ui-btn-icon-left ui-btn-corner-all ui-checkbox-on ui-btn-up-c">{{order.customer.user.get_full_name}} : #{{order.token}}</label>
+				<label class="ui-btn ui-btn-icon-left ui-btn-corner-all ui-checkbox-on ui-btn-up-c">{{order.product.title}}</label>
 				
 				<br />
 				
@@ -42,24 +43,27 @@
 				{% if order.status == 'confirmed' or order.status == 'in-progress'%}
 				{% if can_start %}
 				<div class="start">
-					<a href="{%url 'artist-order-time-update' pk=order.id%}?action=start">Start</a>
+					<a rel="external" class="ui-btn" href="{%url 'artist-order-time-update' pk=order.id%}?action=start">Start</a>
 				</div>
 				{% else%}
 				<div class="stop">
-					<a href="{%url 'artist-order-time-update' pk=order.id%}?action=stop">Stop</a>
+					<a rel="external" class="ui-btn" href="{%url 'artist-order-time-update' pk=order.id%}?action=stop">Stop</a>
 				</div>
 				{% endif%}
 				{% endif%}
 				<br />
 				
-				<label class="ui-btn ui-btn-icon-left ui-btn-corner-all ui-checkbox-on ui-btn-up-c">{{total_time}}</label>
+				<label class="ui-btn ui-btn-icon-left ui-btn-corner-all ui-checkbox-on ui-btn-up-c clearbuttons">{{total_time}}</label>
 				{% if can_start and order.status == 'confirmed' or order.status == 'in-progress'%}
 				<div class="submit">
-					<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=completed" class="confirm">Completed</a>
+					<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=completed" class="confirm ui-btn">Completed</a>
 				</div>
 				{% endif%}
 			</form>
 			
+			<a href="/order/artist/" class="ui-btn back">Back to Queue</a>
+			
+			<div id="ajax"></div>
 				
 		</section>
 	</article>
