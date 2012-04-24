@@ -11,6 +11,11 @@
 		width: 90%;
 		margin: 0 auto;
 		
+		.back {
+			float: left;
+			margin-top: 20px;
+		}
+		
 		ul {
 			text-align: left;
 		}
@@ -71,6 +76,9 @@
 		}
 		
 		.start {
+		
+			margin-bottom: 20px;
+			
 			.ui-btn {
 				.box-shadow(0 1px #000);
 				.gradientBar(#5273b8,#3e5f9a);
@@ -88,6 +96,10 @@
 				width: 35%;
 				float: right;
 			}
+		}
+		
+		.clearbuttons {
+			margin-top: 20px;
 		}
 		
 		.submit {
@@ -343,4 +355,8 @@
 
 [for=id_payment_type_0]:first-child {
 	display: none
+}
+
+.customer #appointments form > label[for=id_payment_rate] {
+	display: none;
 }
