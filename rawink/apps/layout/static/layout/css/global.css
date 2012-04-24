@@ -1674,7 +1674,7 @@ nav ul > li > a:hover {
 }
 .log-in form {
   width: 30%;
-  min-width: 300px;
+  min-width: 240px;
   margin: 0 auto;
 }
 .log-in form li {
@@ -1724,6 +1724,10 @@ nav ul > li > a:hover {
 .customer #appointments {
   width: 90%;
   margin: 0 auto;
+}
+.customer #appointments .back {
+  float: left;
+  margin-top: 20px;
 }
 .customer #appointments ul {
   text-align: left;
@@ -1780,6 +1784,9 @@ nav ul > li > a:hover {
 .customer #appointments table tfoot {
   margin-top: -2px;
 }
+.customer #appointments .start {
+  margin-bottom: 20px;
+}
 .customer #appointments .start .ui-btn {
   -webkit-box-shadow: 0 1px #000000;
   -moz-box-shadow: 0 1px #000000;
@@ -1825,6 +1832,9 @@ nav ul > li > a:hover {
   text-shadow: 1px 1px #000;
   width: 35%;
   float: right;
+}
+.customer #appointments .clearbuttons {
+  margin-top: 20px;
 }
 .customer #appointments .submit .ui-btn {
   -webkit-box-shadow: 0 1px #000000;
@@ -2160,6 +2170,9 @@ nav ul > li > a:hover {
   float: right;
 }
 [for=id_payment_type_0]:first-child {
+  display: none;
+}
+.customer #appointments form > label[for=id_payment_rate] {
   display: none;
 }
 html,
