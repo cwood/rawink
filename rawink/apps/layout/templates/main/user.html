@@ -26,7 +26,7 @@
 		</header>
 		{% endif %}
 		
-		<form method="post" action="{% url 'login' %}">{% csrf_token %}
+		<form method="post" action="{% url 'login' %}" data-ajax="false">{% csrf_token %}
 		
 			<div id="logo">
 				<img src="{{ STATIC_URL }}layout/images/logo-full-large.png" alt="Raw Ink" />
@@ -57,7 +57,7 @@
 				<a href="#intro" class="back" rel="external">Go Back</a>
 			</div>
 		</form>
-		<form method="post" id="new" action="{% url 'create-customer' %}">{% csrf_token %}	
+		<form method="post" id="new" action="{% url 'create-customer' %}" data-ajax="false">{% csrf_token %}	
 			<div id="signup" class="content">
 				<ul>
 					<li><label for="id_first_name">First name:</label> <input id="id_first_name" type="text" name="first_name" maxlength="30" /></li>
