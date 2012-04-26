@@ -31,17 +31,17 @@
 						<div class="status">Status: <span class="complete">{{order.status}}</span></div>
 						{% if order.status == "pending" %}
 						<div class="actions">
-							<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=booked" class="confirm">Booked</a> 
-							<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=canceled" class="cancel">Cancel</a>
+							<a rel="external" href="{% url 'order-status-cahnge' pk=order.pk %}?status=booked" class="confirm fajax">Booked</a> 
+							<a rel="external" href="{% url 'order-status-cahnge' pk=order.pk %}?status=canceled" class="cancel fajax">Cancel</a>
 						</div>
 						{% elif order.status == 'confirmed' %}
 						<div class="actions">
-							<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=in-progress" class="confirm">In-progress</a> 
-							<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=canceled" class="cancel">Cancel</a>
+							<a rel="external" href="{% url 'order-status-cahnge' pk=order.pk %}?status=in-progress" class="confirm fajax">In-progress</a> 
+							<a rel="external" href="{% url 'order-status-cahnge' pk=order.pk %}?status=canceled" class="cancel fajax">Cancel</a>
 						</div>
 						{% elif order.status == 'in-progress' %}
 						<div class="actions">
-							<a href="{% url 'order-status-cahnge' pk=order.pk %}?status=completed" class="completed">Completed</a>
+							<a rel="external" href="{% url 'order-status-cahnge' pk=order.pk %}?status=completed" class="completed fajax">Completed</a>
 						</div>
 						{% endif %}
 						<div class="cost">Price: {{order.get_billable_price}} {% if order.payment_price%} | {{order.payment_price}}{% endif%}</div>
@@ -49,7 +49,7 @@
 					<td class="submit">
 						{% if order.status == "completed"%}
 						<div class="alert">Bill Customer !!</div>
-						<form action="{% url 'order-bill' pk=order.pk %}" method="post" accept-charset="utf-8">
+						<form class="fajax" action="{% url 'order-bill' pk=order.pk %}" method="post" accept-charset="utf-8">
 							<input type="text" name="payment_price" value="{{order.get_billable_price}}" id="">
 							<input type="hidden" name="status" value="payment-complete" id="">
 							<input type="submit" value="Confirm Billing" />
@@ -81,6 +81,8 @@
 			</form>
 		</section>
 	</article>
+	
+	<div id="ajax"></div>
 	
 </div>
 

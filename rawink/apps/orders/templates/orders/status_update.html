@@ -3,7 +3,7 @@
 <div data-role="page" class="studio customer queue">
 	<article data-role="content">
 		<section id="appointments">
-			<form action="./" method="post">
+			<form action="./" method="post" data-ajax="false">
 				<h1>{{request.user.get_full_name}}</h1>
 				<label class="ui-btn ui-btn-icon-left ui-btn-corner-all ui-checkbox-on ui-btn-up-c">{{order.customer.user.get_full_name}}</label>
 				<img src="{{order.product.original_image.url}}" />
