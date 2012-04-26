@@ -114,6 +114,7 @@ loadjs("/static/layout/js/mega-dropdown.js", "js");
 				if( $('#id_payment_type_0:checked') ) $('#id_payment_rate').val('120')
 			});
 			
+/*
 			refreshPage = function(){
 				// $('#appointments form').submit();
 				var form = document.createElement('form');
@@ -128,8 +129,30 @@ loadjs("/static/layout/js/mega-dropdown.js", "js");
 				var tgt = $(this).attr('href');
 				$('#ajax').load( tgt, refreshPage );
 			});
+*/
 		});
-		
+	
+	$('[data-role=page]')
+		.live('pageshow', function(e){
+				
+			refresh = function(){
+				location.reload();
+			}
+			
+			$('a.fajax').click(function(event){
+				event.preventDefault();
+				var tgt = $(this).attr('href');
+				$('#ajax').load( tgt, refresh );
+			});
+			
+			$('form.fajax').submit(function(){
+				$.post($(this).attr("action"), $(this).serialize(), function(html) {
+			        $('#ajax').html(html);
+			    });
+			    return false; 
+			});
+	
+		});
 	
 	function chbx() {
 		var input = $('input[type=checkbox]').wrap('<div class="chbx" />');
