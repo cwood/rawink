@@ -18,6 +18,8 @@
 					<a href="{% url 'artist-order-confirm' pk=order.pk %}" class="confirm ui-btn">Continue</a> 
 					{% elif order.status == 'confirmed'%}
 					<a href="{% url 'artist-order-time' pk=order.pk %}" class="Time ui-btn">Time</a> 
+					{% elif order.status == 'completed'%}
+					<a class="ui-btn cancel" style="font-weight: bold">Complete</a>
 					{%endif%}
 				{%endwith%}
 				</li>
