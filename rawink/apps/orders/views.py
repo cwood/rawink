@@ -36,6 +36,20 @@ class OrderListView(LoginRequiredMixin, ListView):
         qs = super(OrderListView, self).get_queryset(**kwargs)
         if self.request.GET.get('token'):
             qs = qs.filter(token=self.request.GET.get('token'))
+        
+        if self.request.GET.get('date'):
+            if self.request.GET.get('date') == 'today':
+                date_min = datetime.datetime.combine(datetime.datetime.today(), datetime.time.min)
+                date_max = datetime.datetime.combine(datetime.datetime.today(), datetime.time.max)            
+            elif self.request.GET.get('date') == 'yesterday':
+                yesterday = datetime.datetime.now() - datetime.timedelta(days=1)
+                date_min = datetime.datetime.combine(yesterday, datetime.time.min)
+                date_max = datetime.datetime.combine(yesterday, datetime.time.max)            
+            else:
+                date = datetime.datetime.strptime(self.request.GET.get('date'), '%m-%d-%Y')
+                date_min = datetime.datetime.combine(date, datetime.time.min)
+                date_max = datetime.datetime.combine(date, datetime.time.max)            
+            qs = qs.filter(created__range=(date_min, date_max))
         return qs
 
 
@@ -118,6 +132,11 @@ class ArtistOrderList(OrderListView):
     
     def get_queryset(self):
         qs = Order.objects.all().filter(product__artist__user=self.request.user)
+
+        date_min = datetime.datetime.combine(datetime.datetime.today(), datetime.time.min)
+        date_max = datetime.datetime.combine(datetime.datetime.today(), datetime.time.max)            
+        qs = qs.filter(created__range=(date_min, date_max))
+        
         return qs
 
     def get_context_data(self, **kwargs):

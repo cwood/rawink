@@ -8,7 +8,11 @@
 			<a href="/order/" rel="external"><img src="{{ STATIC_URL }}layout/images/logo-full-large.png" alt="Raw Ink" /></a>
 			
 		</div>
-		
+		<div id="name">
+			<a href="{% url 'order-list' %}?date=today">today</a>|
+			<a href="{% url 'order-list' %}?date=yesterday">yesterday</a>|
+			<a href="{% url 'order-list' %}">all</a>
+		</div>
 		<section id="appointments">
 			<table>
 				{% for order in order_list %}
@@ -47,6 +51,8 @@
 						<div class="cost">Price: {{order.get_billable_price}} {% if order.payment_price%} | {{order.payment_price}}{% endif%}</div>
 					</td>
 					<td class="submit">
+						Created: {{ order.created }}<br />
+						Last status changed: {{ order.last_status_change }}<br />
 						{% if order.status == "completed"%}
 						<div class="alert">Bill Customer !!</div>
 						<form class="fajax" action="{% url 'order-bill' pk=order.pk %}" method="post" accept-charset="utf-8">
@@ -76,7 +82,8 @@
 			</div>
 			{% endif %}
 			<form id="search" data-ajax="false" media="GET" >
-				<input type="search" name="token" />
+				Token: <input type="search" name="token" />
+				Date: <input type="search" name="date" /> <span class="name">mm-dd-yyyy</span>
 				<button type="submit">Search</button>
 			</form>
 		</section>
