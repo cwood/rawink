@@ -8,16 +8,15 @@
 			<a href="/order/" rel="external"><img src="{{ STATIC_URL }}layout/images/logo-full-large.png" alt="Raw Ink" /></a>
 			
 		</div>
-		<div id="name">
-			<a href="{% url 'order-list' %}?date=today">today</a>|
-			<a href="{% url 'order-list' %}?date=yesterday">yesterday</a>|
-			<a href="{% url 'order-list' %}">all</a>
+		<div id="orderby">
+			<strong>View</strong>
+			<a href="{% url 'order-list' %}?date=today">today</a>&nbsp;|&nbsp;<a href="{% url 'order-list' %}?date=yesterday">yesterday</a>&nbsp;|&nbsp;<a href="{% url 'order-list' %}">all</a>
 		</div>
 		<section id="appointments">
 			<table>
 				{% for order in order_list %}
-				<tr>
-					<td>
+				<tr class="{% cycle 'odd' 'even' %}">
+					<td rowspan="2">
 						{% with customer=order.customer%}
 						<div class="name">{{customer.user.get_full_name}}</div>
 						<div class="email">e. {{customer.user.email}}</div>
@@ -51,8 +50,6 @@
 						<div class="cost">Price: {{order.get_billable_price}} {% if order.payment_price%} | {{order.payment_price}}{% endif%}</div>
 					</td>
 					<td class="submit">
-						Created: {{ order.created }}<br />
-						Last status changed: {{ order.last_status_change }}<br />
 						{% if order.status == "completed"%}
 						<div class="alert">Bill Customer !!</div>
 						<form class="fajax" action="{% url 'order-bill' pk=order.pk %}" method="post" accept-charset="utf-8">
@@ -61,6 +58,15 @@
 							<input type="submit" value="Confirm Billing" />
 						</form>
 						{% endif%}
+					</td>
+				</tr>
+				<tr class="{% cycle 'odd' 'even' %}">
+					<td>
+						{{artist.get_full_name}}
+					</td>
+					<td style="text-align: left">
+						Created: {{ order.created }}<br />
+						Last status changed: {{ order.last_status_change }}
 					</td>
 				</tr>
 				{% endfor%}

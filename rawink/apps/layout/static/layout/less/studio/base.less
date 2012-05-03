@@ -1,11 +1,17 @@
 .studio {
 	min-height: 100%;
 
-	background: url(../images/texture.png) center fixed;
+/* 	background: url(../images/texture.png) center fixed; */
+	background: #212121;
 	color: #E7E2E2;
 	word-spacing: 0.3em;
 	letter-spacing: 0.07em;
 	text-shadow: 1px 1px black;
+	
+	#orderby a {
+		.inline-block();
+		padding: 15px;
+	}
 	
 	#logo {
 		width: 30%;
@@ -33,7 +39,7 @@
 		padding: 0 15px;
 		position: relative;
 		
-		button {
+		button, input {
 			position: absolute;
 			top: 0;
 			left: 0;
@@ -41,6 +47,12 @@
 			height: 100%;
 			opacity: 0;
 		}
+	}
+	
+	input {
+		height: 20px;
+		padding: 5px;
+		margin-right: 5px;
 	}
 
 	
@@ -146,7 +158,8 @@
 				}
 			}
 			
-			&:nth-child(even) {
+/* 			&:nth-child(even), */
+			&.even {
 			
 				background: rgba(0,0,0,0.8);
 				
@@ -197,27 +210,32 @@
 		clear: both;
 		margin: 5em auto;
 		border: none;
-		width: 300px;
+/* 		width: 300px; */
 		position: relative;
+		
+		> div {
+			.inline-block();
+		}
 		
 		input {
 			.gradientBar(#686565,#736d71);
 			.border-radius(10px);
 			height: 15px;
 			line-height: 15px;
-			width: 195px;
-			padding: 10px 90px 10px 10px;
+			width: 275px;
+			padding: 10px;
 			font-size: 15px;
 			border: 3px solid #514e50;
 		}
 		
 		.ui-btn {
 			width: 80px;
-			position: absolute;
+/* 			position: absolute; */
 			top: 3px;
 			right: 3px;
 			font-size: 18px;
 			padding: 0;
+			float: right;
 		}
 		
 		.ui-input-clear {

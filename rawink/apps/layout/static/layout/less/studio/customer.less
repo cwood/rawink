@@ -1,53 +1,63 @@
 .customer {
-	
+
 	padding: 10% 0;
-	
+
 	h1 {
 		font-weight: normal;
 		font-size: 26px;
 	}
-	
+
 	#appointments {
 		width: 90%;
 		margin: 0 auto;
-		
+
 		.back {
 			float: left;
 			margin-top: 20px;
 		}
-		
+
 		ul {
 			text-align: left;
 		}
-		
+
 		.ui-radio {
 			margin-bottom: 10px;
-			
+
 			label {
 				font-size: 16px;
-				
+
 				&.ui-btn {
 					background: none;
 				}
-				
+
 				.ui-icon {
 					.box-shadow(none);
-					width: 35px;
+					.border-radius(35px);
+					width: 34px;
 					height: 35px;
-					background: url(../images/artist-radio.png);
+					background: #fff;
+					//url(../images/artist-radio.png) no-repeat;
 					display: block;
 					position: absolute;
 					top: 0;
 					left: 0;
 					border: none;
-					
+
 					&.ui-icon-radio-on {
 						background-position: 0 -35px;
+
+						&:after {
+							content: '\2714';
+							color: green;
+							font-size: 30px;
+							font-weight: 900;
+							font-family: Arial;
+						}
 					}
 				}
 			}
 		}
-		
+
 		.ui-input-text {
 			height: 25px;
 			line-height: 25px;
@@ -57,10 +67,10 @@
 			color: #000;
 			font-size: 20px;
 		}
-		
+
 		table {
 			border-spacing: 1px 2px;
-			
+
 			td {
 				background: #f2f2f2;
 				font-size: 20px;
@@ -69,16 +79,16 @@
 				text-shadow: none;
 				padding: 10px 15px;
 			}
-			
+
 			tfoot {
 				margin-top: -2px;
 			}
 		}
-		
+
 		.start {
-		
+
 			margin-bottom: 20px;
-			
+
 			.ui-btn {
 				.box-shadow(0 1px #000);
 				.gradientBar(#5273b8,#3e5f9a);
@@ -87,7 +97,7 @@
 				float: left;
 			}
 		}
-		
+
 		.stop {
 			.ui-btn {
 				.box-shadow(0 1px #000);
@@ -97,11 +107,11 @@
 				float: right;
 			}
 		}
-		
+
 		.clearbuttons {
 			margin-top: 20px;
 		}
-		
+
 		.submit {
 			.ui-btn {
 				.box-shadow(0 1px #000);
@@ -116,7 +126,7 @@
 				position: relative;
 				overflow: hidden;
 				float: right;
-				
+
 				button {
 					opacity: 0;
 					width: 100%;
@@ -127,14 +137,14 @@
 				}
 			}
 		}
-		
+
 		#close {
 			background: rgba(0,0,0,0.8);
 			padding: 25px;
 			color: #fff;
 			font-size: 17px;
 		}
-		
+
 		form > label {
 			width: auto;
 			margin-bottom: 10px;
@@ -143,11 +153,11 @@
 			text-shadow: 1px 1px #333;
 			letter-spacing: 0.08em;
 			clear: both;
-			
+
 			.ui-btn-inner {
 				padding: 0;
 			}
-			
+
 			.ui-icon {
 				.box-shadow(none);
 				display: block;
@@ -157,12 +167,12 @@
 				left: auto;
 				width: 28px;
 				height: 28px;
-				
+
 				&.ui-icon-radio-on {
 					background: url(../images/artist-check.png);
 				}
 			}
-			
+
 			input {
 				float: right;
 			}
@@ -172,54 +182,54 @@
 }
 
 .list {
-	
+
 	padding: 10% 0;
-	
+
 	h1 {
 		font-weight: normal;
 		font-size: 26px;
 		padding-bottom: 20px;
 	}
-	
+
 	#appointments {
 		width: 90%;
 		margin: 0 auto;
-		
+
 			ul {
 				text-align: left;
 				width: 100%;
-				
+
 				li {
 					.submit();
 					padding-bottom: 20px;
 					width: 100%;
 					border-bottom: 1px solid #666;
 					margin-bottom: 10px;
-					
+
 					.ui-btn {
 						margin-left: 10px;
 						margin-top: 0;
-						
+
 						&.cancel {
 							.gradientBar(#db5271,#bc3a5d);
 						}
 					}
 				}
 			}
-		
+
 		.ui-radio {
 			margin-bottom: 10px;
 		}
-			
+
 			label {
 				font-size: 16px;
 				float: left;
 				line-height: 35px;
-				
+
 				&.ui-btn {
 					background: none;
 				}
-				
+
 				.ui-icon {
 					.box-shadow(none);
 					width: 35px;
@@ -230,13 +240,13 @@
 					top: 0;
 					left: 0;
 					border: none;
-					
+
 					&.ui-icon-radio-on {
 						background-position: 0 -35px;
 					}
 				}
 			}
-		
+
 		.ui-input-text {
 			height: 25px;
 			line-height: 25px;
@@ -246,10 +256,10 @@
 			color: #000;
 			font-size: 20px;
 		}
-		
+
 		table {
 			border-spacing: 1px 2px;
-			
+
 			td {
 				background: #f2f2f2;
 				font-size: 20px;
@@ -258,12 +268,12 @@
 				text-shadow: none;
 				padding: 10px 15px;
 			}
-			
+
 			tfoot {
 				margin-top: -2px;
 			}
 		}
-		
+
 		.start {
 			.ui-btn {
 				.box-shadow(0 1px #000);
@@ -273,7 +283,7 @@
 				float: left;
 			}
 		}
-		
+
 		.stop {
 			.ui-btn {
 				.box-shadow(0 1px #000);
@@ -283,7 +293,7 @@
 				float: right;
 			}
 		}
-		
+
 		.submit {
 			.ui-btn {
 				.box-shadow(0 1px #000);
@@ -298,7 +308,7 @@
 				position: relative;
 				overflow: hidden;
 				float: right;
-				
+
 				button {
 					opacity: 0;
 					width: 100%;
@@ -309,14 +319,14 @@
 				}
 			}
 		}
-		
+
 		#close {
 			background: rgba(0,0,0,0.8);
 			padding: 25px;
 			color: #fff;
 			font-size: 17px;
 		}
-		
+
 		form > label {
 			width: auto;
 			margin-bottom: 10px;
@@ -325,11 +335,11 @@
 			text-shadow: 1px 1px #333;
 			letter-spacing: 0.08em;
 			clear: both;
-			
+
 			.ui-btn-inner {
 				padding: 0;
 			}
-			
+
 			.ui-icon {
 				.box-shadow(none);
 				display: block;
@@ -339,12 +349,12 @@
 				left: auto;
 				width: 28px;
 				height: 28px;
-				
+
 				&.ui-icon-radio-on {
 					background: url(../images/artist-check.png);
 				}
 			}
-			
+
 			input {
 				float: right;
 			}
