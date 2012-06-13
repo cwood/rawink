@@ -1,8 +1,5 @@
 # Django settings for rawink project.
 import os
-import pkgutil
-import urlparse
-
 
 gettext = lambda s: s
 project_directory = os.path.abspath(os.path.dirname(__file__))
@@ -24,7 +21,7 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'ENGINE': 'django.db.backends.mysql',  # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'rawink',                      # Or path to database file if using sqlite3.
         'USER': 'rawink',                      # Not used with sqlite3.
         'PASSWORD': 'romeo06',                  # Not used with sqlite3.
@@ -254,7 +251,7 @@ DEBUG_TOOLBAR_CONFIG = {
     # 'SHOW_TOOLBAR_CALLBACK': custom_show_toolbar,
     'HIDE_DJANGO_SQL': False,
     'TAG': 'div',
-    'ENABLE_STACKTRACES' : True,
+    'ENABLE_STACKTRACES': True,
 }
 PAYMENT_RATE = 120
 PAGINATE_BY = 10
