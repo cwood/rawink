@@ -24,6 +24,13 @@
 					<h1>{{artist}}</h1>
 					<h2>{{artist.title}}</h2>
 					<a href="{{artist.get_absolute_url}}">Continue</a>
+					<a href="{{artist.get_absolute_url}}">View Portfolio</a>
+					<a class="release" href="{{artist.get_absolute_url}}">Fill Out Release</a>
+					{% with works=artist.artistworkphoto_set.all%}
+					{% for work in works%}
+
+					{% endfor%}
+					{% endwith%}
 				</header>
 				<p>{{artist.bio}}</p>
 			</section>
