@@ -9,14 +9,8 @@
 				<img src="{{order.product.original_image.url}}" />
 				<label class="ui-btn ui-btn-icon-left ui-btn-corner-all ui-checkbox-on ui-btn-up-c">{{order.product.title}}</label>
 				<br />
-				{# <label for="hourly">Hourly Rate</label> #}
-				{# <input type="radio" name="payment_type" checked="checked" id="hourly" value="True" /> #}
-				{# <label for="fixed">Fixed Rate</label> #}
-				{# <input type="radio" name="payment_type" id="fixed" value="False" /> #}
-				{# <br /> #}
-				{# <input type="hidden" name="status" value="confirmed"  /> #}
-				{# <input type="text" name="payment_rate" value="{{payment_rate}}"/> #}
 				{{form}}
+				<p>{{order.note}}</p>
 				<input type="hidden" name="id" value="{{order.id}}">	
 				<div class="submit">
 					<button type="submit">Confirm</button>

@@ -24,10 +24,10 @@ class OrderForm(forms.ModelForm):
 
     class Meta:
         model = Order
-        fields = ('product', 'customer', 'date_for_tattoo', )
+        fields = ('product', 'customer', 'date_for_tattoo', 'note', )
 
 
-class OrderStatusPriceUpdateForm(OrderForm):
+class OrderStatusPriceUpdateForm(forms.ModelForm):
 
     class Meta:
         model = Order

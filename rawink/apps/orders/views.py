@@ -124,9 +124,7 @@ class ArtistOrderList(OrderListView):
     def get_queryset(self):
         qs = Order.objects.all().filter(product__artist__user=self.request.user)
         today = datetime.datetime.today()
-        qs = qs.filter(created__year=today.year, created__month=today.month, created__day=today.day)
-
-        print qs.query
+        qs = qs.filter(date_for_tattoo__year=today.year, date_for_tattoo__month=today.month, date_for_tattoo__day=today.day)
         return qs
 
     def get_context_data(self, **kwargs):

@@ -50,6 +50,7 @@ class Order(models.Model):
                                    editable=False, blank=True)
     date_for_tattoo = models.DateTimeField(default=datetime.datetime.now,
                                    editable=True)
+    note = models.TextField(blank=True,)
     last_status_change = models.DateTimeField(default=datetime.datetime.now,
                                    editable=False, blank=True)
     payment_type = models.BooleanField(choices=rate_choices)
