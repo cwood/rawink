@@ -807,15 +807,15 @@ nav ul > li > a:hover {
 			&:hover section {
 			visibility: visible;
 			opacity: 1;
-			
+
 				* {
 				-webkit-transition: 0.5s;
 				}
-				
+
 				header {
 				opacity: 1;
 				}
-				
+
 				p {
 				-webkit-transition-delay: 0.4s;
 				top: auto;
@@ -966,7 +966,7 @@ nav ul > li > a:hover {
   cursor: pointer;
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
   *margin-left: .3em;
-  margin-top: 1.5em;
+  margin-top: 0.5em;
 }
 .artists ul li section a:hover,
 .artists ul li section a:active,
@@ -981,6 +981,12 @@ nav ul > li > a:hover {
 }
 .artists ul li section a:first-child {
   *margin-left: 0;
+}
+.artists ul li section a.release {
+  background: green;
+  border: black;
+  color: white;
+  text-shadow: none;
 }
 .work {
   height: 100%;

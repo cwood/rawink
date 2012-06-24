@@ -1,15 +1,15 @@
 .artists {
 text-align: center;
-	
+
 	#logo {
 	margin: 1.5em auto 2.5em;
-	
+
 		a {
 		width: 250px;
 		display: block;
 		margin: 0 auto;
 		}
-		
+
 		p {
 		white-space: nowrap;
 		text-align: center;
@@ -19,15 +19,15 @@ text-align: center;
 		letter-spacing: 0.05em;
 		}
 	}
-	
+
 	ul {
-	
+
 		li {
 		width: 19.5%;
 		max-width: 300%;
 		height: 460px;
 		margin: 0 8px;
-		
+
 			figure {
 			.border-radius(10px);
 			box-shadow: 0 0 15px rgba(0,0,0,0.8);
@@ -36,17 +36,17 @@ text-align: center;
 			padding: 0;
 			height: 460px; // 748
 			cursor: pointer;
-			
+
 				img {
 				/* 				max-height: 100%; */
 				}
-				
+
 				.status {
 				position: relative;
 				display: none;
 				width: 100%;
 				height: 0;
-				
+
 					&:after {
 					position: absolute;
 					z-index: 80;
@@ -60,13 +60,13 @@ text-align: center;
 					border-radius: 6px;
 					}
 				}
-				
+
 				.open {
 				position: relative;
 				display: block;
 				width: 100%;
 				height: 0;
-				
+
 					&:after {
 					position: absolute;
 					top: -3px;
@@ -76,7 +76,7 @@ text-align: center;
 					border-radius: 5px;
 					}
 				}
-				
+
 				.close {
 				display: none;
 				width: 40px;
@@ -90,17 +90,17 @@ text-align: center;
 				margin-bottom: 159px;
 				}
 			}
-			
+
 			&.open {
 				figure .close { display: block; }
 			}
-			
+
 			&.fade {
 				figure .status { display: block; }
 			}
-			
+
 /* 			&.fade img { opacity: 0.6 } */
-			
+
 			section {
 			position: absolute;
 			z-index: 90;
@@ -116,19 +116,19 @@ text-align: center;
 			text-align: left;
 			color: #fff;
 			display: none;
-			
+
 				header {
 				float: left;
 				width: 180px;
 				padding-right: 20px;
-					
+
 					h2 {
 					color: #ce0b0b;
 					font-size: 15px;
 					font-weight: 300;
 					}
 				}
-				
+
 				p {
 				text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
 				float: left;
@@ -136,7 +136,7 @@ text-align: center;
 				position: relative;
 /* 				top: -100%; */
 				}
-				
+
 				a {
 					.btn;
 					margin-top: 0.5em;
@@ -150,22 +150,22 @@ text-align: center;
 				}
 /* 				&.in { visibility: visible } */
 			}
-			
+
 /* 			&:first-child section, */
 /*
 			&:focus section,
 			&:hover section {
 			visibility: visible;
 			opacity: 1;
-			
+
 				* {
 				-webkit-transition: 0.5s;
 				}
-				
+
 				header {
 				opacity: 1;
 				}
-				
+
 				p {
 				-webkit-transition-delay: 0.4s;
 				top: auto;
