@@ -2,12 +2,12 @@
 {% load url from future%}
 {% block main%}
 <div data-role="page" class="artists">
-	
+
 	<article data-role="content">
-	
+
 	<div id="logo">
 		<a href="/main/home" rel="external"><img src="{{ STATIC_URL }}layout/images/logo-full-large.png" alt="Raw Ink" /></a>
-		
+
 		<p>Select your preferred artist or piercer below</p>
 	</div>
 	<ul>
@@ -23,7 +23,6 @@
 				<header>
 					<h1>{{artist}}</h1>
 					<h2>{{artist.title}}</h2>
-					<a href="{{artist.get_absolute_url}}">Continue</a>
 					<a href="{{artist.get_absolute_url}}">View Portfolio</a>
 					<a class="release" href="{{artist.get_absolute_url}}">Fill Out Release</a>
 					{% with works=artist.artistworkphoto_set.all%}
@@ -35,21 +34,21 @@
 				<p>{{artist.bio}}</p>
 			</section>
 		</li>
-		
-		{%endfor%}	
+
+		{%endfor%}
 	</ul>
-	
+
 	{% if request.user.is_authenticated %}
 	<a rel="external" href="{% url 'logout' %}?next=/">Logout</a>
-	
+
 	{% else %}
 <!-- 		<a href="accounts/login/?next=/customer/">Customer Log In</a>&nbsp;&nbsp; | &nbsp;&nbsp; -->
 		<a href="accounts/login/?next=/order/">Studio Log In</a>&nbsp;&nbsp; | &nbsp;&nbsp;
 		<a href="accounts/login/?next=/order/artist/">Artist Log In</a>&nbsp;&nbsp; | &nbsp;&nbsp;
 		<a rel="external" href="http://www.rawinkstudio.com/">www.RawInkStudio.com</a>
 	{% endif %}
-	
+
 	</article>
-</div>	
+</div>
 
 {% endblock%}
