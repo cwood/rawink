@@ -31,20 +31,17 @@ class CreateCustomer(CreateView):
     template_name = 'customers/customer_form.html'
     form_class = CustomerForm
     success_url = '/customer/'
-    
+
     def get(self, request, *args, **kwargs):
-        print self.request.user
         if self.request.user == 'AnonymousUser':
-            print 'already logedin!!'
             return HttpResponseRedirect('/accounts/logout/')
-        
+
         self.object = None
         return super(CreateCustomer, self).get(request, *args, **kwargs)
 
-        
     def get_context_data(self, **kwargs):
         context = super(CreateCustomer, self).get_context_data(**kwargs)
-        
+
         if self.request.POST:
             context['user_form'] = UserForm(self.request.POST)
         else:
@@ -62,14 +59,13 @@ class CreateCustomer(CreateView):
             user.groups.add(g)
             user.email = user.username
             user.save()
-            
+
             customer.user_id = user.id
             customer.save()
-                        
+
             u = authenticate(username=user_form.cleaned_data['username'], password=user_form.cleaned_data['password1'])
             if u is not None:
                 if u.is_active:
-                    print 'User login!'
                     login(self.request, u)
                     # Redirect to a success page.
                 else:
@@ -78,13 +74,13 @@ class CreateCustomer(CreateView):
             else:
                 print 'User disabled!!'
             return HttpResponseRedirect(self.request.POST.get('next'))
-            
+
         else:
-            response = self.render_to_response(self.get_context_data(form=form))    
+            response = self.render_to_response(self.get_context_data(form=form))
         return response
+
 
 class EditCustomer(LoginRequiredMixin, UpdateView):
     model = Customer
     form_class = CustomerForm
     success_url = '/customer/'
-

@@ -20,31 +20,18 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.localflavor.us.models import USStateField, PhoneNumberField
 
-from django.utils.translation import ugettext as _
-from django.core.urlresolvers import reverse
-
-from autoslug import AutoSlugField
-from modeltools import Enum, format_filename as _ff, FilteredManager
-
-Gender = Enum(
-    ('MALE', 'M', 'Male'),
-    ('FEMALE', 'F', 'Femail'),
-)
-
-CardType = Enum(
-    ('MASTER', 'M', 'Master'),
-    ('VISA', 'V', 'Visa'),
-)
-
-
 
 class Customer(models.Model):
     user = models.OneToOneField(User, null=True)
+    age = models.PositiveIntegerField()
+    first_name_guardian = models.CharField(max_length=200, blank=True)
+    last_name_guardian = models.CharField(max_length=200, blank=True)
+
     phone = PhoneNumberField(null=True,)
     street = models.CharField(max_length=255)
     city = models.CharField(blank=True, max_length=255)
     state = USStateField(blank=True)
     zip_code = models.CharField(max_length=10)
-    
+
     def __unicode__(self):
         return u'%s %s' % (self.user.first_name, self.user.last_name)
