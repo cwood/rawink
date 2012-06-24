@@ -4,7 +4,7 @@ import os
 gettext = lambda s: s
 project_directory = os.path.abspath(os.path.dirname(__file__))
 
-DEBUG = False
+DEBUG = True
 
 try:
     from metasettings import *

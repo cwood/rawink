@@ -17,15 +17,18 @@ class UserForm(_UserCreationForm, forms.ModelForm):
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'email', 'username',)
-        
+
+
 class OrderForm(forms.ModelForm):
-    # is_guardian = forms.BooleanField()
+    is_agree = forms.BooleanField(label='I have read and agree to the terms of the above release form')
+
     class Meta:
         model = Order
-        fields = ('product', 'customer', 'tattooee',)
+        fields = ('product', 'customer', 'date_for_tattoo', )
+
 
 class OrderStatusPriceUpdateForm(OrderForm):
-    
+
     class Meta:
         model = Order
         fields = ('status', 'payment_type', 'payment_rate',)
@@ -34,19 +37,22 @@ class OrderStatusPriceUpdateForm(OrderForm):
             'status': HiddenInput,
         }
 
+
 class OrderStatusUpdateFrom(OrderForm):
 
     class Meta:
         model = Order
-        fields = ('status',)        
+        fields = ('status',)
+
 
 class OrderCompletedFrom(OrderForm):
     class Meta:
         model = Order
-        fields = ('status',)        
+        fields = ('status',)
+
 
 class OrderBillFrom(OrderForm):
     class Meta:
         model = Order
-        fields = ('payment_price', 'status',)        
+        fields = ('payment_price', 'status',)
 
