@@ -77,12 +77,12 @@ height: 100%;
 box-shadow: 0 0 15px rgba(0,0,0,0.9);
 
 	img {
-	max-width: none;
+	// max-width: none;
 	min-height: 100%;
 	}
 
 	a {
-	
+
 		span {
 		.transition(-webkit-transform 0.5s ease-in-out);
 		transform: translate3d(0,0,0);
@@ -95,18 +95,18 @@ box-shadow: 0 0 15px rgba(0,0,0,0.9);
 		margin-left: -28px;
 		background: url(../images/sprite.png) 0 -194px;
 		}
-	
+
 		&.done {
 			span {
 			.transition(none);
 			background-position: 0 -250px;
 			}
 		}
-		
+
 		&:hover, &:active {
 			span { .rotate(360deg) }
 		}
-		
+
 		.status {
 		position: absolute;
 		z-index: 1;
@@ -116,6 +116,16 @@ box-shadow: 0 0 15px rgba(0,0,0,0.9);
 		height: 100%;
 		background: rgba(0,0,0,0.5);
 		}
+	}
+}
+
+.user form .content ul li label[for="id_date_for_tattoo"], #id_date_for_tattoo {
+	display: none
+}
+
+.confirm {
+	ul {
+		text-align: left
 	}
 }
 
@@ -133,16 +143,16 @@ box-shadow: 0 0 15px rgba(0,0,0,0.9);
 
 /* Consider this: www.cloudfour.com/css-media-query-for-mobile-is-fools-gold/ */
 @media screen and (max-device-width: 480px) {
-	
-		
+
+
 }
 
 @media all and (orientation: portrait) {
-	
+
 }
 
 @media all and (orientation: landscape) {
-	
+
 }
 
 

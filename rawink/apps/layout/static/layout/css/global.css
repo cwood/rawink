@@ -326,6 +326,12 @@ cite {
 .btn:first-child {
   *margin-left: 0;
 }
+.btn.release {
+  background: green;
+  border: black;
+  color: white;
+  text-shadow: none;
+}
 .btn:hover {
   color: #333333;
   text-decoration: none;
@@ -1005,7 +1011,6 @@ nav ul > li > a:hover {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.9);
 }
 .work article header img {
-  max-width: none;
   min-height: 100%;
 }
 .work article header a span {
@@ -1049,16 +1054,69 @@ nav ul > li > a:hover {
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
 }
-.work article header:after {
-  content: 'Change Artist';
-  position: absolute;
-  z-index: 99;
-  bottom: 50px;
-  width: 100%;
+.work article header a {
+  display: inline-block;
+  padding: 4px 10px 4px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.6em;
+  color: #333333;
   text-align: center;
-  color: #fff;
-  text-shadow: 1px 1px #000;
-  font-size: 15px;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+  vertical-align: middle;
+  background-color: #f5f5f5;
+  background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -ms-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+  background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: linear-gradient(top, #ffffff, #e6e6e6);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
+  border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+  border: 1px solid #ccc;
+  border-bottom-color: #bbb;
+  /*   .border-radius(4px); */
+
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05) 0 4px rgba(0, 0, 0, 0.65);
+  -ms-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05) 0 4px rgba(0, 0, 0, 0.65);
+  -o-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05) 0 4px rgba(0, 0, 0, 0.65);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05) 0 4px rgba(0, 0, 0, 0.65);
+  cursor: pointer;
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+  *margin-left: .3em;
+  position: absolute;
+  bottom: 100px;
+  left: 50px;
+}
+.work article header a:hover,
+.work article header a:active,
+.work article header a.active,
+.work article header a.disabled,
+.work article header a[disabled] {
+  background-color: #e6e6e6;
+}
+.work article header a:active,
+.work article header a.active {
+  background-color: #cccccc \9;
+}
+.work article header a:first-child {
+  *margin-left: 0;
+}
+.work article header a.release {
+  background: green;
+  border: black;
+  color: white;
+  text-shadow: none;
+}
+.work article header a.release {
+  bottom: 50px;
 }
 .work article .message {
   display: block;
@@ -1170,7 +1228,6 @@ nav ul > li > a:hover {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.9);
 }
 .user header img {
-  max-width: none;
   min-height: 100%;
 }
 .user header a span {
@@ -1230,7 +1287,7 @@ nav ul > li > a:hover {
   font-size: 15px;
 }
 .user header:after {
-  content: 'Change Artist';
+  content: 'choose artist';
   position: absolute;
   z-index: 99;
   bottom: 50px;
@@ -1252,10 +1309,10 @@ nav ul > li > a:hover {
 }
 .user form {
   height: 100%;
-  width: 50%;
+  width: 75%;
   z-index: 1;
   position: relative;
-  left: 50%;
+  left: 25%;
   padding-bottom: 30px;
 }
 .user form #logo {
@@ -1263,7 +1320,7 @@ nav ul > li > a:hover {
   margin: 5em auto 0;
 }
 .user form .content {
-  width: 290px;
+  width: 590px;
   margin: 3em auto 0;
   font-size: 15px;
   line-height: 1.571428571;
@@ -1278,6 +1335,12 @@ nav ul > li > a:hover {
 }
 .user form .content#signup {
   margin-top: 0;
+}
+.user form .content #release {
+  height: 260px;
+  overflow: auto;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 20px;
 }
 .user form .content a {
   display: inline-block;
@@ -1332,6 +1395,12 @@ nav ul > li > a:hover {
 }
 .user form .content a:first-child {
   *margin-left: 0;
+}
+.user form .content a.release {
+  background: green;
+  border: black;
+  color: white;
+  text-shadow: none;
 }
 .user form .content a[href='#signup'] {
   float: right;
@@ -1410,6 +1479,14 @@ nav ul > li > a:hover {
 }
 .user form .content ul li .toggle input {
   width: 235px;
+}
+.user form .content .ui-select .ui-btn {
+  width: 240px;
+  background: white;
+  color: black;
+}
+.user form .content .ui-select .ui-btn-inner {
+  display: block;
 }
 .user form .content .ui-btn {
   background: #b21a1a;
@@ -2302,7 +2379,6 @@ h6 {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.9);
 }
 .goback img {
-  max-width: none;
   min-height: 100%;
 }
 .goback a span {
@@ -2345,6 +2421,13 @@ h6 {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
+}
+.user form .content ul li label[for="id_date_for_tattoo"],
+#id_date_for_tattoo {
+  display: none;
+}
+.confirm ul {
+  text-align: left;
 }
 /* Print styles!
 -------------------------------------------------------------------------------*/

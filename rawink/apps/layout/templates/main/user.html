@@ -3,44 +3,44 @@
 {% block main %}
 
 <div data-role="page" {% if product.artist %}class="user"{% else %}class="studio log-in"{% endif %}>
-	
+
 	<article data-role="content">
-		
+
 		{% if product.artist %}
 		<header>
-			<a href="{% url 'artist-index' %}" data-direction="reverse" title="Change Artist">
+			<a href="{% url 'artist-index' %}" data-direction="reverse" title="choose artist">
 				<img src="{{product.artist.photo.url}}" />
 				<i class="status"></i>
 				<span></span>
 			</a>
 		</header>
 		{% endif %}
-		
+
 		{% if product.original_image %}
-		<header class="edit-work">
+<!-- 		<header class="edit-work">
 			<a href="{{product.artist.get_absolute_url}}" data-direction="reverse" title="Change Work">
 				<img src="{{product.original_image.url}}" />
 				<i class="status"></i>
 				<span></span>
 			</a>
-		</header>
+		</header> -->
 		{% endif %}
-		
+
 		<form method="post" action="{% url 'login' %}" data-ajax="false">{% csrf_token %}
-		
+
 			<div id="logo">
 				<img src="{{ STATIC_URL }}layout/images/logo-full-large.png" alt="Raw Ink" />
 			</div>
-			
+
 			<div id="intro" class="content">
 				<p>Awesome! We know who and what you want. Now we need a little information about you.</p>
 				<a href="#login">Log In</a>
 				<a href="#signup" rel="external">Sign Up</a>
 			</div>
-			
+
 			<div id="login" class="content">
 				<p>Log In with your user name and password.</p>
-				
+
 				<ul>
 					<li>
 						{{ form.username.label_tag }}
@@ -53,55 +53,62 @@
 				</ul>
 				<input type="hidden" name="next" value="{{ next }}" />
 				<button type="submit">Log In</button>
-				
+
 				<a href="#intro" class="back" rel="external">Go Back</a>
 			</div>
 		</form>
-		<form method="post" id="new" action="{% url 'create-customer' %}" data-ajax="false">{% csrf_token %}	
+		<form method="post" id="new" action="{% url 'create-customer' %}" data-ajax="false">{% csrf_token %}
 			<div id="signup" class="content">
 				<ul>
 					<li>
-						<label for="id_first_name">First name: (of person getting tattooed)</label> 
+						<label for="id_first_name">First name: (of person getting tattooed)</label>
 						<input id="id_first_name" type="text" name="first_name" maxlength="30" />
 					</li>
 					<li>
-						<label for="id_last_name">Last name:</label> 
+						<label for="id_last_name">Last name:</label>
 						<input id="id_last_name" type="text" name="last_name" maxlength="30" />
 					</li>
 					<li>
-						<label for="id_age">Age:</label> 
+						<label for="id_age">Age:</label>
 						<input type="text" name="age" id="id_age" />
 					</li>
 					<li>
-						<label for="id_username">Username:</label> 
-						<input id="id_username" type="text" name="username" maxlength="64" /> <span class="helptext">The person's email address.</span>
+						<label for="id_username">Username / Email</label>
+						<input id="id_username" type="text" name="username" maxlength="64" />
+						<!-- <span class="helptext">The person's email address.</span> -->
 					</li>
 
 					<li>
 						<label for="id_password1">Password:</label> <input type="password" name="password1" id="id_password1" />
 					</li>
 					<li>
-						<label for="id_password2">Password Confirmation:</label> 
-						<input type="password" name="password2" id="id_password2" /> <span class="helptext">Enter the same password as above, for verification.</span></li>
+						<label for="id_password2">Password Confirmation:</label>
+						<input type="password" name="password2" id="id_password2" />
+						<!-- <span class="helptext">Enter the same password as above, for verification.</span> -->
+					</li>
 
 					<li>
-						<label for="id_first_name_guardian">First name guardian:</label> 
+						<br />
+						<label style="font-size: 110%">If client is under 18…</label>
+						<label for="id_first_name_guardian">First name guardian:</label>
 						<input id="id_first_name_guardian" type="text" name="first_name_guardian" maxlength="200" />
 					</li>
 					<li>
-						<label for="id_last_name_guardian">Last name guardian:</label> 
+						<label for="id_last_name_guardian">Last name:</label>
 						<input id="id_last_name_guardian" type="text" name="last_name_guardian" maxlength="200" />
+						<br />
+						<br />
 					</li>
 					<li>
-						<label for="id_phone">Phone Number:</label> 
+						<label for="id_phone">Phone Number:</label>
 						<input id="id_phone" type="text" name="phone" maxlength="20" />
 					</li>
 					<li>
-						<label for="id_street">Street:</label> 
+						<label for="id_street">Street:</label>
 						<input id="id_street" type="text" name="street" maxlength="255" />
 					</li>
 					<li>
-						<label for="id_city">City:</label> 
+						<label for="id_city">City:</label>
 						<input id="id_city" type="text" name="city" maxlength="255" />
 					</li>
 					<li>
@@ -170,20 +177,20 @@
 					</li>
 
 					<li>
-						<label for="id_zip_code">ZIP code:</label> 
+						<label for="id_zip_code">ZIP code:</label>
 						<input id="id_zip_code" type="text" name="zip_code" maxlength="10" />
 					</li>
 				</ul>
 				<input type="hidden" name="next" value="{{ next }}" />
 				<button type="submit">Sign In</button>
-				
+
 				<a href="#intro" class="back" rel="external">Go Back</a>
 			</div>
-		
+
 		</form>
-		
+
 	</article>
-	
+
 </div>
 
 <script>

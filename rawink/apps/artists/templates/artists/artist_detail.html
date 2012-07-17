@@ -2,43 +2,47 @@
 {% block main %}
 
 <div data-role="page" class="work">
-	
+
 	<article data-role="content">
-		
+
 		<header>
-			<a href="/" data-direction="reverse" title="Change Artist">
-				<img src="{{artist.photo.url}}" width="300" height="738" />
-				<i class="status"></i>
-				<span></span>
-			</a>
+			<img src="{{artist.photo.url}}" width="300" height="738" />
+			<a class="ui-link" href="/" data-direction="reverse" title="choose artist">Change Portfolio</a>
+			{% with works=artist.artistworkphoto_set.all%}
+				{% for work in works%}
+						{% if forloop.first %}
+							<a class="release ui-link" href="{% url create-order %}?product={{work.slug}}">Fill Out Release</a>
+						{% endif %}
+				{% endfor%}
+			{% endwith%}
 		</header>
-		
-		<div class="message">
+
+<!-- 		<div class="message">
 			<p>Please select a tattoo or piercing &ldquo;style&rdquo; that represents what you have in mind. Exact placement, size, etc will be discussed between you and the artist.</p>
 			<a href="#" class="btn">Got It!</a>
 		</div>
-		<span class="overlay"></span>
-		
-		
+		<span class="overlay"></span> -->
+
+
 		<ul>
 			{% with works=artist.artistworkphoto_set.all%}
 			{% for work in works%}
 			<li>
 				<figure>
-					<a href="{% url create-order %}?product={{work.slug}}">
+					<!-- <a href="{% url create-order %}?product={{work.slug}}"> -->
 						<img data-parent="article li" data-target="#{{artist.slug}}" data-toggle="collapse" src="{{work.original_image.url}}" />
 						<figcaption>
 							<span>{{work.title}}</span>
 						</figcaption>
-					</a>
+					<!-- </a> -->
 				</figure>
 			</li>
 			{% endfor%}
-			{% endwith%}	
+			{% endwith%}
 		</ul>
 		<a rel="external" class="pagination noeffect" id="prev"></a>
 		<a rel="external" class="pagination noeffect" id="next"></a>
-		
+
 	</article>
-</div>		
+</div>
 {% endblock%}

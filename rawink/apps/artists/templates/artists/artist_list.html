@@ -8,7 +8,7 @@
 	<div id="logo">
 		<a href="/main/home" rel="external"><img src="{{ STATIC_URL }}layout/images/logo-full-large.png" alt="Raw Ink" /></a>
 
-		<p>Select your preferred artist or piercer below</p>
+		<p>Welcome! Check out our artist's portfolios, <br />or just select the one you are here to see.</p>
 	</div>
 	<ul>
 		{% for artist in object_list %}
@@ -24,11 +24,12 @@
 					<h1>{{artist}}</h1>
 					<h2>{{artist.title}}</h2>
 					<a href="{{artist.get_absolute_url}}">View Portfolio</a>
-					<a class="release" href="{{artist.get_absolute_url}}">Fill Out Release</a>
 					{% with works=artist.artistworkphoto_set.all%}
-					{% for work in works%}
-
-					{% endfor%}
+						{% for work in works%}
+								{% if forloop.first %}
+									<a class="release" href="{% url 'create-order' %}?product={{work.slug}}">Fill Out Release</a>
+								{% endif %}
+						{% endfor%}
 					{% endwith%}
 				</header>
 				<p>{{artist.bio}}</p>

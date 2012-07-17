@@ -3,23 +3,22 @@ height: 100%;
 
 	article {
 	height: 100%;
-	
+
 		header {
 		.goback;
-		
-			&:after {
-			content: 'Change Artist';
-			position: absolute;
-			z-index: 99;
-			bottom: 50px;
-			width: 100%;
-			text-align: center;
-			color: #fff;
-			text-shadow: 1px 1px #000;
-			font-size: 15px;
+
+			a {
+				.btn;
+				position: absolute;
+				bottom: 100px;
+				left: 50px;
+
+				&.release {
+					bottom: 50px;
+				}
 			}
 		}
-		
+
 		.message {
 		display: block;
 		position: absolute;
@@ -33,12 +32,12 @@ height: 100%;
 		margin: -75px auto 0 -160px;
 		border-radius: 10px;
 		color: white;
-		
+
 			a {
 			float: right;
 			}
 		}
-		
+
 		.overlay {
 		position: absolute;
 		width: 100%;
@@ -49,21 +48,21 @@ height: 100%;
 
 		ul {
 		.page(75%);
-				
+
 			li {
 			height: 100%;
 			width: 100%;
 			display: block;
 			float: left;
-			
+
 				figure {
 				height: 100%;
 				line-height: 748px;
 				margin: 0;
 				position: relative;
-				
+
 					img { vertical-align: middle }
-					
+
 					figcaption {
 					position: absolute;
 					bottom: 75px;
@@ -71,7 +70,7 @@ height: 100%;
 					height: 30px;
 					line-height: 30px;
 					display: block;
-					
+
 						span {
 						.inline-block;
 						height: 76px;
@@ -88,7 +87,7 @@ height: 100%;
 				}
 			}
 		}
-		
+
 		.pagination {
 		.transition(all 0.3s ease);
 		width: 56px;
@@ -99,20 +98,20 @@ height: 100%;
 		margin-top: -48.5px;
 		z-index: 99;
 		background: url(../images/sprite.png);
-		
+
 			&#prev {
 			left: 25%;
 			margin-left: 3%;
 			background-position: center 0;
-			
+
 /* 				&:hover, &:active { margin-left: 2%; } */
 			}
-			
+
 			&#next {
 			right: 0;
 			margin-right: 3%;
 			background-position: center -97px;
-				
+
 /* 				&:hover, &:active { margin-right: 2%; } */
 			}
 		}

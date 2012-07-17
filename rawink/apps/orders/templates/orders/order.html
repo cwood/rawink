@@ -2,31 +2,23 @@
 {% load url from future%}
 {% block main%}
 <div data-role="page" class="user confirm">
-	
+
 	<article data-role="content">
 
 		<header class="done">
 			<a href="#" class="done">
 				<img src="{{product.artist.photo.url}}" />
-				<i class="status"></i>
 				<span></span>
 			</a>
 		</header>
-		
-		<header class="edit-work done">
-			<a href="#" class="done">
-				<img src="{{product.original_image.url}}" />
-				<i class="status"></i>
-				<span></span>
-			</a>
-		</header>
+
 		<form action="{% url 'create-order' %}" method="post">
 				<div id="logo">
 					<img src="{{ STATIC_URL }}layout/images/logo-full-large.png" alt="Raw Ink" />
 				</div>
-			
+
 			{% if order_created_success%}
-			
+
 				<div id="intro" class="content">
 					<p>Your all set. Please hand the front desk attendant this iPad so he can confirm your tattoo reservation.</p>
 					<br />
@@ -38,12 +30,22 @@
 				</div>
 			{% else%}
 			<div class="content">
+				{% include "orders/includes/release_form.html" %}
 				<ul>
 				{{ form.errors }}
 				{{ form.as_ul }}
 				{# {% csrf_token %} #}
-				<input type="hidden" name="id" value="{{order_pk}}">	
+				<label for="real_date">Date of Tattoo.</label>
+				<input type="date" name="real_date" value="today" id="real_date">
+				<input type="hidden" name="id" value="{{order_pk}}">
+				<label style="display: none">
+					<input type="checkbox" name="confirm" id="confirm" class="ui-btn ui-btn-icon-left ui-btn-corner-all ui-checkbox-on ui-btn-up-c" checked="checked" />
+				</label>
+				<br />
+				<br />
+				<p>By clicking the following button you are saying that you have read and agree to the terms of the above release form.</p>
 				<button type="submit">Confirm Appointment</button>
+				<a rel="external" href="/accounts/logout/?next=/" style="float: right; margin-top: 5px">Cancel</a>
 				</ul>
 			</div>
 			{% endif%}

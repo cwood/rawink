@@ -20,7 +20,7 @@ class UserForm(_UserCreationForm, forms.ModelForm):
 
 
 class OrderForm(forms.ModelForm):
-    is_agree = forms.BooleanField(label='I have read and agree to the terms of the above release form')
+    # is_agree = forms.BooleanField(label='I have read and agree to the terms of the above release form')
 
     class Meta:
         model = Order
